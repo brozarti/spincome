@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Developer {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  developerKey    String   @unique
+  stripeAccountId String?
+  earningsCents   Int      @default(0)
+  referralCode    String   @unique
+  referredById    String?
+  referredBy      Developer?  @relation("Referrals", fields: [referredById], references: [id])
+  referrals       Developer[] @relation("Referrals")
+  // Opt-in targeting profile (comma-separated values)
+  languages       String?  // e.g. "typescript,python"
+  frameworks      String?  // e.g. "nextjs,react"
+  createdAt       DateTime @default(now())
+
+  impressions     Impression[]
+}
+
+model Advertiser {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  name             String
+  passwordHash     String
+  stripeCustomerId String?
+  createdAt        DateTime @default(now())
+
+  campaigns Campaign[]
+}
+
+model Campaign {
+  id           String   @id @default(cuid())
+  advertiserId String
+  advertiser   Advertiser @relation(fields: [advertiserId], references: [id])
+  headline     String
+  body         String
+  cta          String
+  clickUrl     String
+  maxCpmCents  Int      // max bid in cents per 1000 impressions (auction ceiling)
+  budgetCents  Int      // total budget in cents
+  spentCents   Int      @default(0)
+  active       Boolean  @default(true)
+  // Targeting filters (null = no filter = broad match)
+  targetLanguages  String?  // comma-separated, e.g. "typescript,python"
+  targetFrameworks String?
+  createdAt    DateTime @default(now())
+
+  impressions  Impression[]
+}
+
+model Impression {
+  id           String   @id @default(cuid())
+  campaignId   String
+  campaign     Campaign  @relation(fields: [campaignId], references: [id])
+  developerId  String
+  developer    Developer @relation(fields: [developerId], references: [id])
+  // Context captured from the Claude Code hook payload
+  toolName     String?
+  fileExt      String?
+  // Actual CPM paid (result of auction, may be less than maxCpmCents)
+  actualCpmCents Int    @default(0)
+  clicked      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
