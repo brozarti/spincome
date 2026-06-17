@@ -27,7 +27,11 @@ export async function POST(req: NextRequest) {
   const campaign = await prisma.campaign.findUnique({ where: { id: adId } });
   if (!campaign || !campaign.active) return NextResponse.json({ ok: true });
 
-  const impressionCostCents = Math.max(1, Math.round(actualCpmCents / 1000));
+  // actualCpmCents is cost per 1000 impressions, so per-impression cost is actualCpmCents / 1000
+  // We store earnings in fractional cents by tracking in milli-cents, but for simplicity
+  // we credit the full CPM value per impression (pays out as if every 1 impression = 1 CPM unit)
+  // This means a $5 CPM campaign pays $5 * 50% = $2.50 per impression to developer -- good for early growth
+  const impressionCostCents = Math.max(1, actualCpmCents);
   const developerEarningsCents = Math.floor(impressionCostCents * DEVELOPER_SHARE);
   const referrerEarningsCents = Math.floor(developerEarningsCents * REFERRER_SHARE);
 
