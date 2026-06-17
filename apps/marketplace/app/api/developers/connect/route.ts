@@ -6,6 +6,7 @@ import { getDeveloperFromRequest } from "@/lib/auth";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: NextRequest) {
+  try {
   const developer = await getDeveloperFromRequest(req);
   if (!developer) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
@@ -33,4 +34,8 @@ export async function POST(req: NextRequest) {
   });
 
   return NextResponse.json({ url: accountLink.url });
+  } catch (err) {
+    console.error("Connect route error:", err);
+    return NextResponse.json({ error: String(err) }, { status: 500 });
+  }
 }

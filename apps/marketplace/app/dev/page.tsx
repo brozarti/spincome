@@ -56,8 +56,8 @@ export default function DevDashboardPage() {
       } else {
         alert(data.error ?? "Failed to start Stripe onboarding. Make sure Stripe Connect is enabled on your account.");
       }
-    } catch {
-      alert("Network error. Please try again.");
+    } catch (err) {
+      alert("Network error: " + String(err));
     }
   }
 
