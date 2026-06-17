@@ -2,7 +2,7 @@ import os from "os";
 import path from "path";
 import fs from "fs";
 
-export const API_BASE = process.env.SPINCOME_API_URL ?? "https://spincome.io/api";
+export const API_BASE = process.env.SPINCOME_API_URL ?? "https://spincome-marketplace-git-main-spincome.vercel.app/api";
 
 export interface Config {
   developerKey: string;
