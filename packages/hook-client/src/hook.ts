@@ -4,6 +4,7 @@ import { fetchAd, recordImpression, type AdContext } from "./ad.js";
 import { renderAd } from "./display.js";
 import { readConfig } from "./config.js";
 import { addToSession } from "./session.js";
+import { animateWhileLoading } from "./animate.js";
 import path from "path";
 
 interface HookPayload {
@@ -42,13 +43,16 @@ async function main() {
   }
 
   const context = extractContext(payload);
+
+  // Fetch ad and record impression concurrently, animate while waiting
   const ad = await fetchAd(context);
   if (!ad) process.exit(0);
 
-  // Record impression first to get earnedCents
-  const earnedCents = await recordImpression(ad.id, config.developerKey, ad.actualCpmCents, context);
-  const session = addToSession(earnedCents);
+  const earnedCents = await animateWhileLoading(
+    recordImpression(ad.id, config.developerKey, ad.actualCpmCents, context)
+  );
 
+  const session = addToSession(earnedCents);
   process.stdout.write(renderAd(ad, earnedCents, session.totalCents, context));
 }
 
