@@ -1,30 +1,66 @@
 import type { Ad } from "./ad.js";
 
-const RESET = "\x1b[0m";
-const BOLD = "\x1b[1m";
+const R  = "\x1b[0m";
+const B  = "\x1b[1m";
 const DIM = "\x1b[2m";
-const CYAN = "\x1b[36m";
+const GREEN  = "\x1b[32m";
+const BRIGHT_GREEN = "\x1b[92m";
+const CYAN   = "\x1b[36m";
 const YELLOW = "\x1b[33m";
-const BG_DARK = "\x1b[48;5;235m";
+const WHITE  = "\x1b[97m";
+const BG     = "\x1b[48;5;234m";
 
-function line(content = "", width = 60): string {
-  const padded = ` ${content}`.padEnd(width);
-  return `${BG_DARK}${padded}${RESET}`;
+const W = 62;
+
+function pad(text: string, visibleLen: number): string {
+  const spaces = Math.max(0, W - 2 - visibleLen);
+  return ` ${text}${" ".repeat(spaces)} `;
 }
 
-export function renderAd(ad: Ad): string {
-  const W = 60;
-  const divider = `${DIM}${"─".repeat(W)}${RESET}`;
+function box(content: string, visibleLen: number): string {
+  return `${BG}${pad(content, visibleLen)}${R}`;
+}
+
+function ruler(): string {
+  return `${DIM}${"─".repeat(W)}${R}`;
+}
+
+export function renderAd(ad: Ad, earnedCents: number, sessionCents: number, context?: { toolName?: string; fileExt?: string }): string {
+  const earnedDollars  = (earnedCents / 100).toFixed(4);
+  const sessionDollars = (sessionCents / 100).toFixed(4);
+
+  const contextTag = context?.fileExt
+    ? ` · ${context.fileExt.toUpperCase()} dev`
+    : context?.toolName
+    ? ` · ${context.toolName}`
+    : "";
+
+  const sponsorLine   = `${DIM}Sponsored · ${ad.advertiser}${contextTag}${R}`;
+  const headlineLine  = `${B}${WHITE}${ad.headline}${R}`;
+  const bodyLine      = `${DIM}${ad.body}${R}`;
+  const ctaLine       = `${CYAN}${ad.cta}${R}  ${DIM}${ad.clickUrl}${R}`;
+  const earnLine      = `${BRIGHT_GREEN}+$${earnedDollars} earned${R}  ${DIM}session total: ${GREEN}$${sessionDollars}${R}`;
+  const footerLine    = `${DIM}spincome · /disable to opt out${R}`;
+
+  const sponsorLen   = `Sponsored · ${ad.advertiser}${contextTag}`.length;
+  const headlineLen  = ad.headline.length;
+  const bodyLen      = ad.body.length;
+  const ctaLen       = `${ad.cta}  ${ad.clickUrl}`.length;
+  const earnLen      = `+$${earnedDollars} earned  session total: $${sessionDollars}`.length;
+  const footerLen    = `spincome · /disable to opt out`.length;
 
   return [
     "",
-    divider,
-    line(`${DIM}Sponsored by ${ad.advertiser}${RESET}`, W),
-    line(`${BOLD}${CYAN}${ad.headline}${RESET}`, W),
-    line(`${ad.body}`, W),
-    line(`${YELLOW}${ad.cta} → ${ad.clickUrl}${RESET}`, W),
-    line(`${DIM}Earning with spincome.io | /disable to opt out${RESET}`, W),
-    divider,
+    ruler(),
+    box(sponsorLine,  sponsorLen),
+    box(headlineLine, headlineLen),
+    box(bodyLine,     bodyLen),
+    box("", 0),
+    box(ctaLine,      ctaLen),
+    box("", 0),
+    box(earnLine,     earnLen),
+    box(footerLine,   footerLen),
+    ruler(),
     "",
   ].join("\n");
 }

@@ -9,6 +9,7 @@ export async function GET() {
     totalEarningsResult,
     topTools,
     topExts,
+    leaderboard,
   ] = await Promise.all([
     prisma.impression.count(),
     prisma.developer.count(),
@@ -27,6 +28,11 @@ export async function GET() {
       orderBy: { _count: { id: "desc" } },
       take: 5,
     }),
+    prisma.developer.findMany({
+      orderBy: { earningsCents: "desc" },
+      take: 10,
+      select: { earningsCents: true, impressions: { select: { id: true } }, referralCode: true },
+    }),
   ]);
 
   return NextResponse.json({
@@ -35,5 +41,11 @@ export async function GET() {
     totalEarningsCents: totalEarningsResult._sum.earningsCents ?? 0,
     topTools: topTools.map((t: { toolName: string | null; _count: { id: number } }) => ({ tool: t.toolName, count: t._count.id })),
     topFileExts: topExts.map((e: { fileExt: string | null; _count: { id: number } }) => ({ ext: e.fileExt, count: e._count.id })),
+    leaderboard: leaderboard.map((d, i) => ({
+      rank: i + 1,
+      handle: `dev_${d.referralCode.slice(0, 4)}***`,
+      earningsCents: d.earningsCents,
+      impressions: d.impressions.length,
+    })),
   });
 }

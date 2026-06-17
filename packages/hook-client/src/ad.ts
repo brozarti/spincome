@@ -41,9 +41,9 @@ export async function recordImpression(
   developerKey: string,
   actualCpmCents: number,
   context: AdContext
-): Promise<void> {
+): Promise<number> {
   try {
-    await fetch(`${API_BASE}/ads/impression`, {
+    const res = await fetch(`${API_BASE}/ads/impression`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,12 @@ export async function recordImpression(
       body: JSON.stringify({ adId, actualCpmCents, ...context }),
       signal: AbortSignal.timeout(3000),
     });
+    if (res.ok) {
+      const data = await res.json() as { earnedCents?: number };
+      return data.earnedCents ?? 0;
+    }
   } catch {
-    // fire-and-forget
+    // ignore
   }
+  return 0;
 }

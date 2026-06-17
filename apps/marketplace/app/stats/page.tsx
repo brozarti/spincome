@@ -9,6 +9,7 @@ interface Stats {
   totalEarningsCents: number;
   topTools: { tool: string; count: number }[];
   topFileExts: { ext: string; count: number }[];
+  leaderboard: { rank: number; handle: string; earningsCents: number; impressions: number }[];
 }
 
 export default function StatsPage() {
@@ -85,6 +86,35 @@ export default function StatsPage() {
                 </div>
               </div>
             </div>
+
+            {/* Leaderboard */}
+            {stats.leaderboard.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-sm text-white/40 uppercase tracking-widest mb-4">Top earners</h2>
+                <div className="border border-white/10 rounded-xl overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-white/10 text-white/30 text-xs">
+                        <th className="text-left px-5 py-3 font-normal">Rank</th>
+                        <th className="text-left px-5 py-3 font-normal">Developer</th>
+                        <th className="text-right px-5 py-3 font-normal">Impressions</th>
+                        <th className="text-right px-5 py-3 font-normal">Earned</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stats.leaderboard.map((d) => (
+                        <tr key={d.rank} className="border-b border-white/5 last:border-0 hover:bg-white/3">
+                          <td className="px-5 py-3 text-white/20 font-mono">#{d.rank}</td>
+                          <td className="px-5 py-3 font-mono text-white/70">{d.handle}</td>
+                          <td className="px-5 py-3 text-right text-white/50">{fmt(d.impressions)}</td>
+                          <td className="px-5 py-3 text-right text-emerald-400 font-semibold">{dollars(d.earningsCents)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
 
             <div className="mt-16 border border-white/10 rounded-xl p-6 text-center">
               <p className="text-white/50 text-sm mb-4">
