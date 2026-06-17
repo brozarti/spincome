@@ -45,12 +45,20 @@ export default function DevDashboardPage() {
   }
 
   async function connectStripe() {
-    const res = await fetch("/api/developers/connect", {
-      method: "POST",
-      headers: { "X-Developer-Key": key.trim() },
-    });
-    const data = await res.json();
-    if (data.url) window.location.href = data.url;
+    try {
+      const res = await fetch("/api/developers/connect", {
+        method: "POST",
+        headers: { "X-Developer-Key": key.trim() },
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data.error ?? "Failed to start Stripe onboarding. Make sure Stripe Connect is enabled on your account.");
+      }
+    } catch {
+      alert("Network error. Please try again.");
+    }
   }
 
   async function requestPayout() {
