@@ -65,6 +65,10 @@ export default function AdvertisePage() {
       });
       if (!res.ok) throw new Error("Failed");
       const data = await res.json();
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+        return;
+      }
       setCampaignId(data.campaignId);
       setStatus("success");
     } catch {
@@ -186,7 +190,7 @@ export default function AdvertisePage() {
             disabled={status === "submitting"}
             className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-black font-semibold py-3 rounded-lg transition-colors text-sm"
           >
-            {status === "submitting" ? "Creating campaign..." : "Launch campaign"}
+            {status === "submitting" ? "Redirecting to payment..." : "Launch campaign -- pay now"}
           </button>
         </form>
       </div>
