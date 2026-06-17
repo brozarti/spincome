@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
     impressionCount,
     languages: developer.languages ?? "",
     frameworks: developer.frameworks ?? "",
+    stripeConnected: !!developer.stripeAccountId,
   });
 }
 

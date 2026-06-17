@@ -11,6 +11,7 @@ interface DevStats {
   impressionCount: number;
   languages: string;
   frameworks: string;
+  stripeConnected: boolean;
 }
 
 const CLAUDE_MONTHLY_CENTS = 2000; // $20/month
@@ -22,6 +23,8 @@ export default function DevDashboardPage() {
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [form, setForm] = useState({ languages: "", frameworks: "" });
+  const [payoutStatus, setPayoutStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [payoutMsg, setPayoutMsg] = useState("");
 
   async function lookup(e: React.FormEvent) {
     e.preventDefault();
@@ -37,8 +40,34 @@ export default function DevDashboardPage() {
     }
     const data: DevStats = await res.json();
     setStats(data);
-    setForm({ languages: data.languages, frameworks: data.frameworks });
+    setForm({ languages: data.languages ?? "", frameworks: data.frameworks ?? "" });
     setLoading(false);
+  }
+
+  async function connectStripe() {
+    const res = await fetch("/api/developers/connect", {
+      method: "POST",
+      headers: { "X-Developer-Key": key.trim() },
+    });
+    const data = await res.json();
+    if (data.url) window.location.href = data.url;
+  }
+
+  async function requestPayout() {
+    setPayoutStatus("loading");
+    const res = await fetch("/api/developers/payout", {
+      method: "POST",
+      headers: { "X-Developer-Key": key.trim() },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setPayoutStatus("done");
+      setPayoutMsg(`$${(data.paidOutCents / 100).toFixed(2)} sent to your Stripe account.`);
+      setStats((s) => s ? { ...s, earningsCents: 0 } : s);
+    } else {
+      setPayoutStatus("error");
+      setPayoutMsg(data.error ?? "Payout failed.");
+    }
   }
 
   async function saveProfile(e: React.FormEvent) {
@@ -100,6 +129,35 @@ export default function DevDashboardPage() {
               <p className="text-white/30 text-xs">
                 {pctOfSubscription}% of your $20/mo Claude subscription covered
               </p>
+            </div>
+
+            {/* Payout */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <h2 className="font-semibold mb-1">Withdraw earnings</h2>
+              <p className="text-white/40 text-xs mb-4">Minimum payout $10. Funds arrive in 1-2 business days.</p>
+              {!stats.stripeConnected ? (
+                <button
+                  onClick={connectStripe}
+                  className="bg-violet-600 hover:bg-violet-500 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+                >
+                  Connect Stripe to withdraw
+                </button>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={requestPayout}
+                    disabled={payoutStatus === "loading" || stats.earningsCents < 1000}
+                    className="bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-black font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+                  >
+                    {payoutStatus === "loading" ? "Processing..." : `Withdraw $${(stats.earningsCents / 100).toFixed(2)}`}
+                  </button>
+                  {payoutMsg && (
+                    <p className={`text-sm ${payoutStatus === "error" ? "text-red-400" : "text-emerald-400"}`}>
+                      {payoutMsg}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Grid stats */}
