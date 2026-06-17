@@ -112,9 +112,9 @@ async function main() {
   injectHook(settingsPath);
 
   console.log("\n  All set! Ads will appear after Claude Code tool calls.");
-  console.log(`\n  Your referral link: https://spincome.io/r/${myReferralCode}`);
+  console.log(`\n  Your referral link: https://spincome-marketplace-git-main-spincome.vercel.app/r/${myReferralCode}`);
   console.log("  Share it -- you earn 10% of every referred developer's earnings, forever.");
-  console.log("\n  Dashboard: https://spincome.io/dev\n");
+  console.log("\n  Dashboard: https://spincome-marketplace-git-main-spincome.vercel.app/dev\n");
 
   rl.close();
 }
