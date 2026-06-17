@@ -1,8 +1,15 @@
 "use client";
 
+import Link from "next/link";
+
 export default function SetupPage() {
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4">
+    <main className="min-h-screen bg-black text-white flex flex-col">
+      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
+        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
+        <Link href="/advertise" className="text-sm text-white/60 hover:text-white transition-colors">Advertise</Link>
+      </nav>
+      <div className="flex-1 flex flex-col items-center justify-center px-4">
       <div className="max-w-lg w-full">
         <h1 className="text-3xl font-bold mb-2">Get set up in 30 seconds</h1>
         <p className="text-white/50 mb-10">Run this in your terminal. That&apos;s it.</p>
@@ -31,6 +38,7 @@ export default function SetupPage() {
           </li>
         </ul>
       </div>
+    </div>
     </main>
   );
 }

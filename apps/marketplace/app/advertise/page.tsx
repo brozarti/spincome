@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface FormState {
   advertiserEmail: string;
@@ -95,6 +96,10 @@ export default function AdvertisePage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
+      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
+        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
+        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
+      </nav>
       <div className="max-w-2xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold mb-2">Advertise to developers</h1>
         <p className="text-white/50 mb-10">
