@@ -27,13 +27,18 @@ export async function POST(req: NextRequest) {
   const campaign = await prisma.campaign.findUnique({ where: { id: adId } });
   if (!campaign || !campaign.active) return NextResponse.json({ ok: true });
 
-  // actualCpmCents is cost per 1000 impressions, so per-impression cost is actualCpmCents / 1000
-  // We store earnings in fractional cents by tracking in milli-cents, but for simplicity
-  // we credit the full CPM value per impression (pays out as if every 1 impression = 1 CPM unit)
-  // This means a $5 CPM campaign pays $5 * 50% = $2.50 per impression to developer -- good for early growth
-  const impressionCostCents = Math.max(1, actualCpmCents);
-  const developerEarningsCents = Math.floor(impressionCostCents * DEVELOPER_SHARE);
-  const referrerEarningsCents = Math.floor(developerEarningsCents * REFERRER_SHARE);
+  // actualCpmCents = cents per 1000 impressions (e.g. 500 = $5 CPM)
+  // Per impression cost = actualCpmCents / 1000 cents = 0.5 cents for $5 CPM
+  // We store earnings in milli-cents (1 unit = 0.001 cents) to preserve precision.
+  // Developer earns 50% of per-impression cost in milli-cents:
+  //   e.g. $5 CPM → 500/1000 * 1000 * 0.5 = 250 milli-cents per impression
+  //   After 1000 impressions: 250,000 milli-cents = 250 cents = $2.50 ✓
+  // Display: divide DB value by 100,000 to get dollars
+  // Payout: divide DB value by 1,000 to get cents for Stripe transfer
+  const perImpressionMilliCents = actualCpmCents; // = cpmCents/1000 * 1000
+  const developerEarningsCents = Math.round(perImpressionMilliCents * DEVELOPER_SHARE); // stored as milli-cents
+  const referrerEarningsCents = Math.round(developerEarningsCents * REFERRER_SHARE);
+  const impressionCostCents = Math.round(perImpressionMilliCents); // milli-cents charged to campaign
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ops: any[] = [

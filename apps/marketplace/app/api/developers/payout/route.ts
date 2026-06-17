@@ -5,7 +5,7 @@ import { getDeveloperFromRequest } from "@/lib/auth";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-const MIN_PAYOUT_CENTS = 1000; // $10 minimum
+const MIN_PAYOUT_MILLI_CENTS = 1000000; // $10 minimum (10 * 100,000 milli-cents)
 
 export async function POST(req: NextRequest) {
   const developer = await getDeveloperFromRequest(req);
@@ -15,14 +15,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Connect a Stripe account first" }, { status: 400 });
   }
 
-  if (developer.earningsCents < MIN_PAYOUT_CENTS) {
+  if (developer.earningsCents < MIN_PAYOUT_MILLI_CENTS) {
     return NextResponse.json(
-      { error: `Minimum payout is $${MIN_PAYOUT_CENTS / 100}` },
+      { error: `Minimum payout is $10` },
       { status: 400 }
     );
   }
 
-  const amountCents = developer.earningsCents;
+  // earningsCents is stored in milli-cents; divide by 1000 to get real cents for Stripe
+  const amountCents = Math.floor(developer.earningsCents / 1000);
 
   await stripe.transfers.create({
     amount: amountCents,

@@ -14,7 +14,8 @@ interface DevStats {
   stripeConnected: boolean;
 }
 
-const CLAUDE_MONTHLY_CENTS = 2000; // $20/month
+const CLAUDE_MONTHLY_CENTS = 2000; // $20/month = 2,000,000 milli-cents
+const MILLI_CENTS_PER_DOLLAR = 100000;
 
 export default function DevDashboardPage() {
   const [key, setKey] = useState("");
@@ -90,7 +91,7 @@ export default function DevDashboardPage() {
   }
 
   const pctOfSubscription = stats
-    ? Math.min(100, Math.round((stats.earningsCents / CLAUDE_MONTHLY_CENTS) * 100))
+    ? Math.min(100, Math.round((stats.earningsCents / (CLAUDE_MONTHLY_CENTS * 1000)) * 100))
     : 0;
   const referralUrl = stats ? `https://spincome.io/r/${stats.referralCode}` : "";
 
@@ -126,7 +127,7 @@ export default function DevDashboardPage() {
             <div className="bg-white/5 border border-white/10 rounded-xl p-6">
               <p className="text-white/40 text-xs mb-1">Total earned</p>
               <p className="text-4xl font-bold text-emerald-400 mb-4">
-                ${(stats.earningsCents / 100).toFixed(2)}
+                ${(stats.earningsCents / MILLI_CENTS_PER_DOLLAR).toFixed(4)}
               </p>
               <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-2">
                 <div
@@ -154,10 +155,10 @@ export default function DevDashboardPage() {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={requestPayout}
-                    disabled={payoutStatus === "loading" || stats.earningsCents < 1000}
+                    disabled={payoutStatus === "loading" || stats.earningsCents < 1000000}
                     className="bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-black font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
                   >
-                    {payoutStatus === "loading" ? "Processing..." : `Withdraw $${(stats.earningsCents / 100).toFixed(2)}`}
+                    {payoutStatus === "loading" ? "Processing..." : `Withdraw $${(stats.earningsCents / MILLI_CENTS_PER_DOLLAR).toFixed(2)}`}
                   </button>
                   {payoutMsg && (
                     <p className={`text-sm ${payoutStatus === "error" ? "text-red-400" : "text-emerald-400"}`}>
@@ -173,7 +174,7 @@ export default function DevDashboardPage() {
               <Stat label="Impressions" value={stats.impressionCount.toLocaleString()} />
               <Stat label="Referrals" value={stats.referralCount.toLocaleString()} />
               <Stat label="Avg CPM" value={stats.impressionCount > 0
-                ? `$${((stats.earningsCents / stats.impressionCount) * 2).toFixed(3)}`
+                ? `$${((stats.earningsCents / stats.impressionCount / MILLI_CENTS_PER_DOLLAR) * 2000).toFixed(2)}`
                 : "--"} />
             </div>
 

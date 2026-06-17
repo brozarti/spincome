@@ -26,8 +26,9 @@ function ruler(): string {
 }
 
 export function renderAd(ad: Ad, earnedCents: number, sessionCents: number, context?: { toolName?: string; fileExt?: string }): string {
-  const earnedDollars  = (earnedCents / 100).toFixed(4);
-  const sessionDollars = (sessionCents / 100).toFixed(4);
+  // earnedCents and sessionCents are stored in milli-cents (1 unit = $0.00001)
+  const earnedDollars  = (earnedCents / 100000).toFixed(4);
+  const sessionDollars = (sessionCents / 100000).toFixed(4);
 
   const contextTag = context?.fileExt
     ? ` · ${context.fileExt.toUpperCase()} dev`
