@@ -8,6 +8,7 @@ export default function Home() {
         <span className="font-bold text-lg tracking-tight">spincome.io</span>
         <div className="flex gap-6 text-sm text-white/60">
           <Link href="/stats" className="hover:text-white transition-colors">Stats</Link>
+          <Link href="/bids" className="hover:text-white transition-colors">Live bids</Link>
           <Link href="/advertise" className="hover:text-white transition-colors">Advertise</Link>
           <Link href="/dev" className="hover:text-white transition-colors">Dashboard</Link>
         </div>
