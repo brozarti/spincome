@@ -135,6 +135,8 @@ ipcMain.handle("save-config", (_, config) => {
   return true;
 });
 
+ipcMain.on("quit-app", () => app.quit());
+
 app.dock?.hide();
 
 app.whenReady().then(() => {

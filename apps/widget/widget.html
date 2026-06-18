@@ -100,6 +100,13 @@
   .stripe-badge {
     display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 99px;
   }
+  .close-btn {
+    background: none; border: none; color: rgba(255,255,255,0.2);
+    font-size: 14px; cursor: pointer; padding: 2px 6px; border-radius: 4px;
+    -webkit-app-region: no-drag; margin-left: 6px; line-height: 1;
+  }
+  .close-btn:hover { color: #f87171; background: rgba(255,255,255,0.06); }
+
   .stripe-yes { background: rgba(16,185,129,0.12); color: #34d399; }
   .stripe-no { background: rgba(251,191,36,0.12); color: #fbbf24; }
 
@@ -178,6 +185,7 @@
     <div class="coin">$</div>
     <span class="brand">spincome</span>
     <div class="live"><span>live</span><div class="live-dot"></div></div>
+    <button class="close-btn" onclick="require('electron').ipcRenderer.send('quit-app')" title="Quit Spincome">✕</button>
   </div>
 
   <!-- Setup screen -->
