@@ -70,8 +70,8 @@ export default function DashboardPage() {
                   </div>
                   <div className="grid grid-cols-3 gap-4 text-sm mb-4">
                     <Stat label="Impressions" value={c._count.impressions.toLocaleString()} />
-                    <Stat label="Spent" value={`$${(c.spentCents / 100).toFixed(2)}`} />
-                    <Stat label="Budget" value={`$${(c.budgetCents / 100).toFixed(2)}`} />
+                    <Stat label="Spent" value={`$${(c.spentCents / 100000).toFixed(2)}`} />
+                    <Stat label="Budget" value={`$${(c.budgetCents / 100000).toFixed(2)}`} />
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div

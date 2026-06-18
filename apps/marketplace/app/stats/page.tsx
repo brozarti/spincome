@@ -20,7 +20,7 @@ export default function StatsPage() {
   }, []);
 
   const fmt = (n: number) => n.toLocaleString();
-  const dollars = (cents: number) => `$${(cents / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const dollars = (milliCents: number) => `$${(milliCents / 100000).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   return (
     <main className="min-h-screen bg-black text-white">

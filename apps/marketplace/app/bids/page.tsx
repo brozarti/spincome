@@ -24,7 +24,7 @@ interface BidsData {
 }
 
 function dollars(milliCents: number) {
-  return `$${(milliCents / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `$${(milliCents / 100000).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 function cpm(cents: number) {

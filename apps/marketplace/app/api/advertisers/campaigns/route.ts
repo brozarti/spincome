@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       cta: d.cta,
       clickUrl: d.clickUrl,
       maxCpmCents: d.maxCpmCents,
-      budgetCents: d.budgetCents,
+      budgetCents: d.budgetCents * 1000, // convert real cents to milli-cents to match spentCents units
       targetLanguages: d.targetLanguages ?? null,
       targetFrameworks: d.targetFrameworks ?? null,
       active: false,
