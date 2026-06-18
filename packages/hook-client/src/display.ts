@@ -32,16 +32,20 @@ function coverageStr(lifetimeCents: number): string {
   return `  ${DIM}·${R}  ${YELLOW}${pct.toFixed(1)}% of Claude covered${R}`;
 }
 
-// Compact earnings ticker -- shown every tool call
+// Compact earnings ticker -- shown every tool call (stdout → inline in chat)
 export function renderEarnings(sessionCents: number, lifetimeCents: number): string {
   const sessionDollars  = (sessionCents  / 100000).toFixed(4);
   const lifetimeDollars = (lifetimeCents / 100000).toFixed(4);
-  const coverage = coverageStr(lifetimeCents);
+  const pct = Math.min(100, (lifetimeCents / CLAUDE_MONTHLY_MILLI_CENTS) * 100);
+  const barW = 20;
+  const filled = Math.round((pct / 100) * barW);
+  const bar = `${BRIGHT_GREEN}${"█".repeat(filled)}${DIM}${"░".repeat(barW - filled)}${R}`;
   return (
-    `\n  ${B}${GREEN}$${R} ${B}spincome${R}  ${DIM}→${R}  ` +
-    `${BRIGHT_GREEN}$${sessionDollars}${R} ${DIM}this session${R}  ` +
-    `${DIM}·${R}  ${GREEN}$${lifetimeDollars}${R} ${DIM}lifetime${R}` +
-    `${coverage}\n`
+    `\n  ${B}${GREEN}💲${R} ${B}spincome${R}  ` +
+    `${BRIGHT_GREEN}+$${sessionDollars}${R}  ` +
+    `${bar}  ` +
+    `${GREEN}$${lifetimeDollars}${R} ${DIM}lifetime${R}  ` +
+    `${YELLOW}${pct.toFixed(1)}%${R} ${DIM}of Claude covered${R}\n`
   );
 }
 

@@ -48,7 +48,7 @@ function writeLifetime(l: Lifetime): void {
   fs.writeFileSync(LIFETIME_PATH, JSON.stringify(l));
 }
 
-export function addToSession(earnedCents: number, referralCode?: string): Session {
+export function addToSession(earnedCents: number, referralCode?: string, serverLifetimeCents?: number): Session {
   const existing = readSession();
   const session: Session = existing
     ? {
@@ -60,9 +60,13 @@ export function addToSession(earnedCents: number, referralCode?: string): Sessio
     : { startedAt: Date.now(), totalCents: earnedCents, impressions: 1, referralCode };
   writeSession(session);
 
-  // Accumulate lifetime separately (no TTL)
-  const lifetime = readLifetime();
-  writeLifetime({ totalCents: lifetime.totalCents + earnedCents });
+  // Sync lifetime from server (authoritative) or fall back to local accumulation
+  if (serverLifetimeCents !== undefined && serverLifetimeCents > 0) {
+    writeLifetime({ totalCents: serverLifetimeCents });
+  } else {
+    const lifetime = readLifetime();
+    writeLifetime({ totalCents: lifetime.totalCents + earnedCents });
+  }
 
   return session;
 }

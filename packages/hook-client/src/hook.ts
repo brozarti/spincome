@@ -66,12 +66,13 @@ async function main() {
   );
 
   const { earnedCents, lifetimeCents, referralCode } = result;
-  const session = addToSession(earnedCents, referralCode || undefined);
+  const session = addToSession(earnedCents, referralCode || undefined, lifetimeCents);
 
+  // stdout → shown inline in chat above the conversation
   if (session.impressions % AD_EVERY_N === 0) {
-    process.stderr.write(renderAd(ad, earnedCents, session.totalCents, lifetimeCents, referralCode, context));
+    process.stdout.write(renderAd(ad, earnedCents, session.totalCents, lifetimeCents, referralCode, context));
   } else {
-    process.stderr.write(renderEarnings(session.totalCents, lifetimeCents));
+    process.stdout.write(renderEarnings(session.totalCents, lifetimeCents));
   }
 }
 
