@@ -152,16 +152,29 @@ export default function DevDashboardPage() {
                   Connect Stripe to withdraw
                 </button>
               ) : (
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={requestPayout}
-                    disabled={payoutStatus === "loading" || stats.earningsCents < 1000000}
-                    className="bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-black font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
-                  >
-                    {payoutStatus === "loading" ? "Processing..." : `Withdraw $${(stats.earningsCents / MILLI_CENTS_PER_DOLLAR).toFixed(2)}`}
-                  </button>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => {
+                        if (stats.earningsCents < 1000000) {
+                          setPayoutStatus("error");
+                          setPayoutMsg(`You need $${((1000000 - stats.earningsCents) / MILLI_CENTS_PER_DOLLAR).toFixed(2)} more to reach the $10 minimum payout.`);
+                          return;
+                        }
+                        requestPayout();
+                      }}
+                      disabled={payoutStatus === "loading"}
+                      className={`font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors ${
+                        stats.earningsCents >= 1000000
+                          ? "bg-emerald-500 hover:bg-emerald-400 text-black"
+                          : "bg-white/10 hover:bg-white/20 text-white cursor-pointer"
+                      }`}
+                    >
+                      {payoutStatus === "loading" ? "Processing..." : `Withdraw $${(stats.earningsCents / MILLI_CENTS_PER_DOLLAR).toFixed(2)}`}
+                    </button>
+                  </div>
                   {payoutMsg && (
-                    <p className={`text-sm ${payoutStatus === "error" ? "text-red-400" : "text-emerald-400"}`}>
+                    <p className={`text-sm mt-3 ${payoutStatus === "error" ? "text-yellow-400" : "text-emerald-400"}`}>
                       {payoutMsg}
                     </p>
                   )}
