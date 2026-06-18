@@ -174,7 +174,7 @@ export default function DevDashboardPage() {
                     </button>
                   </div>
                   {payoutMsg && (
-                    <p className={`text-sm mt-3 ${payoutStatus === "error" ? "text-yellow-400" : "text-emerald-400"}`}>
+                    <p className={`text-sm mt-3 ${payoutStatus === "error" ? "text-white/50" : "text-emerald-400"}`}>
                       {payoutMsg}
                     </p>
                   )}
