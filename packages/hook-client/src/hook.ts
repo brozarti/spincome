@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 import { fetchAd, recordImpression, type AdContext } from "./ad.js";
-import { renderAd } from "./display.js";
+import { renderEarnings, renderAd } from "./display.js";
 import { readConfig } from "./config.js";
 import { addToSession } from "./session.js";
 import { animateWhileLoading } from "./animate.js";
 import path from "path";
+
+const AD_EVERY_N = 10; // show full ad every 10th impression
 
 interface HookPayload {
   tool_name?: string;
@@ -43,8 +45,6 @@ async function main() {
   }
 
   const context = extractContext(payload);
-
-  // Fetch ad and record impression concurrently, animate while waiting
   const ad = await fetchAd(context);
   if (!ad) process.exit(0);
 
@@ -53,7 +53,13 @@ async function main() {
   );
 
   const session = addToSession(earnedCents);
-  process.stdout.write(renderAd(ad, earnedCents, session.totalCents, context));
+
+  // Every 10th impression show the full ad, otherwise just the earnings ticker
+  if (session.impressions % AD_EVERY_N === 0) {
+    process.stdout.write(renderAd(ad, earnedCents, session.totalCents, context));
+  } else {
+    process.stdout.write(renderEarnings(session.totalCents));
+  }
 }
 
 main().catch(() => process.exit(0));
