@@ -10,8 +10,8 @@ const schema = z.object({
   fileExt: z.string().optional(),
 });
 
-// Revenue split: developer 50%, referrer 10% (of developer share), platform keeps the rest
-const DEVELOPER_SHARE = 0.5;
+// Revenue split: developer 70%, referrer 10% (of developer share), platform keeps the rest
+const DEVELOPER_SHARE = 0.7;
 const REFERRER_SHARE = 0.1; // 10% of what the developer earns, forever
 
 export async function POST(req: NextRequest) {
