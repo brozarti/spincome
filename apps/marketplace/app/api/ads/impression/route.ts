@@ -73,5 +73,16 @@ export async function POST(req: NextRequest) {
 
   await prisma.$transaction(ops);
 
-  return NextResponse.json({ ok: true, earnedCents: developerEarningsCents });
+  // Fetch updated lifetime total to return to the hook client
+  const updated = await prisma.developer.findUnique({
+    where: { id: developer.id },
+    select: { earningsCents: true, referralCode: true },
+  });
+
+  return NextResponse.json({
+    ok: true,
+    earnedCents: developerEarningsCents,
+    lifetimeCents: updated?.earningsCents ?? 0,
+    referralCode: updated?.referralCode ?? "",
+  });
 }

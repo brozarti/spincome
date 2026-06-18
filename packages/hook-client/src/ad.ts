@@ -15,6 +15,12 @@ export interface Ad {
   actualCpmCents: number;
 }
 
+export interface ImpressionResult {
+  earnedCents: number;
+  lifetimeCents: number;
+  referralCode: string;
+}
+
 export async function fetchAd(context: AdContext): Promise<Ad | null> {
   const config = readConfig();
   if (!config?.enabled || !config?.developerKey) return null;
@@ -41,7 +47,7 @@ export async function recordImpression(
   developerKey: string,
   actualCpmCents: number,
   context: AdContext
-): Promise<number> {
+): Promise<ImpressionResult> {
   try {
     const res = await fetch(`${API_BASE}/ads/impression`, {
       method: "POST",
@@ -53,11 +59,15 @@ export async function recordImpression(
       signal: AbortSignal.timeout(3000),
     });
     if (res.ok) {
-      const data = await res.json() as { earnedCents?: number };
-      return data.earnedCents ?? 0;
+      const data = await res.json() as { earnedCents?: number; lifetimeCents?: number; referralCode?: string };
+      return {
+        earnedCents: data.earnedCents ?? 0,
+        lifetimeCents: data.lifetimeCents ?? 0,
+        referralCode: data.referralCode ?? "",
+      };
     }
   } catch {
     // ignore
   }
-  return 0;
+  return { earnedCents: 0, lifetimeCents: 0, referralCode: "" };
 }

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { fetchAd, recordImpression, type AdContext } from "./ad.js";
-import { renderEarnings, renderAd } from "./display.js";
+import { renderEarnings, renderAd, renderSummary } from "./display.js";
 import { readConfig } from "./config.js";
-import { addToSession } from "./session.js";
+import { addToSession, getSessionSummary } from "./session.js";
 import { animateWhileLoading } from "./animate.js";
 import path from "path";
 
@@ -30,7 +30,20 @@ function extractContext(payload: HookPayload): AdContext {
   return { toolName, fileExt };
 }
 
+// Session-end summary (fired by PreSessionEnd hook)
+async function summary() {
+  const { session, lifetimeCents } = getSessionSummary();
+  if (!session || session.impressions === 0) process.exit(0);
+  process.stderr.write(renderSummary(session.totalCents, lifetimeCents, session.impressions));
+}
+
 async function main() {
+  // "spincome hook summary" → session-end display
+  if (process.argv[3] === "summary") {
+    await summary();
+    return;
+  }
+
   const chunks: Buffer[] = [];
   for await (const chunk of process.stdin) chunks.push(chunk);
 
@@ -48,17 +61,17 @@ async function main() {
   const ad = await fetchAd(context);
   if (!ad) process.exit(0);
 
-  const earnedCents = await animateWhileLoading(
+  const result = await animateWhileLoading(
     recordImpression(ad.id, config.developerKey, ad.actualCpmCents, context)
   );
 
-  const session = addToSession(earnedCents);
+  const { earnedCents, lifetimeCents, referralCode } = result;
+  const session = addToSession(earnedCents, referralCode || undefined);
 
-  // Every 10th impression show the full ad, otherwise just the earnings ticker
   if (session.impressions % AD_EVERY_N === 0) {
-    process.stdout.write(renderAd(ad, earnedCents, session.totalCents, context));
+    process.stderr.write(renderAd(ad, earnedCents, session.totalCents, lifetimeCents, referralCode, context));
   } else {
-    process.stdout.write(renderEarnings(session.totalCents));
+    process.stderr.write(renderEarnings(session.totalCents, lifetimeCents));
   }
 }
 

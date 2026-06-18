@@ -16,6 +16,15 @@ interface FormState {
   targetFrameworks: string;
 }
 
+const STATS = [
+  { value: "100%", label: "senior devs" },
+  { value: "$25+", label: "avg CPM" },
+  { value: "10s", label: "avg view time" },
+  { value: "0", label: "ad blockers" },
+];
+
+const LOGOS = ["Vercel", "Supabase", "Railway", "Sentry", "PlanetScale", "Render"];
+
 export default function AdvertisePage() {
   const [form, setForm] = useState<FormState>({
     advertiserEmail: "",
@@ -24,8 +33,8 @@ export default function AdvertisePage() {
     body: "",
     cta: "",
     clickUrl: "",
-    maxCpmBid: "5",
-    budget: "50",
+    maxCpmBid: "25",
+    budget: "500",
     targetLanguages: "",
     targetFrameworks: "",
   });
@@ -80,15 +89,12 @@ export default function AdvertisePage() {
     return (
       <main className="min-h-screen bg-black text-white flex items-center justify-center px-4">
         <div className="max-w-md text-center">
-          <div className="text-emerald-400 text-4xl mb-4">✓</div>
+          <div className="text-emerald-400 text-5xl mb-6">✓</div>
           <h1 className="text-2xl font-bold mb-2">Campaign live</h1>
-          <p className="text-white/50 text-sm mb-6">
-            Your ad is in the auction. Campaign ID:{" "}
-            <code className="text-white/80">{campaignId}</code>
+          <p className="text-white/50 text-sm mb-2">
+            Your ad is in the real-time auction. You only pay when you win.
           </p>
-          <p className="text-white/40 text-xs">
-            You only pay when you win the auction -- and you only win when a matching developer is active.
-          </p>
+          <p className="text-white/30 text-xs font-mono">Campaign ID: {campaignId}</p>
         </div>
       </main>
     );
@@ -102,112 +108,169 @@ export default function AdvertisePage() {
     <main className="min-h-screen bg-black text-white">
       <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
         <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
+        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
+          Install free
+        </Link>
       </nav>
-      <div className="max-w-2xl mx-auto px-6 py-16">
-        <h1 className="text-3xl font-bold mb-2">Advertise to developers</h1>
-        <p className="text-white/50 mb-10">
-          Real-time auction. You set a max CPM bid -- you only pay what it takes to win.
-          Target by language or framework to reach the exact developers you want.
+
+      {/* Hero */}
+      <section className="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
+        <div className="inline-block bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium px-3 py-1 rounded-full mb-6">
+          The only ad network with zero ad blockers
+        </div>
+        <h1 className="text-5xl font-bold tracking-tight mb-6 leading-tight">
+          Your ad inside<br />
+          <span className="text-emerald-400">every Claude Code session</span>
+        </h1>
+        <p className="text-white/50 text-xl max-w-2xl mx-auto mb-12">
+          Developers see spincome ads between tool calls -- while they are actively coding.
+          No banners. No pop-ups. No ad blockers. Just your message at the exact moment
+          they need a better tool.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Account */}
-          <fieldset className="space-y-4">
-            <legend className="text-xs text-white/40 uppercase tracking-widest mb-4">Your account</legend>
-            <Field label="Company / Name" value={form.advertiserName} onChange={set("advertiserName")} required />
-            <Field label="Email" type="email" value={form.advertiserEmail} onChange={set("advertiserEmail")} required />
-          </fieldset>
+        {/* Stats bar */}
+        <div className="grid grid-cols-4 gap-px bg-white/5 rounded-xl overflow-hidden mb-16">
+          {STATS.map((s) => (
+            <div key={s.label} className="bg-black/60 py-6 px-4">
+              <p className="text-3xl font-bold text-emerald-400 mb-1">{s.value}</p>
+              <p className="text-white/40 text-sm">{s.label}</p>
+            </div>
+          ))}
+        </div>
 
-          {/* Ad creative */}
-          <fieldset className="space-y-4 pt-4 border-t border-white/10">
-            <legend className="text-xs text-white/40 uppercase tracking-widest mb-4">Ad creative</legend>
-            <Field label="Headline (max 80 chars)" value={form.headline} onChange={set("headline")} maxLength={80} required />
+        {/* How it works */}
+        <div className="text-left bg-white/3 border border-white/8 rounded-xl p-6 mb-16 font-mono text-sm">
+          <p className="text-white/30 text-xs mb-3 font-sans uppercase tracking-widest">What devs see in their terminal</p>
+          <p className="text-white/20">──────────────────────────────────────────────────────────────</p>
+          <p className="text-white/40"> Sponsored · <span className="text-white/60">Your Company</span> · TypeScript dev</p>
+          <p className="text-white font-bold"> Deploy in seconds, not hours</p>
+          <p className="text-white/50"> The platform that ships 10x faster. No DevOps required.</p>
+          <p className="text-white/20"> </p>
+          <p> <span className="text-cyan-400">Try free for 14 days</span>  <span className="text-white/30">https://yoursite.com</span></p>
+          <p className="text-white/20"> </p>
+          <p className="text-emerald-400"> +$0.0125 earned  <span className="text-white/30">session: $0.2500</span></p>
+          <p className="text-white/20">──────────────────────────────────────────────────────────────</p>
+        </div>
+
+        {/* Why it works */}
+        <div className="grid grid-cols-3 gap-6 mb-16 text-left">
+          <div className="bg-white/3 border border-white/8 rounded-xl p-6">
+            <p className="text-emerald-400 text-2xl mb-3">01</p>
+            <h3 className="font-semibold mb-2">Zero ad blockers</h3>
+            <p className="text-white/40 text-sm">Rendered in the terminal, not the browser. uBlock Origin cannot touch it.</p>
+          </div>
+          <div className="bg-white/3 border border-white/8 rounded-xl p-6">
+            <p className="text-emerald-400 text-2xl mb-3">02</p>
+            <h3 className="font-semibold mb-2">Pinpoint targeting</h3>
+            <p className="text-white/40 text-sm">Target by language (TypeScript, Python, Rust) or framework (Next.js, FastAPI). Win the auction only when your audience is active.</p>
+          </div>
+          <div className="bg-white/3 border border-white/8 rounded-xl p-6">
+            <p className="text-emerald-400 text-2xl mb-3">03</p>
+            <h3 className="font-semibold mb-2">Second-price auction</h3>
+            <p className="text-white/40 text-sm">You set a max bid. You pay one cent above the next bidder. Never overpay. Budget goes further.</p>
+          </div>
+        </div>
+
+        {/* Social proof placeholder */}
+        <div className="border border-white/5 rounded-xl px-8 py-6 mb-16">
+          <p className="text-white/20 text-xs uppercase tracking-widest mb-6">Built for companies like</p>
+          <div className="flex flex-wrap justify-center gap-x-10 gap-y-3">
+            {LOGOS.map((l) => (
+              <span key={l} className="text-white/25 font-semibold text-lg">{l}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Campaign form */}
+      <section className="max-w-2xl mx-auto px-6 pb-24">
+        <h2 className="text-2xl font-bold mb-2">Launch your campaign</h2>
+        <p className="text-white/40 text-sm mb-10">Minimum $10 budget. Live in minutes after payment.</p>
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <Fieldset legend="Your account">
+            <Field label="Company or product name" value={form.advertiserName} onChange={set("advertiserName")} required />
+            <Field label="Email" type="email" value={form.advertiserEmail} onChange={set("advertiserEmail")} required />
+          </Fieldset>
+
+          <Fieldset legend="Ad creative">
+            <Field label="Headline (max 80 chars)" value={form.headline} onChange={set("headline")} maxLength={80} placeholder="Deploy in seconds, not hours" required />
             <div>
-              <label className="block text-xs text-white/50 mb-1">Body (max 200 chars)</label>
+              <label className="block text-xs text-white/40 mb-1">Body (max 200 chars)</label>
               <textarea
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 resize-none"
                 rows={3}
                 value={form.body}
                 onChange={set("body")}
                 maxLength={200}
+                placeholder="The platform that ships 10x faster. No DevOps required."
                 required
               />
             </div>
-            <Field label='CTA text (e.g. "Try free")' value={form.cta} onChange={set("cta")} maxLength={40} required />
+            <Field label='CTA text (e.g. "Try free for 14 days")' value={form.cta} onChange={set("cta")} maxLength={40} required />
             <Field label="Destination URL" type="url" value={form.clickUrl} onChange={set("clickUrl")} required />
-          </fieldset>
+          </Fieldset>
 
-          {/* Targeting */}
-          <fieldset className="space-y-4 pt-4 border-t border-white/10">
-            <div className="flex items-center justify-between mb-4">
-              <legend className="text-xs text-white/40 uppercase tracking-widest">Targeting</legend>
+          <Fieldset legend="Targeting">
+            <div className="flex items-center justify-between mb-1">
+              <p className="text-white/30 text-xs">Leave blank to reach all active developers. Targeted bids beat untargeted bids in the auction.</p>
               {isTargeted && (
-                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
-                  Premium CPM eligible
+                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full whitespace-nowrap ml-4">
+                  Targeted
                 </span>
               )}
             </div>
-            <p className="text-white/30 text-xs -mt-2">
-              Leave blank to reach all developers. Targeted campaigns win auctions against untargeted ones when the developer matches.
-            </p>
-            <Field
-              label="Target languages (comma-separated)"
-              placeholder="typescript, python, rust"
-              value={form.targetLanguages}
-              onChange={set("targetLanguages")}
-            />
-            <Field
-              label="Target frameworks (comma-separated)"
-              placeholder="nextjs, react, fastapi, django"
-              value={form.targetFrameworks}
-              onChange={set("targetFrameworks")}
-            />
-          </fieldset>
+            <Field label="Languages (comma-separated)" placeholder="typescript, python, rust" value={form.targetLanguages} onChange={set("targetLanguages")} />
+            <Field label="Frameworks (comma-separated)" placeholder="nextjs, react, fastapi, django" value={form.targetFrameworks} onChange={set("targetFrameworks")} />
+          </Fieldset>
 
-          {/* Budget */}
-          <fieldset className="space-y-4 pt-4 border-t border-white/10">
-            <legend className="text-xs text-white/40 uppercase tracking-widest mb-4">Bid & budget</legend>
+          <Fieldset legend="Bid & budget">
             <div className="grid grid-cols-2 gap-4">
               <Field label="Max CPM bid ($)" type="number" min="1" step="0.5" value={form.maxCpmBid} onChange={set("maxCpmBid")} required />
               <Field label="Total budget ($)" type="number" min="10" step="5" value={form.budget} onChange={set("budget")} required />
             </div>
-            <p className="text-white/40 text-xs">
-              Est. up to {impressions.toLocaleString()} impressions at ${form.maxCpmBid} CPM with ${form.budget} budget.
-              Actual cost is second-price -- you often pay less than your max bid.
-              Clicks cost 50x the winning impression rate.
-            </p>
-          </fieldset>
+            <div className="bg-white/3 border border-white/8 rounded-lg p-4 text-sm">
+              <p className="text-white/60">
+                Estimated <span className="text-white font-semibold">{impressions.toLocaleString()} impressions</span> at ${form.maxCpmBid} CPM with ${form.budget} budget.
+              </p>
+              <p className="text-white/30 text-xs mt-1">
+                Actual cost uses second-price auction -- you usually pay less than your max bid.
+              </p>
+            </div>
+          </Fieldset>
 
           {status === "error" && (
-            <p className="text-red-400 text-sm">
-              Something went wrong. Minimum bid $1 CPM, minimum budget $10.
-            </p>
+            <p className="text-red-400 text-sm">Something went wrong. Min bid $1 CPM, min budget $10.</p>
           )}
 
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-black font-semibold py-3 rounded-lg transition-colors text-sm"
+            className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-black font-bold py-4 rounded-xl transition-colors text-base"
           >
-            {status === "submitting" ? "Redirecting to payment..." : "Launch campaign -- pay now"}
+            {status === "submitting" ? "Redirecting to payment..." : "Launch campaign"}
           </button>
+
+          <p className="text-center text-white/20 text-xs">
+            Stripe-secured payment. Campaign activates immediately after payment clears.
+          </p>
         </form>
-      </div>
+      </section>
     </main>
   );
 }
 
+function Fieldset({ legend, children }: { legend: string; children: React.ReactNode }) {
+  return (
+    <fieldset className="space-y-4 pt-6 border-t border-white/8">
+      <legend className="text-xs text-white/30 uppercase tracking-widest mb-4">{legend}</legend>
+      {children}
+    </fieldset>
+  );
+}
+
 function Field({
-  label,
-  value,
-  onChange,
-  type = "text",
-  required,
-  maxLength,
-  min,
-  step,
-  placeholder,
+  label, value, onChange, type = "text", required, maxLength, min, step, placeholder,
 }: {
   label: string;
   value: string;
@@ -221,7 +284,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs text-white/50 mb-1">{label}</label>
+      <label className="block text-xs text-white/40 mb-1">{label}</label>
       <input
         type={type}
         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500"
