@@ -1,0 +1,14 @@
+{
+  "name": "spincome-widget",
+  "version": "1.0.0",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "echo 'no build step'"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.1",
+    "electron": "^33.0.0"
+  }
+}

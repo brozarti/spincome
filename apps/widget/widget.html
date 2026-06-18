@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: transparent;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    user-select: none;
+  }
+
+  #arrow { width: 12px; height: 6px; margin: 0 auto; }
+  #arrow svg { display: block; }
+
+  #widget {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin: 0 10px;
+  }
+
+  .header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+  }
+  .coin {
+    width: 28px; height: 28px; background: #10b981; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; color: #000;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  .brand { font-weight: 600; font-size: 13px; color: #fff; letter-spacing: -0.3px; }
+  .live {
+    margin-left: auto; display: flex; align-items: center; gap: 4px;
+    font-size: 10px; color: rgba(255,255,255,0.3);
+  }
+  .live-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: #10b981;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  .synced-badge {
+    font-size: 9px; background: rgba(16,185,129,0.12); color: #34d399;
+    padding: 2px 6px; border-radius: 99px; margin-left: 6px;
+  }
+
+  .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px;
+  }
+  .stat {
+    background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px 10px;
+  }
+  .stat-label {
+    font-size: 9px; color: rgba(255,255,255,0.3); margin-bottom: 2px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .stat-value { font-size: 16px; font-weight: 600; }
+  .session { color: #34d399; }
+  .lifetime { color: #10b981; }
+  .imps { color: #fff; }
+  .pct { color: #fbbf24; }
+
+  .bar-wrap { margin-bottom: 12px; }
+  .bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 9px; color: rgba(255,255,255,0.25); margin-bottom: 4px;
+  }
+  .bar-track {
+    height: 5px; background: rgba(255,255,255,0.06);
+    border-radius: 99px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    transition: width 0.8s ease; position: relative;
+  }
+  .bar-shimmer {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 14px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+    border-radius: 0 99px 99px 0; animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .user-info {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 10px; margin-top: 2px;
+  }
+  .user-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; color: rgba(255,255,255,0.25); margin-bottom: 4px;
+  }
+  .user-row span:last-child { color: rgba(255,255,255,0.5); font-family: monospace; }
+  .referral-link {
+    font-size: 10px; color: #34d399; word-break: break-all;
+    cursor: pointer; margin-top: 4px;
+  }
+  .referral-link:hover { text-decoration: underline; }
+  .stripe-badge {
+    display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 99px;
+  }
+  .stripe-yes { background: rgba(16,185,129,0.12); color: #34d399; }
+  .stripe-no { background: rgba(251,191,36,0.12); color: #fbbf24; }
+
+  .withdraw-section {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 10px; margin-top: 8px;
+  }
+  .withdraw-btn {
+    width: 100%; background: #10b981; border: none; border-radius: 8px;
+    padding: 8px; font-size: 11px; font-weight: 600; color: #000;
+    cursor: pointer; -webkit-app-region: no-drag; transition: background 0.15s;
+  }
+  .withdraw-btn:hover { background: #34d399; }
+  .withdraw-btn:disabled { opacity: 0.35; cursor: default; background: #10b981; }
+  .withdraw-btn.connect-stripe {
+    background: #7c3aed; color: #fff;
+  }
+  .withdraw-btn.connect-stripe:hover { background: #8b5cf6; }
+  .withdraw-msg {
+    font-size: 10px; text-align: center; margin-top: 6px; min-height: 14px;
+  }
+  .withdraw-msg.success { color: #34d399; }
+  .withdraw-msg.error { color: #f87171; }
+  .withdraw-msg.info { color: rgba(255,255,255,0.3); }
+
+  /* Setup screen */
+  #setup { display: none; }
+  #setup.active { display: block; }
+  #dashboard { display: block; }
+  #dashboard.hidden { display: none; }
+
+  .setup-title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .setup-desc { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 14px; line-height: 1.5; }
+  .setup-input {
+    width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff;
+    font-family: monospace; outline: none; margin-bottom: 8px;
+    -webkit-app-region: no-drag;
+  }
+  .setup-input:focus { border-color: #10b981; }
+  .setup-input::placeholder { color: rgba(255,255,255,0.2); }
+  .setup-btn {
+    width: 100%; background: #10b981; border: none; border-radius: 8px;
+    padding: 8px; font-size: 12px; font-weight: 600; color: #000;
+    cursor: pointer; -webkit-app-region: no-drag;
+  }
+  .setup-btn:hover { background: #34d399; }
+  .setup-btn:disabled { opacity: 0.4; cursor: default; }
+  .setup-error { font-size: 10px; color: #f87171; margin-top: 6px; }
+  .setup-or { font-size: 10px; color: rgba(255,255,255,0.25); text-align: center; margin: 10px 0; }
+  .setup-register {
+    width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 500;
+    color: #fff; cursor: pointer; -webkit-app-region: no-drag;
+  }
+  .setup-register:hover { background: rgba(255,255,255,0.1); }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 0 8px 3px rgba(16,185,129,0.1); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+  @keyframes shimmer {
+    0%, 100% { opacity: 0; } 50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div id="arrow">
+  <svg width="12" height="6" viewBox="0 0 12 6"><path d="M6 0L12 6H0z" fill="rgba(10,10,10,0.95)"/></svg>
+</div>
+<div id="widget">
+  <div class="header">
+    <div class="coin">$</div>
+    <span class="brand">spincome</span>
+    <div class="live"><span>live</span><div class="live-dot"></div></div>
+  </div>
+
+  <!-- Setup screen -->
+  <div id="setup">
+    <div class="setup-title">Connect your account</div>
+    <div class="setup-desc">Enter your developer key to see your earnings. Don't have one? Register with your email below.</div>
+    <input class="setup-input" id="key-input" placeholder="dev_..." spellcheck="false">
+    <button class="setup-btn" id="key-btn" onclick="connectKey()">Connect</button>
+    <div class="setup-error" id="key-error"></div>
+    <div class="setup-or">or</div>
+    <input class="setup-input" id="email-input" placeholder="your@email.com" type="email" spellcheck="false">
+    <button class="setup-register" id="reg-btn" onclick="register()">Register new account</button>
+    <div class="setup-error" id="reg-error"></div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Session</div>
+        <div class="stat-value session" id="session">--</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Lifetime</div>
+        <div class="stat-value lifetime" id="lifetime">--</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Impressions</div>
+        <div class="stat-value imps" id="imps">--</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Claude covered</div>
+        <div class="stat-value pct" id="pct">--</div>
+      </div>
+    </div>
+
+    <div class="bar-wrap">
+      <div class="bar-label">
+        <span id="bar-amt">$0.00 of $20.00/mo</span>
+        <span id="bar-pct">0%</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" id="bar" style="width: 0%;">
+          <div class="bar-shimmer"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-info">
+      <div class="user-row">
+        <span id="user-email">--</span>
+        <span id="stripe-status"></span>
+      </div>
+      <div class="user-row">
+        <span>Referrals</span>
+        <span id="referrals">0</span>
+      </div>
+      <div class="referral-link" id="referral-link" onclick="copyReferral()"></div>
+      <div class="setup-error" id="copy-msg" style="color: #34d399;"></div>
+    </div>
+
+    <div class="withdraw-section" id="withdraw-section">
+      <button class="withdraw-btn" id="withdraw-btn" onclick="handleWithdraw()">Withdraw</button>
+      <div class="withdraw-msg" id="withdraw-msg"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const { ipcRenderer, clipboard, shell } = require("electron");
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+
+const SESSION_PATH  = path.join(os.homedir(), ".spincome", "session.json");
+const LIFETIME_PATH = path.join(os.homedir(), ".spincome", "lifetime.json");
+const API_BASE      = "https://spincome-marketplace-git-main-spincome.vercel.app/api";
+const CLAUDE_MONTHLY = 2000000;
+const SESSION_TTL = 4 * 60 * 60 * 1000;
+
+let serverData = null;
+let currentConfig = null;
+
+function readJSON(p) {
+  try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch { return null; }
+}
+
+function showSetup() {
+  document.getElementById("setup").classList.add("active");
+  document.getElementById("dashboard").classList.add("hidden");
+}
+
+function showDashboard() {
+  document.getElementById("setup").classList.remove("active");
+  document.getElementById("dashboard").classList.remove("hidden");
+}
+
+async function connectKey() {
+  const key = document.getElementById("key-input").value.trim();
+  if (!key.startsWith("dev_")) {
+    document.getElementById("key-error").textContent = "Key must start with dev_";
+    return;
+  }
+  document.getElementById("key-btn").disabled = true;
+  document.getElementById("key-error").textContent = "";
+
+  try {
+    const res = await fetch(API_BASE + "/developers/me", {
+      headers: { "X-Developer-Key": key },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) {
+      document.getElementById("key-error").textContent = "Invalid key. Check and try again.";
+      document.getElementById("key-btn").disabled = false;
+      return;
+    }
+    serverData = await res.json();
+    await ipcRenderer.invoke("save-config", { developerKey: key, enabled: true });
+    currentConfig = { developerKey: key, enabled: true };
+    updateUI();
+    showDashboard();
+  } catch (e) {
+    document.getElementById("key-error").textContent = "Network error. Try again.";
+  }
+  document.getElementById("key-btn").disabled = false;
+}
+
+async function register() {
+  const email = document.getElementById("email-input").value.trim();
+  if (!email || !email.includes("@")) {
+    document.getElementById("reg-error").textContent = "Enter a valid email.";
+    return;
+  }
+  document.getElementById("reg-btn").disabled = true;
+  document.getElementById("reg-error").textContent = "";
+
+  try {
+    const res = await fetch(API_BASE + "/developers/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+      signal: AbortSignal.timeout(5000),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      document.getElementById("reg-error").textContent = data.error || "Registration failed.";
+      document.getElementById("reg-btn").disabled = false;
+      return;
+    }
+    const key = data.developerKey;
+    await ipcRenderer.invoke("save-config", { developerKey: key, enabled: true });
+    currentConfig = { developerKey: key, enabled: true };
+    // Fetch full data
+    const meRes = await fetch(API_BASE + "/developers/me", {
+      headers: { "X-Developer-Key": key },
+    });
+    if (meRes.ok) serverData = await meRes.json();
+    updateUI();
+    showDashboard();
+  } catch (e) {
+    document.getElementById("reg-error").textContent = "Network error. Try again.";
+  }
+  document.getElementById("reg-btn").disabled = false;
+}
+
+async function handleWithdraw() {
+  const btn = document.getElementById("withdraw-btn");
+  const msg = document.getElementById("withdraw-msg");
+
+  if (!serverData?.stripeConnected) {
+    // Open Stripe connect in browser
+    try {
+      btn.disabled = true;
+      const res = await fetch(API_BASE + "/developers/connect", {
+        method: "POST",
+        headers: { "X-Developer-Key": currentConfig.developerKey },
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await res.json();
+      if (data.url) {
+        shell.openExternal(data.url);
+        msg.className = "withdraw-msg info";
+        msg.textContent = "Complete Stripe setup in your browser";
+      } else {
+        msg.className = "withdraw-msg error";
+        msg.textContent = data.error || "Failed to start Stripe connect";
+      }
+    } catch {
+      msg.className = "withdraw-msg error";
+      msg.textContent = "Network error";
+    }
+    btn.disabled = false;
+    return;
+  }
+
+  btn.disabled = true;
+  msg.className = "withdraw-msg info";
+  msg.textContent = "Processing...";
+
+  try {
+    const res = await fetch(API_BASE + "/developers/payout", {
+      method: "POST",
+      headers: { "X-Developer-Key": currentConfig.developerKey },
+      signal: AbortSignal.timeout(10000),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      msg.className = "withdraw-msg success";
+      msg.textContent = "$" + (data.paidOutCents / 100).toFixed(2) + " sent to your Stripe";
+      fetchServer();
+    } else {
+      msg.className = "withdraw-msg error";
+      msg.textContent = data.error || "Payout failed";
+    }
+  } catch {
+    msg.className = "withdraw-msg error";
+    msg.textContent = "Network error";
+  }
+  btn.disabled = false;
+}
+
+function copyReferral() {
+  const link = document.getElementById("referral-link").textContent;
+  if (link) {
+    clipboard.writeText(link);
+    document.getElementById("copy-msg").textContent = "Copied!";
+    setTimeout(() => { document.getElementById("copy-msg").textContent = ""; }, 1500);
+  }
+}
+
+function updateUI() {
+  const session  = readJSON(SESSION_PATH);
+  const lifetime = readJSON(LIFETIME_PATH);
+
+  const sessionValid = session && (Date.now() - session.startedAt < SESSION_TTL);
+  const sessionCents  = sessionValid ? session.totalCents : 0;
+  // Prefer server lifetime, fall back to local
+  const lifetimeCents = serverData?.earningsCents ?? lifetime?.totalCents ?? 0;
+  const impressions   = serverData?.impressionCount ?? (sessionValid ? session.impressions : 0);
+  const pct = Math.min(100, (lifetimeCents / CLAUDE_MONTHLY) * 100);
+
+  document.getElementById("session").textContent  = "$" + (sessionCents / 100000).toFixed(4);
+  document.getElementById("lifetime").textContent = "$" + (lifetimeCents / 100000).toFixed(4);
+  document.getElementById("imps").textContent     = impressions.toLocaleString();
+  document.getElementById("pct").textContent      = pct.toFixed(1) + "%";
+  document.getElementById("bar-pct").textContent  = pct.toFixed(1) + "%";
+  document.getElementById("bar").style.width      = Math.max(0.5, pct).toFixed(1) + "%";
+  document.getElementById("bar-amt").textContent  = "$" + (lifetimeCents / 100000).toFixed(2) + " of $20.00/mo";
+
+  if (serverData) {
+    document.getElementById("user-email").textContent = serverData.email || "--";
+    document.getElementById("referrals").textContent  = (serverData.referralCount ?? 0).toLocaleString();
+
+    const base = "https://spincome-marketplace-git-main-spincome.vercel.app";
+    document.getElementById("referral-link").textContent =
+      serverData.referralCode ? base + "/r/" + serverData.referralCode : "";
+
+    const stripeEl = document.getElementById("stripe-status");
+    const wBtn = document.getElementById("withdraw-btn");
+
+    if (serverData.stripeConnected) {
+      stripeEl.innerHTML = '<span class="stripe-badge stripe-yes">Stripe connected</span>';
+      const dollars = (lifetimeCents / 100000).toFixed(2);
+      wBtn.textContent = "Withdraw $" + dollars;
+      wBtn.className = "withdraw-btn";
+      wBtn.disabled = lifetimeCents < 50000;
+    } else {
+      stripeEl.innerHTML = '<span class="stripe-badge stripe-no">Stripe not connected</span>';
+      wBtn.textContent = "Connect Stripe to withdraw";
+      wBtn.className = "withdraw-btn connect-stripe";
+      wBtn.disabled = false;
+    }
+  }
+}
+
+async function fetchServer() {
+  if (!currentConfig?.developerKey) return;
+  try {
+    const res = await fetch(API_BASE + "/developers/me", {
+      headers: { "X-Developer-Key": currentConfig.developerKey },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (res.ok) {
+      serverData = await res.json();
+      updateUI();
+    }
+  } catch {}
+}
+
+// Init
+(async () => {
+  currentConfig = await ipcRenderer.invoke("get-config");
+  if (!currentConfig?.developerKey) {
+    showSetup();
+  } else {
+    showDashboard();
+    updateUI();
+    fetchServer();
+  }
+})();
+
+// Watch local files for instant session updates
+[SESSION_PATH, LIFETIME_PATH].forEach(p => {
+  try { fs.watch(p, () => setTimeout(updateUI, 100)); } catch {}
+});
+
+// Refresh server data every 30s
+setInterval(fetchServer, 30000);
+// Update local reads every 3s
+setInterval(updateUI, 3000);
+</script>
+</body>
+</html>
