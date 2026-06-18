@@ -351,6 +351,15 @@ async function register() {
   document.getElementById("reg-btn").disabled = false;
 }
 
+let msgTimer;
+function flashMsg(text, type) {
+  const msg = document.getElementById("withdraw-msg");
+  msg.className = "withdraw-msg " + type;
+  msg.textContent = text;
+  clearTimeout(msgTimer);
+  msgTimer = setTimeout(() => { msg.textContent = ""; }, 5000);
+}
+
 async function handleWithdraw() {
   const btn = document.getElementById("withdraw-btn");
   const msg = document.getElementById("withdraw-msg");
@@ -367,23 +376,19 @@ async function handleWithdraw() {
       const data = await res.json();
       if (data.url) {
         shell.openExternal(data.url);
-        msg.className = "withdraw-msg info";
-        msg.textContent = "Complete Stripe setup in your browser";
+        flashMsg("Complete Stripe setup in your browser", "info");
       } else {
-        msg.className = "withdraw-msg error";
-        msg.textContent = data.error || "Failed to start Stripe connect";
+        flashMsg(data.error || "Failed to start Stripe connect", "error");
       }
     } catch {
-      msg.className = "withdraw-msg error";
-      msg.textContent = "Network error";
+      flashMsg("Network error", "error");
     }
     btn.disabled = false;
     return;
   }
 
   btn.disabled = true;
-  msg.className = "withdraw-msg info";
-  msg.textContent = "Processing...";
+  flashMsg("Processing...", "info");
 
   try {
     const res = await fetch(API_BASE + "/developers/payout", {
@@ -393,12 +398,10 @@ async function handleWithdraw() {
     });
     const data = await res.json();
     if (res.ok) {
-      msg.className = "withdraw-msg success";
-      msg.textContent = "$" + (data.paidOutCents / 100).toFixed(2) + " sent to your Stripe";
+      flashMsg("$" + (data.paidOutCents / 100).toFixed(2) + " sent to your Stripe", "success");
       fetchServer();
     } else {
-      msg.className = "withdraw-msg error";
-      msg.textContent = data.error || "Payout failed";
+      flashMsg(data.error || "Payout failed", "error");
     }
   } catch {
     msg.className = "withdraw-msg error";
