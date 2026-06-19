@@ -27,7 +27,8 @@ function ruler(): string {
 }
 
 function coverageStr(lifetimeCents: number): string {
-  const pct = Math.min(100, (lifetimeCents / CLAUDE_MONTHLY_MILLI_CENTS) * 100);
+  const pct = (lifetimeCents / CLAUDE_MONTHLY_MILLI_CENTS) * 100;
+  if (pct >= 100) return `  ${DIM}·${R}  ${BRIGHT_GREEN}Claude paid for${R}`;
   if (pct < 0.01) return "";
   return `  ${DIM}·${R}  ${YELLOW}${pct.toFixed(1)}% of Claude covered${R}`;
 }
@@ -40,12 +41,15 @@ export function renderEarnings(sessionCents: number, lifetimeCents: number): str
   const barW = 20;
   const filled = Math.round((pct / 100) * barW);
   const bar = `${BRIGHT_GREEN}${"█".repeat(filled)}${DIM}${"░".repeat(barW - filled)}${R}`;
+  const label = pct >= 100
+    ? `${BRIGHT_GREEN}Claude paid for${R}`
+    : `${YELLOW}${pct.toFixed(1)}%${R} ${DIM}of Claude covered${R}`;
   return (
     `\n  ${B}${GREEN}💲${R} ${B}spincome${R}  ` +
     `${BRIGHT_GREEN}+$${sessionDollars}${R}  ` +
     `${bar}  ` +
     `${GREEN}$${lifetimeDollars}${R} ${DIM}lifetime${R}  ` +
-    `${YELLOW}${pct.toFixed(1)}%${R} ${DIM}of Claude covered${R}\n`
+    `${label}\n`
   );
 }
 
@@ -68,7 +72,14 @@ export function renderSummary(sessionCents: number, lifetimeCents: number, impre
     box("", 0),
     box(`${DIM}Claude subscription coverage${R}`, "Claude subscription coverage".length),
     box(bar, 50),
-    box(`${YELLOW}${pct.toFixed(1)}% of your $20/mo Claude subscription offset${R}`, `${pct.toFixed(1)}% of your $20/mo Claude subscription offset`.length),
+    box(
+      pct >= 100
+        ? `${BRIGHT_GREEN}Claude subscription fully covered!${R}`
+        : `${YELLOW}${pct.toFixed(1)}% of your $20/mo Claude subscription offset${R}`,
+      pct >= 100
+        ? "Claude subscription fully covered!".length
+        : `${pct.toFixed(1)}% of your $20/mo Claude subscription offset`.length
+    ),
     ruler(),
     "",
   ].join("\n");

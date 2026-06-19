@@ -428,15 +428,19 @@ function updateUI() {
   // Prefer server lifetime, fall back to local
   const lifetimeCents = serverData?.earningsCents ?? lifetime?.totalCents ?? 0;
   const impressions   = serverData?.impressionCount ?? (sessionValid ? session.impressions : 0);
-  const pct = Math.min(100, (lifetimeCents / CLAUDE_MONTHLY) * 100);
+  const rawPct = (lifetimeCents / CLAUDE_MONTHLY) * 100;
+  const pct = Math.min(100, rawPct);
+  const paid = rawPct >= 100;
 
   document.getElementById("session").textContent  = "$" + (sessionCents / 100000).toFixed(4);
   document.getElementById("lifetime").textContent = "$" + (lifetimeCents / 100000).toFixed(4);
   document.getElementById("imps").textContent     = impressions.toLocaleString();
-  document.getElementById("pct").textContent      = pct.toFixed(1) + "%";
-  document.getElementById("bar-pct").textContent  = pct.toFixed(1) + "%";
-  document.getElementById("bar").style.width      = Math.max(0.5, pct).toFixed(1) + "%";
-  document.getElementById("bar-amt").textContent  = "$" + (lifetimeCents / 100000).toFixed(2) + " of $20.00/mo";
+  document.getElementById("pct").textContent      = paid ? "Paid" : pct.toFixed(1) + "%";
+  document.getElementById("bar-pct").textContent  = paid ? "100%" : pct.toFixed(1) + "%";
+  document.getElementById("bar").style.width      = pct.toFixed(1) + "%";
+  document.getElementById("bar-amt").textContent  = paid
+    ? "Claude subscription fully covered!"
+    : "$" + (lifetimeCents / 100000).toFixed(2) + " of $20.00/mo";
 
   if (serverData) {
     document.getElementById("user-email").textContent = serverData.email || "--";
