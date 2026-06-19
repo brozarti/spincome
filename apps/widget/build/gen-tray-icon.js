@@ -10,8 +10,8 @@ app.whenReady().then(async () => {
   svg { display: block; }
 </style></head><body>
 <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
-  <circle cx="22" cy="22" r="17" fill="none" stroke="white" stroke-width="2.5"/>
-  <text x="22" y="22" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="white" font-family="-apple-system, sans-serif">$</text>
+  <circle cx="22" cy="22" r="17" fill="none" stroke="black" stroke-width="2.5"/>
+  <text x="22" y="22" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="black" font-family="-apple-system, sans-serif">$</text>
 </svg>
 </body></html>`;
 
