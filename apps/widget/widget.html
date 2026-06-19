@@ -458,8 +458,8 @@ function updateUI() {
   // Prefer server lifetime, fall back to local
   const lifetimeCents = serverData?.earningsCents ?? lifetime?.totalCents ?? 0;
   const impressions   = serverData?.impressionCount ?? (sessionValid ? session.impressions : 0);
-  const plan = currentConfig?.plan || "pro";
-  const planCost = PLAN_COSTS[plan] || PLAN_COSTS.pro;
+  const plan = currentConfig?.plan ?? "pro";
+  const planCost = plan in PLAN_COSTS ? PLAN_COSTS[plan] : PLAN_COSTS.pro;
   const planPrice = (planCost / 100000).toFixed(0);
 
   document.getElementById("plan-select").value = plan;
