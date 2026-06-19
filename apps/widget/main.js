@@ -21,13 +21,20 @@ function getConfig() {
 }
 
 function createTrayIcon() {
-  // 44x44 (2x for retina) green $ circle
-  const s = 44;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
-    <circle cx="${s/2}" cy="${s/2}" r="${s/2 - 2}" fill="#10b981"/>
-    <text x="${s/2}" y="${s/2 + 8}" text-anchor="middle" font-size="26" font-weight="bold" fill="#000" font-family="sans-serif">$</text>
-  </svg>`;
-  const img = nativeImage.createFromBuffer(Buffer.from(svg));
+  // Use the pre-rendered PNG from the iconset (32x32 for retina, displayed at 16x16)
+  const iconPath = path.join(__dirname, "build", "spincome.iconset", "icon_32x32.png");
+  if (fs.existsSync(iconPath)) {
+    const img = nativeImage.createFromPath(iconPath);
+    img.setTemplateImage(false);
+    return img.resize({ width: 18, height: 18 });
+  }
+  // Fallback if iconset not found
+  const img = nativeImage.createFromBuffer(Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="16" fill="#10b981"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="#000" font-family="sans-serif">$</text>
+    </svg>`
+  ));
   img.setTemplateImage(false);
   return img.resize({ width: 18, height: 18 });
 }
