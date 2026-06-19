@@ -21,21 +21,17 @@ function getConfig() {
 }
 
 function createTrayIcon() {
-  // Use the pre-rendered PNG from the iconset (32x32 for retina, displayed at 16x16)
-  const iconPath = path.join(__dirname, "build", "spincome.iconset", "icon_32x32.png");
+  // Template image: macOS auto-colors it to match menu bar (black in light, white in dark)
+  const iconPath = path.join(__dirname, "build", "tray-iconTemplate.png");
   if (fs.existsSync(iconPath)) {
     const img = nativeImage.createFromPath(iconPath);
-    img.setTemplateImage(false);
+    img.setTemplateImage(true);
     return img.resize({ width: 18, height: 18 });
   }
-  // Fallback if iconset not found
-  const img = nativeImage.createFromBuffer(Buffer.from(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
-      <circle cx="18" cy="18" r="16" fill="#10b981"/>
-      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="#000" font-family="sans-serif">$</text>
-    </svg>`
-  ));
-  img.setTemplateImage(false);
+  // Fallback
+  const img = nativeImage.createFromPath(
+    path.join(__dirname, "build", "spincome.iconset", "icon_32x32.png")
+  );
   return img.resize({ width: 18, height: 18 });
 }
 
