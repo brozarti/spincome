@@ -11,7 +11,12 @@ const YELLOW       = "\x1b[33m";
 const BG           = "\x1b[48;5;234m";
 
 const W = 62;
-const CLAUDE_MONTHLY_MILLI_CENTS = 2000000; // $20/mo in milli-cents
+import { readConfig, PLAN_COST_MILLI_CENTS } from "./config.js";
+
+function getPlancost(): number {
+  const plan = readConfig()?.plan ?? "pro";
+  return PLAN_COST_MILLI_CENTS[plan];
+}
 
 function pad(text: string, visibleLen: number): string {
   const spaces = Math.max(0, W - 2 - visibleLen);
@@ -27,7 +32,9 @@ function ruler(): string {
 }
 
 function coverageStr(lifetimeCents: number): string {
-  const pct = (lifetimeCents / CLAUDE_MONTHLY_MILLI_CENTS) * 100;
+  const cost = getPlancost();
+  if (cost === 0) return "";
+  const pct = (lifetimeCents / cost) * 100;
   if (pct >= 100) return `  ${DIM}·${R}  ${BRIGHT_GREEN}Claude paid for${R}`;
   if (pct < 0.01) return "";
   return `  ${DIM}·${R}  ${YELLOW}${pct.toFixed(1)}% of Claude covered${R}`;
@@ -37,7 +44,15 @@ function coverageStr(lifetimeCents: number): string {
 export function renderEarnings(sessionCents: number, lifetimeCents: number): string {
   const sessionDollars  = (sessionCents  / 100000).toFixed(4);
   const lifetimeDollars = (lifetimeCents / 100000).toFixed(4);
-  const pct = Math.min(100, (lifetimeCents / CLAUDE_MONTHLY_MILLI_CENTS) * 100);
+  const cost = getPlancost();
+  if (cost === 0) {
+    return (
+      `\n  ${B}${GREEN}💲${R} ${B}spincome${R}  ` +
+      `${BRIGHT_GREEN}+$${sessionDollars}${R}  ` +
+      `${GREEN}$${lifetimeDollars}${R} ${DIM}lifetime${R}\n`
+    );
+  }
+  const pct = Math.min(100, (lifetimeCents / cost) * 100);
   const barW = 20;
   const filled = Math.round((pct / 100) * barW);
   const bar = `${BRIGHT_GREEN}${"█".repeat(filled)}${DIM}${"░".repeat(barW - filled)}${R}`;
@@ -57,11 +72,10 @@ export function renderEarnings(sessionCents: number, lifetimeCents: number): str
 export function renderSummary(sessionCents: number, lifetimeCents: number, impressions: number): string {
   const sessionDollars  = (sessionCents  / 100000).toFixed(4);
   const lifetimeDollars = (lifetimeCents / 100000).toFixed(4);
-  const pct = Math.min(100, (lifetimeCents / CLAUDE_MONTHLY_MILLI_CENTS) * 100);
-  const barFilled = Math.round(pct / 2); // out of 50 chars
-  const bar = `${BRIGHT_GREEN}${"█".repeat(barFilled)}${DIM}${"░".repeat(50 - barFilled)}${R}`;
+  const cost = getPlancost();
+  const planPrice = (cost / 100000).toFixed(0);
 
-  return [
+  const lines = [
     "",
     ruler(),
     box(`${B}${WHITE}spincome · session complete${R}`, 27),
@@ -69,20 +83,29 @@ export function renderSummary(sessionCents: number, lifetimeCents: number, impre
     box(`${DIM}Earned this session   ${R}${BRIGHT_GREEN}$${sessionDollars}${R}`, `Earned this session   $${sessionDollars}`.length),
     box(`${DIM}Lifetime total        ${R}${GREEN}$${lifetimeDollars}${R}`, `Lifetime total        $${lifetimeDollars}`.length),
     box(`${DIM}Tool calls            ${R}${WHITE}${impressions}${R}`, `Tool calls            ${impressions}`.length),
-    box("", 0),
-    box(`${DIM}Claude subscription coverage${R}`, "Claude subscription coverage".length),
-    box(bar, 50),
-    box(
-      pct >= 100
-        ? `${BRIGHT_GREEN}Claude subscription fully covered!${R}`
-        : `${YELLOW}${pct.toFixed(1)}% of your $20/mo Claude subscription offset${R}`,
-      pct >= 100
-        ? "Claude subscription fully covered!".length
-        : `${pct.toFixed(1)}% of your $20/mo Claude subscription offset`.length
-    ),
-    ruler(),
-    "",
-  ].join("\n");
+  ];
+
+  if (cost > 0) {
+    const pct = Math.min(100, (lifetimeCents / cost) * 100);
+    const barFilled = Math.round(pct / 2);
+    const bar = `${BRIGHT_GREEN}${"█".repeat(barFilled)}${DIM}${"░".repeat(50 - barFilled)}${R}`;
+    const coverageText = pct >= 100
+      ? `${BRIGHT_GREEN}Claude subscription fully covered!${R}`
+      : `${YELLOW}${pct.toFixed(1)}% of your $${planPrice}/mo Claude subscription offset${R}`;
+    const coverageLen = pct >= 100
+      ? "Claude subscription fully covered!".length
+      : `${pct.toFixed(1)}% of your $${planPrice}/mo Claude subscription offset`.length;
+
+    lines.push(
+      box("", 0),
+      box(`${DIM}Claude subscription coverage${R}`, "Claude subscription coverage".length),
+      box(bar, 50),
+      box(coverageText, coverageLen),
+    );
+  }
+
+  lines.push(ruler(), "");
+  return lines.join("\n");
 }
 
 // Full ad box -- shown every Nth call

@@ -110,6 +110,16 @@
   .stripe-yes { background: rgba(16,185,129,0.12); color: #34d399; }
   .stripe-no { background: rgba(251,191,36,0.12); color: #fbbf24; }
 
+  .plan-section { margin-top: 8px; }
+  .plan-select {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; padding: 2px 6px; font-size: 10px; color: #fff;
+    outline: none; -webkit-app-region: no-drag; cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+  }
+  .plan-select option { background: #1a1a1a; color: #fff; }
+  .plan-select:hover { border-color: rgba(255,255,255,0.2); }
+
   .withdraw-section {
     border-top: 1px solid rgba(255,255,255,0.06);
     padding-top: 10px; margin-top: 8px;
@@ -247,6 +257,17 @@
       <div class="setup-error" id="copy-msg" style="color: #34d399;"></div>
     </div>
 
+    <div class="plan-section">
+      <div class="user-row">
+        <span>Claude plan</span>
+        <select id="plan-select" class="plan-select" onchange="changePlan()">
+          <option value="free">Free ($0/mo)</option>
+          <option value="pro" selected>Pro ($20/mo)</option>
+          <option value="max">Max ($100/mo)</option>
+        </select>
+      </div>
+    </div>
+
     <div class="withdraw-section" id="withdraw-section">
       <button class="withdraw-btn" id="withdraw-btn" onclick="handleWithdraw()">Withdraw</button>
       <div class="withdraw-msg" id="withdraw-msg"></div>
@@ -263,7 +284,7 @@ const os = require("os");
 const SESSION_PATH  = path.join(os.homedir(), ".spincome", "session.json");
 const LIFETIME_PATH = path.join(os.homedir(), ".spincome", "lifetime.json");
 const API_BASE      = "https://spincome-marketplace-git-main-spincome.vercel.app/api";
-const CLAUDE_MONTHLY = 2000000;
+const PLAN_COSTS = { free: 0, pro: 2000000, max: 10000000 };
 const SESSION_TTL = 4 * 60 * 60 * 1000;
 
 let serverData = null;
@@ -410,6 +431,15 @@ async function handleWithdraw() {
   btn.disabled = false;
 }
 
+async function changePlan() {
+  const plan = document.getElementById("plan-select").value;
+  if (currentConfig) {
+    currentConfig.plan = plan;
+    await ipcRenderer.invoke("save-config", currentConfig);
+  }
+  updateUI();
+}
+
 function copyReferral() {
   const link = document.getElementById("referral-link").textContent;
   if (link) {
@@ -428,19 +458,31 @@ function updateUI() {
   // Prefer server lifetime, fall back to local
   const lifetimeCents = serverData?.earningsCents ?? lifetime?.totalCents ?? 0;
   const impressions   = serverData?.impressionCount ?? (sessionValid ? session.impressions : 0);
-  const rawPct = (lifetimeCents / CLAUDE_MONTHLY) * 100;
-  const pct = Math.min(100, rawPct);
-  const paid = rawPct >= 100;
+  const plan = currentConfig?.plan || "pro";
+  const planCost = PLAN_COSTS[plan] || PLAN_COSTS.pro;
+  const planPrice = (planCost / 100000).toFixed(0);
 
+  document.getElementById("plan-select").value = plan;
   document.getElementById("session").textContent  = "$" + (sessionCents / 100000).toFixed(4);
   document.getElementById("lifetime").textContent = "$" + (lifetimeCents / 100000).toFixed(4);
   document.getElementById("imps").textContent     = impressions.toLocaleString();
-  document.getElementById("pct").textContent      = paid ? "Paid" : pct.toFixed(1) + "%";
-  document.getElementById("bar-pct").textContent  = paid ? "100%" : pct.toFixed(1) + "%";
-  document.getElementById("bar").style.width      = pct.toFixed(1) + "%";
-  document.getElementById("bar-amt").textContent  = paid
-    ? "Claude subscription fully covered!"
-    : "$" + (lifetimeCents / 100000).toFixed(2) + " of $20.00/mo";
+
+  if (planCost === 0) {
+    document.getElementById("pct").textContent     = "Free";
+    document.getElementById("bar-pct").textContent = "--";
+    document.getElementById("bar").style.width     = "0%";
+    document.getElementById("bar-amt").textContent = "Free plan -- all earnings are profit";
+  } else {
+    const rawPct = (lifetimeCents / planCost) * 100;
+    const pct = Math.min(100, rawPct);
+    const paid = rawPct >= 100;
+    document.getElementById("pct").textContent     = paid ? "Paid" : pct.toFixed(1) + "%";
+    document.getElementById("bar-pct").textContent = paid ? "100%" : pct.toFixed(1) + "%";
+    document.getElementById("bar").style.width     = pct.toFixed(1) + "%";
+    document.getElementById("bar-amt").textContent = paid
+      ? "Claude subscription fully covered!"
+      : "$" + (lifetimeCents / 100000).toFixed(2) + " of $" + planPrice + ".00/mo";
+  }
 
   if (serverData) {
     document.getElementById("user-email").textContent = serverData.email || "--";

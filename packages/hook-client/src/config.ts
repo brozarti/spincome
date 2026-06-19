@@ -4,9 +4,18 @@ import fs from "fs";
 
 export const API_BASE = process.env.SPINCOME_API_URL ?? "https://spincome-marketplace-git-main-spincome.vercel.app/api";
 
+export type ClaudePlan = "free" | "pro" | "max";
+
+export const PLAN_COST_MILLI_CENTS: Record<ClaudePlan, number> = {
+  free: 0,
+  pro: 2000000,   // $20/mo
+  max: 10000000,  // $100/mo
+};
+
 export interface Config {
   developerKey: string;
   enabled: boolean;
+  plan?: ClaudePlan;
 }
 
 const CONFIG_PATH = path.join(os.homedir(), ".spincome", "config.json");
