@@ -190,7 +190,7 @@ export default function DevDashboardPage() {
               <Stat label="Impressions" value={stats.impressionCount.toLocaleString()} />
               <Stat label="Referrals" value={stats.referralCount.toLocaleString()} />
               <Stat label="Avg CPM" value={stats.impressionCount > 0
-                ? `$${((stats.earningsCents / stats.impressionCount / MILLI_CENTS_PER_DOLLAR) * 2000).toFixed(2)}`
+                ? `$${((stats.earningsCents / stats.impressionCount / MILLI_CENTS_PER_DOLLAR) * 1000).toFixed(2)}`
                 : "--"} />
             </div>
 
