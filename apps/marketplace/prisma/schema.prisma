@@ -20,6 +20,9 @@ model Developer {
   // Opt-in targeting profile (comma-separated values)
   languages       String?  // e.g. "typescript,python"
   frameworks      String?  // e.g. "nextjs,react"
+  // OAuth fields
+  avatarUrl       String?
+  name            String?
   createdAt       DateTime @default(now())
 
   impressions     Impression[]

@@ -99,16 +99,31 @@ export default function DevDashboardPage() {
     <main className="min-h-screen bg-black text-white">
       <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
         <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
+        <div className="flex items-center gap-6">
+          <Link href="/market" className="text-sm text-white/40 hover:text-white transition-colors">Market</Link>
+          <Link href="/login" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Sign in</Link>
+        </div>
       </nav>
       <div className="max-w-2xl mx-auto px-6 py-16">
         <h1 className="text-2xl font-bold mb-8">Developer dashboard</h1>
 
         {!stats ? (
-          <form onSubmit={lookup} className="flex gap-3">
-            <input
-              type="text"
-              placeholder="dev_..."
+          <div className="space-y-6">
+            <Link
+              href="/login"
+              className="w-full flex items-center justify-center gap-3 bg-white text-black font-semibold py-3 rounded-lg text-sm hover:bg-white/90 transition-colors"
+            >
+              Sign in with Google or email
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-white/10" />
+              <span className="text-white/20 text-xs">or use your developer key</span>
+              <div className="flex-1 h-px bg-white/10" />
+            </div>
+            <form onSubmit={lookup} className="flex gap-3">
+              <input
+                type="text"
+                placeholder="dev_..."
               className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm font-mono focus:outline-none focus:border-emerald-500"
               value={key}
               onChange={(e) => setKey(e.target.value)}
@@ -121,6 +136,7 @@ export default function DevDashboardPage() {
               {loading ? "..." : "View"}
             </button>
           </form>
+          </div>
         ) : (
           <div className="space-y-6">
             {/* Earnings */}
