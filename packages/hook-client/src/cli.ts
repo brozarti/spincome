@@ -111,10 +111,12 @@ async function main() {
   const settingsPath = CLAUDE_SETTINGS_PATHS[0];
   injectHook(settingsPath);
 
-  console.log("\n  All set! Ads will appear after Claude Code tool calls.");
-  console.log(`\n  Your referral link: https://spincome-marketplace-git-main-spincome.vercel.app/r/${myReferralCode}`);
-  console.log("  Share it -- you earn 10% of every referred developer's earnings, forever.");
-  console.log("\n  Dashboard: https://spincome-marketplace-git-main-spincome.vercel.app/dev\n");
+  console.log("\n  All set! Ads will appear after Claude Code tool calls.\n");
+  console.log(`  Your developer key: ${developerKey}`);
+  console.log("  Save this -- you'll need it to log into your dashboard and the widget.\n");
+  console.log(`  Your referral link: https://spincome-marketplace-git-main-spincome.vercel.app/r/${myReferralCode}`);
+  console.log("  Share it -- you earn 10% of every referred developer's earnings, forever.\n");
+  console.log("  Dashboard: https://spincome-marketplace-git-main-spincome.vercel.app/dev\n");
 
   rl.close();
 }
