@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Nav } from "@/app/components/nav";
 
 const EARNINGS_EXAMPLES = [
   { usage: "Light (50 tool calls/day)", daily: "$0.60", monthly: "$18" },
@@ -9,17 +10,7 @@ const EARNINGS_EXAMPLES = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white flex flex-col">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <span className="font-bold text-lg tracking-tight">spincome.io</span>
-        <div className="flex gap-6 text-sm text-white/60">
-          <Link href="/market" className="hover:text-white transition-colors">Market</Link>
-          <Link href="/bids" className="hover:text-white transition-colors">Live bids</Link>
-          <Link href="/advertise" className="hover:text-white transition-colors">Advertise</Link>
-          <Link href="/dev" className="hover:text-white transition-colors">Dashboard</Link>
-          <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
-        </div>
-      </nav>
+      <Nav />
 
       {/* Hero */}
       <section className="flex-1 flex flex-col items-center justify-center text-center px-4 pt-24 pb-16">

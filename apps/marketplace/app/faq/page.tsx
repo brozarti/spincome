@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Nav, Footer } from "@/app/components/nav";
 
 const FAQS = [
   {
@@ -84,14 +84,8 @@ const FAQS = [
 
 export default function FAQPage() {
   return (
-    <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <div className="flex items-center gap-6">
-          <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
-          <Link href="/advertise" className="text-sm text-white/40 hover:text-white transition-colors">Advertise</Link>
-        </div>
-      </nav>
+    <main className="min-h-screen bg-black text-white flex flex-col">
+      <Nav />
 
       <div className="max-w-2xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold mb-2">FAQ</h1>

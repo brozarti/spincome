@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Nav, Footer } from "@/app/components/nav";
 
 interface FormState {
   advertiserEmail: string;
@@ -112,14 +113,7 @@ export default function AdvertisePage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <div className="flex items-center gap-6">
-          <Link href="/bids" className="text-sm text-white/40 hover:text-white transition-colors">Live bids</Link>
-          <Link href="/dashboard" className="text-sm text-white/40 hover:text-white transition-colors">My campaigns</Link>
-          <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
-        </div>
-      </nav>
+      <Nav />
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">

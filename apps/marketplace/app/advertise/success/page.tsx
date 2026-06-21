@@ -1,11 +1,10 @@
 import Link from "next/link";
+import { Nav } from "@/app/components/nav";
 
 export default function AdvertiseSuccessPage() {
   return (
     <main className="min-h-screen bg-black text-white flex flex-col">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-      </nav>
+      <Nav />
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="max-w-md text-center">
           <div className="text-emerald-400 text-5xl mb-6">✓</div>

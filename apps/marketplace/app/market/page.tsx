@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Nav } from "@/app/components/nav";
 
 interface MarketData {
   currentHourImpressions: number;
@@ -27,13 +28,7 @@ export default function MarketPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <div className="flex items-center gap-6">
-          <Link href="/bids" className="text-sm text-white/40 hover:text-white transition-colors">Live bids</Link>
-          <Link href="/advertise" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Advertise</Link>
-        </div>
-      </nav>
+      <Nav />
 
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="flex items-start justify-between mb-3">

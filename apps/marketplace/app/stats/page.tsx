@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Nav, Footer } from "@/app/components/nav";
 
 interface Stats {
   totalImpressions: number;
@@ -23,11 +24,8 @@ export default function StatsPage() {
   const dollars = (milliCents: number) => `$${(milliCents / 100000).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
-      </nav>
+    <main className="min-h-screen bg-black text-white flex flex-col">
+      <Nav />
 
       <div className="max-w-3xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold mb-2">Live network stats</h1>

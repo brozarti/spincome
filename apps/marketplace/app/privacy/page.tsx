@@ -1,11 +1,9 @@
-import Link from "next/link";
+import { Nav, Footer } from "@/app/components/nav";
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-      </nav>
+    <main className="min-h-screen bg-black text-white flex flex-col">
+      <Nav />
       <div className="max-w-2xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold mb-8">Privacy policy</h1>
         <div className="space-y-6 text-white/60 text-sm leading-relaxed">

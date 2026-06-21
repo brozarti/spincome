@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Nav } from "@/app/components/nav";
 
 interface DevStats {
   email: string;
@@ -97,13 +98,7 @@ export default function DevDashboardPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <div className="flex items-center gap-6">
-          <Link href="/market" className="text-sm text-white/40 hover:text-white transition-colors">Market</Link>
-          <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
-        </div>
-      </nav>
+      <Nav />
       <div className="max-w-2xl mx-auto px-6 py-16">
         <h1 className="text-2xl font-bold mb-8">Developer dashboard</h1>
 

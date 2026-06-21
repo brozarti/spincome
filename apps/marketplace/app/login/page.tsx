@@ -2,15 +2,13 @@
 
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { Nav } from "@/app/components/nav";
 
 export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
-      </nav>
+      <Nav />
 
       <div className="max-w-sm mx-auto px-6 py-24">
         <h1 className="text-2xl font-bold mb-2 text-center">Sign in</h1>
