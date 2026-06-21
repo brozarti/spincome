@@ -562,6 +562,10 @@ async function fetchServer() {
     });
     if (res.ok) {
       serverData = await res.json();
+      // Sync local lifetime file to match server (prevents drift)
+      if (serverData.earningsCents) {
+        try { fs.writeFileSync(LIFETIME_PATH, JSON.stringify({ totalCents: serverData.earningsCents })); } catch {}
+      }
       updateUI();
     }
   } catch {}
