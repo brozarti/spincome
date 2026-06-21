@@ -6,6 +6,8 @@ import { readConfig } from "./config.js";
 import { addToSession, getSessionSummary } from "./session.js";
 import { animateWhileLoading } from "./animate.js";
 import path from "path";
+import fs from "fs";
+import os from "os";
 
 const AD_EVERY_N = 10; // show full ad every 10th impression
 
@@ -67,6 +69,20 @@ async function main() {
 
   const { earnedCents, lifetimeCents, referralCode } = result;
   const session = addToSession(earnedCents, referralCode || undefined, lifetimeCents);
+
+  // Write ad to file so the menu bar widget can display it
+  const adFile = path.join(os.homedir(), ".spincome", "current-ad.json");
+  try {
+    fs.writeFileSync(adFile, JSON.stringify({
+      headline: ad.headline,
+      body: ad.body,
+      cta: ad.cta,
+      clickUrl: ad.clickUrl,
+      advertiser: ad.advertiser,
+      earnedCents,
+      timestamp: Date.now(),
+    }));
+  } catch {}
 
   // stdout → shown inline in chat above the conversation
   if (session.impressions % AD_EVERY_N === 0) {

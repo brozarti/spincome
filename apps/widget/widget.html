@@ -110,6 +110,34 @@
   .stripe-yes { background: rgba(16,185,129,0.12); color: #34d399; }
   .stripe-no { background: rgba(251,191,36,0.12); color: #fbbf24; }
 
+  .ad-section {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 10px; margin-top: 8px;
+  }
+  .ad-card {
+    background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px;
+    animation: adFadeIn 0.4s ease;
+  }
+  .ad-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .ad-icon { width: 20px; height: 20px; border-radius: 4px; }
+  .ad-sponsor { font-size: 9px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.5px; }
+  .ad-headline { font-size: 12px; font-weight: 600; color: #fff; margin-top: 1px; line-height: 1.3; }
+  .ad-body { font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 6px; line-height: 1.4; }
+  .ad-cta {
+    display: inline-block; font-size: 10px; color: #22d3ee; text-decoration: none;
+    -webkit-app-region: no-drag; cursor: pointer;
+  }
+  .ad-cta:hover { text-decoration: underline; }
+  .ad-earned {
+    font-size: 10px; color: #34d399; margin-top: 6px; font-weight: 500;
+  }
+  @keyframes adFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .plan-section { margin-top: 8px; }
   .plan-select {
     background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
@@ -241,6 +269,21 @@
         <div class="bar-fill" id="bar" style="width: 0%;">
           <div class="bar-shimmer"></div>
         </div>
+      </div>
+    </div>
+
+    <div id="ad-section" class="ad-section" style="display:none;">
+      <div class="ad-card">
+        <div class="ad-header">
+          <img id="ad-icon" class="ad-icon" src="" style="display:none;" />
+          <div>
+            <span class="ad-sponsor" id="ad-sponsor">Sponsored</span>
+            <p class="ad-headline" id="ad-headline"></p>
+          </div>
+        </div>
+        <p class="ad-body" id="ad-body"></p>
+        <a class="ad-cta" id="ad-cta" href="#" target="_blank"></a>
+        <div class="ad-earned" id="ad-earned"></div>
       </div>
     </div>
 
@@ -535,6 +578,36 @@ async function fetchServer() {
     fetchServer();
   }
 })();
+
+// Handle incoming ads from main process
+ipcRenderer.on("new-ad", (_, ad) => {
+  const section = document.getElementById("ad-section");
+  document.getElementById("ad-sponsor").textContent = "Sponsored · " + (ad.advertiser || "");
+  document.getElementById("ad-headline").textContent = ad.headline || "";
+  document.getElementById("ad-body").textContent = ad.body || "";
+  const ctaEl = document.getElementById("ad-cta");
+  ctaEl.textContent = ad.cta || "Learn more";
+  ctaEl.href = ad.clickUrl || "#";
+  const iconEl = document.getElementById("ad-icon");
+  if (ad.brandIconBase64) {
+    iconEl.src = ad.brandIconBase64;
+    iconEl.style.display = "block";
+  } else {
+    iconEl.style.display = "none";
+  }
+  const earned = ad.earnedCents ? "+$" + (ad.earnedCents / 100000).toFixed(4) + " earned" : "";
+  document.getElementById("ad-earned").textContent = earned;
+  section.style.display = "block";
+  // Re-trigger animation
+  const card = section.querySelector(".ad-card");
+  card.style.animation = "none";
+  card.offsetHeight;
+  card.style.animation = "adFadeIn 0.4s ease";
+  // Auto-hide after 15 seconds
+  clearTimeout(window._adTimer);
+  window._adTimer = setTimeout(() => { section.style.display = "none"; }, 15000);
+  updateUI();
+});
 
 // Watch local files for instant session updates
 [SESSION_PATH, LIFETIME_PATH].forEach(p => {

@@ -6,10 +6,12 @@ const os = require("os");
 const CONFIG_PATH   = path.join(os.homedir(), ".spincome", "config.json");
 const LIFETIME_PATH = path.join(os.homedir(), ".spincome", "lifetime.json");
 const SESSION_PATH  = path.join(os.homedir(), ".spincome", "session.json");
+const AD_PATH       = path.join(os.homedir(), ".spincome", "current-ad.json");
 const API_BASE      = "https://spincome-marketplace-git-main-spincome.vercel.app/api";
 
 let tray;
 let win;
+let lastAdTimestamp = 0;
 
 function readJSON(p) {
   try { return JSON.parse(fs.readFileSync(p, "utf8")); }
@@ -152,6 +154,42 @@ app.whenReady().then(() => {
   [LIFETIME_PATH, SESSION_PATH].forEach(p => {
     try { fs.watch(p, () => setTimeout(updateTrayTitle, 200)); } catch {}
   });
+
+  // Watch for new ads -- auto-show widget when ad arrives
+  try {
+    fs.watch(AD_PATH, () => {
+      setTimeout(() => {
+        const ad = readJSON(AD_PATH);
+        if (!ad || ad.timestamp <= lastAdTimestamp) return;
+        lastAdTimestamp = ad.timestamp;
+
+        // Notify the renderer to show the ad
+        if (win) {
+          win.webContents.send("new-ad", ad);
+        }
+
+        // Auto-show the widget briefly
+        if (!win) {
+          createWindow();
+          win.once("ready-to-show", () => {
+            win.show();
+            win.webContents.send("new-ad", ad);
+          });
+        } else if (!win.isVisible()) {
+          const trayBounds = tray.getBounds();
+          const winW = 320;
+          const x = Math.round(trayBounds.x + trayBounds.width / 2 - winW / 2);
+          const y = trayBounds.y + trayBounds.height + 4;
+          const display = screen.getPrimaryDisplay();
+          win.setPosition(
+            Math.max(0, Math.min(x, display.workAreaSize.width - winW)),
+            y
+          );
+          win.show();
+        }
+      }, 150);
+    });
+  } catch {}
 
   setInterval(updateTrayTitle, 15000);
 });
