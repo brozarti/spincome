@@ -108,9 +108,11 @@ export default function AdvertisePage() {
     <main className="min-h-screen bg-black text-white">
       <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
         <Link href="/" className="font-bold text-lg tracking-tight">spincome.io</Link>
-        <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
-          Install free
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/bids" className="text-sm text-white/40 hover:text-white transition-colors">Live bids</Link>
+          <Link href="/dashboard" className="text-sm text-white/40 hover:text-white transition-colors">My campaigns</Link>
+          <Link href="/setup" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
+        </div>
       </nav>
 
       {/* Hero */}
@@ -223,6 +225,24 @@ export default function AdvertisePage() {
             <Field label="Languages (comma-separated)" placeholder="typescript, python, rust" value={form.targetLanguages} onChange={set("targetLanguages")} />
             <Field label="Frameworks (comma-separated)" placeholder="nextjs, react, fastapi, django" value={form.targetFrameworks} onChange={set("targetFrameworks")} />
           </Fieldset>
+
+          {/* Live ad preview */}
+          {form.headline && (
+            <div className="pt-6 border-t border-white/8">
+              <p className="text-xs text-white/30 uppercase tracking-widest mb-4">Live preview</p>
+              <div className="bg-black border border-white/10 rounded-lg p-4 font-mono text-sm">
+                <p className="text-white/20">{"─".repeat(50)}</p>
+                <p className="text-white/40"> Sponsored · {form.advertiserName || "Your Company"}{isTargeted ? ` · ${(form.targetLanguages || form.targetFrameworks).split(",")[0].trim()} dev` : ""}</p>
+                <p className="text-white font-bold"> {form.headline}</p>
+                <p className="text-white/50"> {form.body}</p>
+                <p> </p>
+                <p> <span className="text-cyan-400">{form.cta || "Learn more"}</span>  <span className="text-white/30">{form.clickUrl || "https://..."}</span></p>
+                <p> </p>
+                <p className="text-emerald-400"> +$0.0125 earned  <span className="text-white/30">session: $0.2500</span></p>
+                <p className="text-white/20">{"─".repeat(50)}</p>
+              </div>
+            </div>
+          )}
 
           <Fieldset legend="Bid & budget">
             <div className="grid grid-cols-2 gap-4">

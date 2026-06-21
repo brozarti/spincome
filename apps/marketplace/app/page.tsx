@@ -10,7 +10,8 @@ export default function Home() {
           <Link href="/stats" className="hover:text-white transition-colors">Stats</Link>
           <Link href="/bids" className="hover:text-white transition-colors">Live bids</Link>
           <Link href="/advertise" className="hover:text-white transition-colors">Advertise</Link>
-          <Link href="/dev" className="hover:text-white transition-colors">Dashboard</Link>
+          <Link href="/dashboard" className="hover:text-white transition-colors">Advertisers</Link>
+          <Link href="/dev" className="hover:text-white transition-colors">Developers</Link>
         </div>
       </nav>
 
