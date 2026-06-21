@@ -12,6 +12,8 @@ const API_BASE      = "https://spincome-marketplace-git-main-spincome.vercel.app
 let tray;
 let win;
 let lastAdTimestamp = 0;
+let autoOpenedByAd = false;
+let autoHideTimer;
 
 function readJSON(p) {
   try { return JSON.parse(fs.readFileSync(p, "utf8")); }
@@ -69,6 +71,8 @@ function createWindow() {
 }
 
 function toggleWindow() {
+  autoOpenedByAd = false;
+  clearTimeout(autoHideTimer);
   if (!win) {
     createWindow();
     win.once("ready-to-show", () => win.show());
@@ -168,7 +172,10 @@ app.whenReady().then(() => {
           win.webContents.send("new-ad", ad);
         }
 
-        // Auto-show the widget briefly
+        // Auto-show the widget briefly, then hide after 8 seconds
+        autoOpenedByAd = true;
+        clearTimeout(autoHideTimer);
+
         if (!win) {
           createWindow();
           win.once("ready-to-show", () => {
@@ -187,6 +194,14 @@ app.whenReady().then(() => {
           );
           win.show();
         }
+
+        // Auto-minimize after 8 seconds if it was auto-opened
+        autoHideTimer = setTimeout(() => {
+          if (autoOpenedByAd && win && win.isVisible()) {
+            win.hide();
+            autoOpenedByAd = false;
+          }
+        }, 8000);
       }, 150);
     });
   } catch {}
