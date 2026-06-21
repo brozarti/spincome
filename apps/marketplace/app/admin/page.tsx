@@ -13,8 +13,8 @@ interface RevenueData {
   recentImpressions: { day: string; count: number }[];
 }
 
-function dollars(cents: number) {
-  return `$${(cents / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+function dollars(milliCents: number) {
+  return `$${(milliCents / 100000).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 export default function AdminPage() {
