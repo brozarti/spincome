@@ -45,9 +45,11 @@ model Campaign {
   cta          String
   clickUrl     String
   maxCpmCents  Int      // max bid in cents per 1000 impressions (auction ceiling)
-  budgetCents  Int      // total budget in cents
+  budgetCents  Int      // total budget in milli-cents
   spentCents   Int      @default(0)
   active       Boolean  @default(true)
+  deliverySpeed String  @default("medium") // "slow" | "medium" | "fast"
+  brandIconBase64 String? // small brand icon (base64 PNG/JPG, <=64KB)
   // Targeting filters (null = no filter = broad match)
   targetLanguages  String?  // comma-separated, e.g. "typescript,python"
   targetFrameworks String?

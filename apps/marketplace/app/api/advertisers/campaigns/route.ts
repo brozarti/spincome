@@ -16,6 +16,8 @@ const createSchema = z.object({
   budgetCents: z.number().int().min(1000),
   targetLanguages: z.string().nullable().optional(),
   targetFrameworks: z.string().nullable().optional(),
+  deliverySpeed: z.enum(["slow", "medium", "fast"]).optional(),
+  brandIconBase64: z.string().nullable().optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -48,6 +50,8 @@ export async function POST(req: NextRequest) {
       budgetCents: d.budgetCents * 1000, // convert real cents to milli-cents to match spentCents units
       targetLanguages: d.targetLanguages ?? null,
       targetFrameworks: d.targetFrameworks ?? null,
+      deliverySpeed: d.deliverySpeed ?? "medium",
+      brandIconBase64: d.brandIconBase64 ?? null,
       active: false,
     },
   });

@@ -14,6 +14,8 @@ interface FormState {
   budget: string;
   targetLanguages: string;
   targetFrameworks: string;
+  deliverySpeed: string;
+  brandIcon: string;
 }
 
 const STATS = [
@@ -37,6 +39,8 @@ export default function AdvertisePage() {
     budget: "500",
     targetLanguages: "",
     targetFrameworks: "",
+    deliverySpeed: "medium",
+    brandIcon: "",
   });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [campaignId, setCampaignId] = useState("");
@@ -70,6 +74,8 @@ export default function AdvertisePage() {
           budgetCents,
           targetLanguages: form.targetLanguages.trim() || null,
           targetFrameworks: form.targetFrameworks.trim() || null,
+          deliverySpeed: form.deliverySpeed,
+          brandIconBase64: form.brandIcon || null,
         }),
       });
       if (!res.ok) throw new Error("Failed");
@@ -256,6 +262,62 @@ export default function AdvertisePage() {
               <p className="text-white/30 text-xs mt-1">
                 Actual cost uses second-price auction -- you usually pay less than your max bid.
               </p>
+            </div>
+          </Fieldset>
+
+          <Fieldset legend="Delivery & branding">
+            <div>
+              <label className="block text-xs text-white/40 mb-2">Delivery speed</label>
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { value: "slow", label: "Slow", desc: "~2 days" },
+                  { value: "medium", label: "Medium", desc: "~6 hours" },
+                  { value: "fast", label: "Fast", desc: "ASAP" },
+                ].map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => setForm((f) => ({ ...f, deliverySpeed: opt.value }))}
+                    className={`border rounded-lg p-3 text-left transition-colors ${
+                      form.deliverySpeed === opt.value
+                        ? "border-emerald-500 bg-emerald-500/10"
+                        : "border-white/10 hover:border-white/20"
+                    }`}
+                  >
+                    <p className={`text-sm font-medium ${form.deliverySpeed === opt.value ? "text-emerald-400" : "text-white"}`}>
+                      {opt.label}
+                    </p>
+                    <p className="text-xs text-white/30">{opt.desc}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs text-white/40 mb-1">Brand icon (optional, max 64KB)</label>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                className="w-full text-sm text-white/40 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white/10 file:text-white hover:file:bg-white/20 file:cursor-pointer"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file || file.size > 65536) return;
+                  const reader = new FileReader();
+                  reader.onload = () => setForm((f) => ({ ...f, brandIcon: reader.result as string }));
+                  reader.readAsDataURL(file);
+                }}
+              />
+              {form.brandIcon && (
+                <div className="mt-2 flex items-center gap-3">
+                  <img src={form.brandIcon} alt="Brand icon" className="w-8 h-8 rounded" />
+                  <button
+                    type="button"
+                    onClick={() => setForm((f) => ({ ...f, brandIcon: "" }))}
+                    className="text-xs text-white/30 hover:text-white/50"
+                  >
+                    Remove
+                  </button>
+                </div>
+              )}
             </div>
           </Fieldset>
 
