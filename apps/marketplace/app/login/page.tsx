@@ -1,12 +1,9 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 import Link from "next/link";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -32,43 +29,6 @@ export default function LoginPage() {
           </svg>
           Continue with Google
         </button>
-
-        <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-white/20 text-xs">or</span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
-
-        {/* Email magic link */}
-        {!sent ? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              signIn("email", { email, callbackUrl: "/dev", redirect: false });
-              setSent(true);
-            }}
-          >
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 mb-3"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-white/10 hover:bg-white/15 text-white font-semibold py-3 rounded-lg text-sm transition-colors"
-            >
-              Email me a sign-in link
-            </button>
-          </form>
-        ) : (
-          <div className="text-center">
-            <p className="text-emerald-400 text-sm mb-2">Check your email</p>
-            <p className="text-white/40 text-xs">We sent a sign-in link to {email}</p>
-          </div>
-        )}
 
         <p className="text-white/20 text-xs text-center mt-8">
           By signing in you agree to our{" "}
