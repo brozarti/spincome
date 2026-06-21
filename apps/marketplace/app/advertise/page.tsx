@@ -36,7 +36,7 @@ export default function AdvertisePage() {
     cta: "",
     clickUrl: "",
     maxCpmBid: "25",
-    budget: "500",
+    budget: "10",
     targetLanguages: "",
     targetFrameworks: "",
     deliverySpeed: "medium",
