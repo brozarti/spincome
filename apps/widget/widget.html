@@ -170,6 +170,17 @@
   .withdraw-msg.error { color: #f87171; }
   .withdraw-msg.info { color: rgba(255,255,255,0.3); }
 
+  .logout-section {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 8px; margin-top: 8px;
+  }
+  .logout-btn {
+    width: 100%; background: none; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 6px; font-size: 10px; color: rgba(255,255,255,0.25);
+    cursor: pointer; -webkit-app-region: no-drag; transition: all 0.15s;
+  }
+  .logout-btn:hover { color: #f87171; border-color: rgba(248,113,113,0.3); }
+
   /* Setup screen */
   #setup { display: none; }
   #setup.active { display: block; }
@@ -314,6 +325,10 @@
     <div class="withdraw-section" id="withdraw-section">
       <button class="withdraw-btn" id="withdraw-btn" onclick="handleWithdraw()">Withdraw</button>
       <div class="withdraw-msg" id="withdraw-msg"></div>
+    </div>
+
+    <div class="logout-section">
+      <button class="logout-btn" onclick="logout()">Log out</button>
     </div>
   </div>
 </div>
@@ -472,6 +487,16 @@ async function handleWithdraw() {
     msg.textContent = "Network error";
   }
   btn.disabled = false;
+}
+
+async function logout() {
+  const configPath = path.join(os.homedir(), ".spincome", "config.json");
+  try { fs.unlinkSync(configPath); } catch {}
+  try { fs.unlinkSync(LIFETIME_PATH); } catch {}
+  try { fs.unlinkSync(SESSION_PATH); } catch {}
+  currentConfig = null;
+  serverData = null;
+  showSetup();
 }
 
 async function changePlan() {
