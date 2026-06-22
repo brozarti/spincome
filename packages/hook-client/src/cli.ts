@@ -111,12 +111,20 @@ async function main() {
   const settingsPath = CLAUDE_SETTINGS_PATHS[0];
   injectHook(settingsPath);
 
-  console.log("\n  All set! Ads will appear after Claude Code tool calls.\n");
-  console.log(`  Your developer key: ${developerKey}`);
-  console.log("  Save this -- you'll need it to log into your dashboard and the widget.\n");
-  console.log(`  Your referral link: https://spincome-marketplace-git-main-spincome.vercel.app/r/${myReferralCode}`);
+  const base = API_BASE.replace("/api", "");
+
+  console.log("\n  \x1b[32m✓\x1b[0m All set! Ads will appear after Claude Code tool calls.\n");
+  console.log("  ┌─────────────────────────────────────────────────────┐");
+  console.log(`  │  \x1b[1mYour developer key:\x1b[0m                                 │`);
+  console.log(`  │  \x1b[92m${developerKey}\x1b[0m  │`);
+  console.log("  │                                                     │");
+  console.log("  │  \x1b[33mSave this key!\x1b[0m You need it for the dashboard       │");
+  console.log("  │  and the menu bar widget.                           │");
+  console.log("  └─────────────────────────────────────────────────────┘\n");
+  console.log(`  \x1b[36mReferral link:\x1b[0m ${base}/r/${myReferralCode}`);
   console.log("  Share it -- you earn 10% of every referred developer's earnings, forever.\n");
-  console.log("  Dashboard: https://spincome-marketplace-git-main-spincome.vercel.app/dev\n");
+  console.log(`  \x1b[36mDashboard:\x1b[0m ${base}/dev`);
+  console.log(`  \x1b[36mWidget:\x1b[0m ${base}/download\n`);
 
   rl.close();
 }
