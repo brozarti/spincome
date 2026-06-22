@@ -195,13 +195,13 @@ app.whenReady().then(() => {
           win.show();
         }
 
-        // Auto-minimize after 8 seconds if it was auto-opened
+        // Auto-minimize after 5 seconds of no new tool calls
         autoHideTimer = setTimeout(() => {
           if (autoOpenedByAd && win && win.isVisible()) {
             win.hide();
             autoOpenedByAd = false;
           }
-        }, 8000);
+        }, 5000);
       }, 150);
     });
   } catch {}
