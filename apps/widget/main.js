@@ -43,7 +43,7 @@ function createWindow() {
   const trayBounds = tray.getBounds();
   const display = screen.getPrimaryDisplay();
   const winW = 320;
-  const winH = 560;
+  const winH = 620;
 
   const x = Math.round(trayBounds.x + trayBounds.width / 2 - winW / 2);
   const y = trayBounds.y + trayBounds.height + 4;
