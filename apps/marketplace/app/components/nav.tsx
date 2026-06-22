@@ -10,7 +10,7 @@ export function Nav() {
         <Link href="/advertise" className="text-white/40 hover:text-white transition-colors">Advertise</Link>
         <Link href="/dashboard" className="text-white/40 hover:text-white transition-colors">Advertisers</Link>
         <Link href="/dev" className="text-white/40 hover:text-white transition-colors">Developers</Link>
-        <Link href="/setup" className="text-emerald-400 hover:text-emerald-300 transition-colors">Install free</Link>
+        <Link href="/download" className="text-emerald-400 hover:text-emerald-300 transition-colors">Download</Link>
       </div>
     </nav>
   );
