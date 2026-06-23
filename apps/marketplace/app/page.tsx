@@ -109,9 +109,9 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Install in 30 seconds",
-                desc: "One command sets up the Claude Code hook. No code changes, no config files, no dependencies.",
-                code: "npx @brozarti/spincome setup",
+                title: "Choose how to install",
+                desc: "Run one command in your terminal, or download the menu bar widget and set up everything from there. No terminal required.",
+                code: "npx @brozarti/spincome",
               },
               {
                 step: "2",
@@ -129,9 +129,14 @@ export default function Home() {
                 <h3 className="font-semibold mb-2">{item.title}</h3>
                 <p className="text-white/40 text-sm leading-relaxed mb-3">{item.desc}</p>
                 {item.code && (
-                  <code className="block bg-black border border-white/10 rounded-lg px-3 py-2 text-xs text-emerald-400 font-mono">
-                    {item.code}
-                  </code>
+                  <>
+                    <code className="block bg-black border border-white/10 rounded-lg px-3 py-2 text-xs text-emerald-400 font-mono mb-2">
+                      {item.code}
+                    </code>
+                    <Link href="/download" className="text-xs text-white/30 hover:text-white/50 transition-colors">
+                      or download the Mac widget
+                    </Link>
+                  </>
                 )}
               </div>
             ))}
