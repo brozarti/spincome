@@ -36,10 +36,16 @@ export default function SetupPage() {
           </li>
         </ul>
 
-        <div className="mt-10 bg-white/3 border border-white/8 rounded-xl p-5 flex items-center gap-4">
+        <div className="mt-8 flex items-center gap-3">
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-white/20 text-xs">or set up with the Widget</span>
+          <div className="flex-1 h-px bg-white/10" />
+        </div>
+
+        <div className="mt-8 bg-white/3 border border-white/8 rounded-xl p-5 flex items-center gap-4">
           <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-lg font-bold text-black shrink-0">$</div>
           <div className="text-left flex-1 min-w-0">
-            <p className="text-sm font-medium mb-0.5">Menu bar widget for Mac</p>
+            <p className="text-sm font-medium mb-0.5">Menu Bar Widget for Mac</p>
             <p className="text-white/30 text-xs">Live earnings, ads, and withdrawals from your desktop.</p>
           </div>
           <Link
