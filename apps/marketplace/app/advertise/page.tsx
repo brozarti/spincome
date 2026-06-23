@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Nav, Footer } from "@/app/components/nav";
+import { LiveStats } from "@/app/components/live-stats";
 
 interface FormState {
   advertiserEmail: string;
@@ -129,6 +130,11 @@ export default function AdvertisePage() {
           No banners. No pop-ups. No ad blockers. Just your message at the exact moment
           they need a better tool.
         </p>
+
+        {/* Live network proof */}
+        <div className="border border-white/8 rounded-xl py-6 px-8 mb-12">
+          <LiveStats />
+        </div>
 
         {/* Stats bar */}
         <div className="grid grid-cols-4 gap-px bg-white/5 rounded-xl overflow-hidden mb-16">

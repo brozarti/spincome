@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Nav, Footer } from "@/app/components/nav";
+import { LiveStats } from "@/app/components/live-stats";
 
 const EARNINGS_EXAMPLES = [
   { usage: "Light (50 tool calls/day)", daily: "$0.60", monthly: "$18" },
@@ -42,6 +43,13 @@ export default function Home() {
           >
             Advertise to developers
           </Link>
+        </div>
+      </section>
+
+      {/* Live network stats */}
+      <section className="px-8 pb-12">
+        <div className="max-w-2xl mx-auto border border-white/8 rounded-xl py-6 px-8">
+          <LiveStats />
         </div>
       </section>
 

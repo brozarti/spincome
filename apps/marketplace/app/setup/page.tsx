@@ -35,6 +35,19 @@ export default function SetupPage() {
             <span className="text-white/40">Connect Stripe later to withdraw earnings</span>
           </li>
         </ul>
+
+        <div className="mt-10 pt-8 border-t border-white/10">
+          <h2 className="font-semibold mb-2">Want a menu bar widget?</h2>
+          <p className="text-white/40 text-sm mb-4">
+            Track your earnings in real time from the macOS menu bar. See ads, withdraw, and copy your referral link -- all without leaving your desktop.
+          </p>
+          <Link
+            href="/download"
+            className="inline-block border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-6 py-2.5 rounded-lg text-sm transition-colors"
+          >
+            Download for Mac
+          </Link>
+        </div>
       </div>
     </div>
     </main>
