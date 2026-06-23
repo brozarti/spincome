@@ -10,6 +10,8 @@ import fs from "fs";
 import os from "os";
 
 const AD_EVERY_N = 10; // show full ad every 10th impression
+const COOLDOWN_MS = 30000; // minimum 30s between ad fetches
+const LAST_AD_PATH = path.join(os.homedir(), ".spincome", "last-ad-time");
 
 interface HookPayload {
   tool_name?: string;
@@ -59,9 +61,26 @@ async function main() {
     // empty or malformed stdin
   }
 
+  // Cooldown: skip ad fetch if one fired within the last 30s
+  let lastAdTime = 0;
+  try { lastAdTime = parseInt(fs.readFileSync(LAST_AD_PATH, "utf8"), 10) || 0; } catch {}
+  const now = Date.now();
+
+  if (now - lastAdTime < COOLDOWN_MS) {
+    // Still in cooldown -- just show the cached earnings ticker
+    const { session, lifetimeCents } = getSessionSummary();
+    if (session) {
+      process.stdout.write(renderEarnings(session.totalCents, lifetimeCents));
+    }
+    process.exit(0);
+  }
+
   const context = extractContext(payload);
   const ad = await fetchAd(context);
   if (!ad) process.exit(0);
+
+  // Mark cooldown
+  try { fs.writeFileSync(LAST_AD_PATH, String(now)); } catch {}
 
   const result = await animateWhileLoading(
     recordImpression(ad.id, config.developerKey, ad.actualCpmCents, context)
@@ -80,7 +99,7 @@ async function main() {
       clickUrl: ad.clickUrl,
       advertiser: ad.advertiser,
       earnedCents,
-      timestamp: Date.now(),
+      timestamp: now,
     }));
   } catch {}
 

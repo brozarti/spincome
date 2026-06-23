@@ -1,6 +1,6 @@
 {
   "name": "@brozarti/spincome",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "Earn passive income from your Claude Code sessions",
   "bin": {
     "spincome": "./dist/cli.js"
