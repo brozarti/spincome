@@ -5,7 +5,7 @@ import { getDeveloperFromRequest } from "@/lib/auth";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-const MIN_PAYOUT_MILLI_CENTS = 1000000; // $10 minimum (10 * 100,000 milli-cents)
+const MIN_PAYOUT_MILLI_CENTS = 1000000; // $10 = 1,000,000 milli-cents
 
 export async function POST(req: NextRequest) {
   const developer = await getDeveloperFromRequest(req);
@@ -22,14 +22,24 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // earningsCents is stored in milli-cents; divide by 1000 to get real cents for Stripe
   const amountCents = Math.floor(developer.earningsCents / 1000);
 
-  await stripe.transfers.create({
-    amount: amountCents,
-    currency: "usd",
-    destination: developer.stripeAccountId,
-  });
+  try {
+    await stripe.transfers.create({
+      amount: amountCents,
+      currency: "usd",
+      destination: developer.stripeAccountId,
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (msg.includes("balance") || msg.includes("insufficient")) {
+      return NextResponse.json(
+        { error: "Payout temporarily unavailable. Funds are pending from advertisers." },
+        { status: 503 }
+      );
+    }
+    return NextResponse.json({ error: "Payout failed: " + msg }, { status: 500 });
+  }
 
   await prisma.developer.update({
     where: { id: developer.id },
