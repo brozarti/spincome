@@ -1,6 +1,5 @@
 import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./prisma";
 import { nanoid } from "nanoid";
 
@@ -10,10 +9,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_CLIENT_ID ?? "",
       clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
     }),
-    ...(process.env.GOOGLE_CLIENT_ID ? [GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
-    })] : []),
   ],
   pages: {
     signIn: "/login",
