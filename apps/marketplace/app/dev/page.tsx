@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Nav } from "@/app/components/nav";
 
@@ -19,6 +20,7 @@ const CLAUDE_MONTHLY_CENTS = 2000; // $20/month = 2,000,000 milli-cents
 const MILLI_CENTS_PER_DOLLAR = 100000;
 
 export default function DevDashboardPage() {
+  const { data: session } = useSession();
   const [key, setKey] = useState("");
   const [stats, setStats] = useState<DevStats | null>(null);
   const [error, setError] = useState("");
@@ -27,6 +29,24 @@ export default function DevDashboardPage() {
   const [form, setForm] = useState({ languages: "", frameworks: "" });
   const [payoutStatus, setPayoutStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [payoutMsg, setPayoutMsg] = useState("");
+
+  // Auto-load dashboard if signed in via GitHub
+  useEffect(() => {
+    const devKey = (session as unknown as Record<string, unknown>)?.developerKey as string | undefined;
+    if (devKey && !stats) {
+      setKey(devKey);
+      fetch("/api/developers/me", {
+        headers: { "X-Developer-Key": devKey },
+      })
+        .then((r) => r.ok ? r.json() : null)
+        .then((data) => {
+          if (data) {
+            setStats(data);
+            setForm({ languages: data.languages ?? "", frameworks: data.frameworks ?? "" });
+          }
+        });
+    }
+  }, [session, stats]);
 
   async function lookup(e: React.FormEvent) {
     e.preventDefault();
