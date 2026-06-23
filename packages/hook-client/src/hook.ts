@@ -10,7 +10,7 @@ import fs from "fs";
 import os from "os";
 
 const AD_EVERY_N = 10; // show full ad every 10th impression
-const COOLDOWN_MS = 30000; // minimum 30s between ad fetches
+const COOLDOWN_MS = 15000; // minimum 15s between ad fetches
 const LAST_AD_PATH = path.join(os.homedir(), ".spincome", "last-ad-time");
 
 interface HookPayload {
