@@ -342,7 +342,7 @@ const os = require("os");
 
 const SESSION_PATH  = path.join(os.homedir(), ".spincome", "session.json");
 const LIFETIME_PATH = path.join(os.homedir(), ".spincome", "lifetime.json");
-const API_BASE      = "https://spincome-marketplace-git-main-spincome.vercel.app/api";
+const API_BASE      = "https://spincome.io/api";
 const PLAN_COSTS = { free: 0, pro: 2000000, max: 10000000 };
 const SESSION_TTL = 4 * 60 * 60 * 1000;
 
@@ -570,7 +570,7 @@ function updateUI() {
     document.getElementById("user-email").textContent = serverData.email || "--";
     document.getElementById("referrals").textContent  = (serverData.referralCount ?? 0).toLocaleString();
 
-    const base = "https://spincome-marketplace-git-main-spincome.vercel.app";
+    const base = "https://spincome.io";
     document.getElementById("referral-link").textContent =
       serverData.referralCode ? base + "/r/" + serverData.referralCode : "";
 

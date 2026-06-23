@@ -129,7 +129,7 @@ export function renderAd(
 
   const base = process.env.SPINCOME_API_URL
     ? process.env.SPINCOME_API_URL.replace("/api", "")
-    : "https://spincome-marketplace-git-main-spincome.vercel.app";
+    : "https://spincome.io";
   const referralUrl = referralCode ? `${base}/r/${referralCode}` : `${base}/setup`;
 
   const sponsorLine   = `${DIM}Sponsored · ${ad.advertiser}${contextTag}${R}`;

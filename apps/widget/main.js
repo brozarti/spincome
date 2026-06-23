@@ -7,7 +7,7 @@ const CONFIG_PATH   = path.join(os.homedir(), ".spincome", "config.json");
 const LIFETIME_PATH = path.join(os.homedir(), ".spincome", "lifetime.json");
 const SESSION_PATH  = path.join(os.homedir(), ".spincome", "session.json");
 const AD_PATH       = path.join(os.homedir(), ".spincome", "current-ad.json");
-const API_BASE      = "https://spincome-marketplace-git-main-spincome.vercel.app/api";
+const API_BASE      = "https://spincome.io/api";
 
 let tray;
 let win;
