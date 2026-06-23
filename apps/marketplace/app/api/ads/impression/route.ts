@@ -71,16 +71,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  await prisma.$transaction(ops);
-
-  // Auto-deactivate campaign if budget is exhausted
-  const newSpent = campaign.spentCents + impressionCostCents;
-  if (newSpent >= campaign.budgetCents) {
-    await prisma.campaign.update({
-      where: { id: campaign.id },
-      data: { active: false },
-    });
+  // Auto-deactivate campaign if budget is exhausted (inside transaction to prevent race)
+  if (campaign.spentCents + impressionCostCents >= campaign.budgetCents) {
+    ops.push(
+      prisma.campaign.update({
+        where: { id: campaign.id },
+        data: { active: false },
+      })
+    );
   }
+
+  await prisma.$transaction(ops);
 
   // Fetch updated lifetime total to return to the hook client
   const updated = await prisma.developer.findUnique({

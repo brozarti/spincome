@@ -332,6 +332,7 @@ export default function AdvertisePage() {
           </p>
         </form>
       </section>
+      <Footer />
     </main>
   );
 }

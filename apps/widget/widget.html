@@ -478,7 +478,7 @@ async function handleWithdraw() {
     });
     const data = await res.json();
     if (res.ok) {
-      flashMsg("$" + (data.paidOutCents / 100).toFixed(2) + " sent to your Stripe", "success");
+      flashMsg("$" + (data.paidOutCents / 100).toFixed(2) + " sent to Stripe", "success");
       fetchServer();
     } else {
       flashMsg(data.error || "Payout failed", "error");
@@ -497,6 +497,11 @@ async function logout() {
   try { fs.unlinkSync(SESSION_PATH); } catch {}
   currentConfig = null;
   serverData = null;
+  clearTimeout(window._adTimer);
+  cleanupWatchers();
+  clearInterval(_fetchInterval);
+  clearInterval(_uiInterval);
+  document.getElementById("ad-section").style.display = "none";
   showSetup();
 }
 
@@ -647,14 +652,22 @@ ipcRenderer.on("new-ad", (_, ad) => {
 });
 
 // Watch local files for instant session updates
-[SESSION_PATH, LIFETIME_PATH].forEach(p => {
-  try { fs.watch(p, () => setTimeout(updateUI, 100)); } catch {}
-});
+let _fileWatchers = [];
+function setupWatchers() {
+  cleanupWatchers();
+  [SESSION_PATH, LIFETIME_PATH].forEach(p => {
+    try { _fileWatchers.push(fs.watch(p, () => setTimeout(updateUI, 100))); } catch {}
+  });
+}
+function cleanupWatchers() {
+  _fileWatchers.forEach(w => { try { w.close(); } catch {} });
+  _fileWatchers = [];
+}
+setupWatchers();
 
-// Refresh server data every 30s
-setInterval(fetchServer, 30000);
-// Update local reads every 3s
-setInterval(updateUI, 3000);
+// Refresh server data every 30s, local reads every 3s
+let _fetchInterval = setInterval(fetchServer, 30000);
+let _uiInterval = setInterval(updateUI, 3000);
 </script>
 </body>
 </html>

@@ -131,6 +131,7 @@ export default function BidsPage() {
           </Link>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

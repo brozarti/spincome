@@ -130,6 +130,7 @@ export default function StatsPage() {
           </>
         )}
       </div>
+      <Footer />
     </main>
   );
 }

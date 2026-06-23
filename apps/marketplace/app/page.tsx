@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Nav } from "@/app/components/nav";
+import { Nav, Footer } from "@/app/components/nav";
 
 const EARNINGS_EXAMPLES = [
   { usage: "Light (50 tool calls/day)", daily: "$0.60", monthly: "$18" },
@@ -169,18 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 px-8 py-10">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-6 text-sm text-white/30">
-            <Link href="/faq" className="hover:text-white/50 transition-colors">FAQ</Link>
-            <Link href="/privacy" className="hover:text-white/50 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-white/50 transition-colors">Terms</Link>
-            <Link href="/market" className="hover:text-white/50 transition-colors">Market data</Link>
-          </div>
-          <p className="text-white/15 text-xs">spincome.io</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
