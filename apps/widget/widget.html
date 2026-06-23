@@ -566,13 +566,16 @@ function updateUI() {
       : "$" + (lifetimeCents / 100000).toFixed(2) + " of $" + planPrice + ".00/mo";
   }
 
+  // Show referral link from server data or local session
+  const base = "https://spincome.io";
+  const refCode = serverData?.referralCode || session?.referralCode || "";
+  if (refCode) {
+    document.getElementById("referral-link").textContent = base + "/r/" + refCode;
+  }
+
   if (serverData) {
     document.getElementById("user-email").textContent = serverData.email || "--";
     document.getElementById("referrals").textContent  = (serverData.referralCount ?? 0).toLocaleString();
-
-    const base = "https://spincome.io";
-    document.getElementById("referral-link").textContent =
-      serverData.referralCode ? base + "/r/" + serverData.referralCode : "";
 
     const stripeEl = document.getElementById("stripe-status");
     const wBtn = document.getElementById("withdraw-btn");
