@@ -5,14 +5,12 @@ import { useState } from "react";
 export function EarningsCalc() {
   const [calls, setCalls] = useState(200);
 
-  const cpm = 25;
+  const cpm = 10; // realistic mid-range CPM
   const devShare = 0.5;
-  const perImpression = (cpm / 1000) * devShare;
-  const cooldownPerMin = 4; // max 4 impressions/min (15s cooldown)
-  const activeMinutes = Math.min(calls / 2, 480); // assume ~2 calls/min, max 8hr day
-  const dailyImpressions = Math.min(calls, activeMinutes * cooldownPerMin);
-  const daily = dailyImpressions * perImpression;
-  const monthly = daily * 30;
+  // 15s cooldown means not every tool call generates an impression
+  const dailyImpressions = Math.min(calls, Math.floor(calls * 0.6)); // ~60% of calls become billable impressions
+  const daily = (dailyImpressions / 1000) * cpm * devShare;
+  const monthly = daily * 22; // work days
   const claudeCovered = Math.min(100, (monthly / 20) * 100);
 
   return (

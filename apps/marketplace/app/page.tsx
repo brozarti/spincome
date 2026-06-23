@@ -16,12 +16,12 @@ export default function Home() {
           Live -- developers earning right now
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 max-w-3xl leading-[1.1]">
-          Claude Code<br />
-          <span className="text-emerald-400">pays for itself.</span>
+          Get paid to<br />
+          <span className="text-emerald-400">use Claude Code.</span>
         </h1>
         <p className="text-white/50 text-lg md:text-xl max-w-xl mb-4">
           A single terminal ad after each tool call. You keep 50% of the revenue.
-          Most developers earn enough to cover their Claude subscription.
+          Offset your Claude subscription or earn pure profit.
         </p>
         <p className="text-white/30 text-sm mb-10">
           30-second install. No code changes. Disable anytime.
