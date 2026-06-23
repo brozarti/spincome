@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Nav } from "@/app/components/nav";
+import { CopyCommand } from "@/app/components/copy-command";
 
 export default function SetupPage() {
   return (
@@ -12,9 +13,8 @@ export default function SetupPage() {
         <h1 className="text-3xl font-bold mb-2">Get set up in 30 seconds</h1>
         <p className="text-white/50 mb-10">Run this in your terminal. That&apos;s it.</p>
 
-        <div className="bg-white/5 border border-white/10 rounded-xl p-6 font-mono text-sm mb-8 text-left">
-          <span className="text-white/30 select-none">$ </span>
-          <span className="text-emerald-400">npx @brozarti/spincome</span>
+        <div className="mb-8">
+          <CopyCommand command="npx @brozarti/spincome" />
         </div>
 
         <ul className="space-y-4 text-sm text-white/60 text-left">

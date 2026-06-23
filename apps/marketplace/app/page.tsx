@@ -1,12 +1,8 @@
 import Link from "next/link";
 import { Nav, Footer } from "@/app/components/nav";
 import { LiveStats } from "@/app/components/live-stats";
-
-const EARNINGS_EXAMPLES = [
-  { usage: "Light (50 tool calls/day)", daily: "$0.60", monthly: "$18" },
-  { usage: "Moderate (200 tool calls/day)", daily: "$2.50", monthly: "$75" },
-  { usage: "Heavy (500+ tool calls/day)", daily: "$6.25", monthly: "$187" },
-];
+import { EarningsCalc } from "@/app/components/earnings-calc";
+import { CopyCommand } from "@/app/components/copy-command";
 
 export default function Home() {
   return (
@@ -38,10 +34,10 @@ export default function Home() {
             Start earning -- free
           </Link>
           <Link
-            href="/advertise"
+            href="/download"
             className="border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-8 py-3.5 rounded-lg transition-colors text-sm"
           >
-            Advertise to developers
+            Download Mac widget
           </Link>
         </div>
       </section>
@@ -72,7 +68,7 @@ export default function Home() {
               <p className="text-white/10"> </p>
               <p> <span className="text-cyan-400">Start free</span>  <span className="text-white/20">vercel.com</span></p>
               <p className="text-white/10"> </p>
-              <p className="text-emerald-400"> +$0.0125 earned  <span className="text-white/30">session: $0.2500 · 1.3% of Claude covered</span></p>
+              <p className="text-emerald-400"> +$0.0125 earned  <span className="text-white/30">session: $0.2500</span></p>
               <p className="text-white/20">{"─".repeat(52)}</p>
               <p className="text-white/20 mt-3">{">"} Refactoring auth module... <span className="text-emerald-400 animate-pulse">|</span></p>
             </div>
@@ -81,65 +77,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Earnings projection */}
+      {/* Earnings calculator */}
       <section className="border-t border-white/10 px-8 py-20">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold mb-3 text-center">How much can you earn?</h2>
-          <p className="text-white/40 text-sm text-center mb-10">Based on $25 avg CPM. Actual earnings depend on advertiser demand.</p>
-          <div className="grid md:grid-cols-3 gap-4">
-            {EARNINGS_EXAMPLES.map((e) => (
-              <div key={e.usage} className="bg-white/3 border border-white/8 rounded-xl p-6 text-center">
-                <p className="text-white/40 text-xs mb-3">{e.usage}</p>
-                <p className="text-3xl font-bold text-emerald-400 mb-1">{e.monthly}<span className="text-lg text-white/30">/mo</span></p>
-                <p className="text-white/20 text-xs">{e.daily}/day</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-white/30 text-sm mt-6">
-            A Claude Pro subscription costs $20/month. Most moderate users cover it within the first week.
-          </p>
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold mb-3 text-center">How much will you earn?</h2>
+          <p className="text-white/40 text-sm text-center mb-10">Drag the slider. Earnings depend on advertiser demand and your usage.</p>
+          <EarningsCalc />
         </div>
       </section>
 
       {/* How it works */}
       <section className="border-t border-white/10 px-8 py-20">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-12 text-center">Three steps to earning</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Choose how to install",
-                desc: "Run one command in your terminal, or download the menu bar widget and set up everything from there. No terminal required.",
-                code: "npx @brozarti/spincome",
-              },
-              {
-                step: "2",
-                title: "Code like you normally do",
-                desc: "A small ad appears after tool calls. Non-intrusive. No pop-ups. No interruptions. It just sits there.",
-              },
-              {
-                step: "3",
-                title: "Watch your balance grow",
-                desc: "50% of every impression goes to you. Track earnings in the menu bar widget. Withdraw via Stripe.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="bg-white/3 border border-white/8 rounded-xl p-6">
-                <div className="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-sm font-bold mb-4">{item.step}</div>
-                <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed mb-3">{item.desc}</p>
-                {item.code && (
-                  <>
-                    <code className="block bg-black border border-white/10 rounded-lg px-3 py-2 text-xs text-emerald-400 font-mono mb-2">
-                      {item.code}
-                    </code>
-                    <Link href="/download" className="text-xs text-white/30 hover:text-white/50 transition-colors">
-                      or download the Mac widget
-                    </Link>
-                  </>
-                )}
-              </div>
-            ))}
+          <h2 className="text-2xl font-bold mb-12 text-center">Two ways to start</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white/3 border border-white/8 rounded-xl p-6">
+              <div className="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-sm font-bold mb-4">1</div>
+              <h3 className="font-semibold mb-2">Terminal (30 seconds)</h3>
+              <p className="text-white/40 text-sm leading-relaxed mb-4">One command registers you, installs the hook, and starts earning. Nothing else needed.</p>
+              <CopyCommand command="npx @brozarti/spincome" />
+            </div>
+            <div className="bg-white/3 border border-white/8 rounded-xl p-6">
+              <div className="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-sm font-bold mb-4">2</div>
+              <h3 className="font-semibold mb-2">Mac widget (no terminal needed)</h3>
+              <p className="text-white/40 text-sm leading-relaxed mb-4">Download the menu bar widget. Register, install the hook, track earnings, and withdraw -- all from the widget.</p>
+              <Link
+                href="/download"
+                className="inline-block bg-white/10 hover:bg-white/15 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+              >
+                Download for Mac
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -147,14 +115,14 @@ export default function Home() {
       {/* Why it works for advertisers */}
       <section className="border-t border-white/10 px-8 py-20">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-3 text-center">Why advertisers pay premium CPMs</h2>
+          <h2 className="text-2xl font-bold mb-3 text-center">Why advertisers pay premium rates</h2>
           <p className="text-white/40 text-sm text-center mb-10">This is why your earnings are real.</p>
           <div className="grid md:grid-cols-4 gap-4">
             {[
               { value: "0", label: "Ad blockers", desc: "Terminal ads. uBlock can't touch them." },
               { value: "100%", label: "Senior devs", desc: "Every viewer is an active developer." },
               { value: "10s+", label: "View time", desc: "Ads sit while Claude thinks." },
-              { value: "$25+", label: "Avg CPM", desc: "Developer audiences command premium rates." },
+              { value: "In-flow", label: "Context", desc: "Ads appear when devs need tools most." },
             ].map((s) => (
               <div key={s.label} className="bg-white/3 border border-white/8 rounded-xl p-5 text-center">
                 <p className="text-2xl font-bold text-emerald-400 mb-1">{s.value}</p>
@@ -179,6 +147,31 @@ export default function Home() {
           >
             Get your referral link
           </Link>
+        </div>
+      </section>
+
+      {/* For advertisers */}
+      <section className="border-t border-white/10 px-8 py-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-xl font-bold mb-2">Want to reach developers?</h2>
+          <p className="text-white/40 text-sm mb-6">
+            Second-price auction. Target by language and framework. $10 minimum budget.
+            Your ad appears when developers are actively coding -- the highest-intent moment possible.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link
+              href="/advertise"
+              className="bg-white/10 hover:bg-white/15 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition-colors"
+            >
+              Launch a campaign
+            </Link>
+            <Link
+              href="/bids"
+              className="border border-white/10 hover:border-white/20 text-white/50 hover:text-white px-6 py-2.5 rounded-lg text-sm transition-colors"
+            >
+              See live bids
+            </Link>
+          </div>
         </div>
       </section>
 
