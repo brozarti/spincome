@@ -36,16 +36,16 @@ export default function SetupPage() {
           </li>
         </ul>
 
-        <div className="mt-10 pt-8 border-t border-white/10">
-          <h2 className="font-semibold mb-2">Want a menu bar widget?</h2>
-          <p className="text-white/40 text-sm mb-4">
-            Track your earnings in real time from the macOS menu bar. See ads, withdraw, and copy your referral link -- all without leaving your desktop.
-          </p>
+        <div className="mt-10 bg-white/3 border border-white/8 rounded-xl p-6 flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium mb-1">Menu bar widget for Mac</p>
+            <p className="text-white/30 text-xs">Live earnings, ads, and withdrawals from your desktop.</p>
+          </div>
           <Link
             href="/download"
-            className="inline-block border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-6 py-2.5 rounded-lg text-sm transition-colors"
+            className="shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-5 py-2 rounded-lg text-xs transition-colors"
           >
-            Download for Mac
+            Download
           </Link>
         </div>
       </div>
