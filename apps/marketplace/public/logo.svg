@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="220" fill="#0a0a0a"/>
+  <circle cx="512" cy="480" r="320" fill="url(#g)"/>
+  <text x="512" y="480" text-anchor="middle" dominant-baseline="central" font-size="380" font-weight="bold" fill="#000" font-family="system-ui, -apple-system, sans-serif">$</text>
+  <text x="512" y="920" text-anchor="middle" font-size="100" font-weight="600" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" opacity="0.9">spincome</text>
+</svg>
