@@ -144,6 +144,38 @@ ipcMain.handle("save-config", (_, config) => {
   return true;
 });
 
+ipcMain.handle("install-hook", () => {
+  const settingsPath = path.join(os.homedir(), ".claude", "settings.json");
+  const hookCmd = "npx @brozarti/spincome hook";
+
+  let settings = {};
+  if (fs.existsSync(settingsPath)) {
+    try { settings = JSON.parse(fs.readFileSync(settingsPath, "utf8")); } catch {}
+  }
+
+  const hooks = settings.hooks ?? {};
+  const postToolUse = hooks.PostToolUse ?? [];
+
+  const alreadyInstalled = postToolUse.some(entry =>
+    entry.hooks?.some(h => h.command === hookCmd)
+  );
+
+  if (!alreadyInstalled) {
+    postToolUse.push({
+      matcher: "",
+      hooks: [{ type: "command", command: hookCmd }],
+    });
+    hooks.PostToolUse = postToolUse;
+    settings.hooks = hooks;
+
+    const dir = path.dirname(settingsPath);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+  }
+
+  return alreadyInstalled ? "already" : "installed";
+});
+
 ipcMain.on("quit-app", () => app.quit());
 
 app.dock?.hide();

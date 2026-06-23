@@ -384,7 +384,11 @@ async function connectKey() {
     }
     serverData = await res.json();
     await ipcRenderer.invoke("save-config", { developerKey: key, enabled: true });
+    await ipcRenderer.invoke("install-hook");
     currentConfig = { developerKey: key, enabled: true };
+    setupWatchers();
+    _fetchInterval = setInterval(fetchServer, 30000);
+    _uiInterval = setInterval(updateUI, 3000);
     updateUI();
     showDashboard();
   } catch (e) {
@@ -417,7 +421,11 @@ async function register() {
     }
     const key = data.developerKey;
     await ipcRenderer.invoke("save-config", { developerKey: key, enabled: true });
+    await ipcRenderer.invoke("install-hook");
     currentConfig = { developerKey: key, enabled: true };
+    setupWatchers();
+    _fetchInterval = setInterval(fetchServer, 30000);
+    _uiInterval = setInterval(updateUI, 3000);
     // Fetch full data
     const meRes = await fetch(API_BASE + "/developers/me", {
       headers: { "X-Developer-Key": key },
