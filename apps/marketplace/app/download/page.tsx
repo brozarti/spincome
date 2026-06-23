@@ -49,7 +49,7 @@ export default function DownloadPage() {
           <div className="space-y-4">
             {[
               { step: "1", text: "Download and open the DMG. Drag Spincome to Applications." },
-              { step: "2", text: "Launch Spincome. It appears in your menu bar as a $ icon." },
+              { step: "2", text: "Right-click (or Control-click) Spincome.app and select \"Open\". macOS will ask to confirm -- click \"Open\". You only need to do this once." },
               { step: "3", text: "Enter your developer key, or register with your email right in the widget." },
               { step: "4", text: "Install the Claude Code hook to start earning:" },
             ].map((s) => (
