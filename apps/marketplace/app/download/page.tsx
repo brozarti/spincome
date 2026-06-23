@@ -51,7 +51,7 @@ export default function DownloadPage() {
               { step: "1", text: "Download and open the DMG. Drag Spincome to Applications." },
               { step: "2", text: "Right-click (or Control-click) Spincome.app and select \"Open\". macOS will ask to confirm -- click \"Open\". You only need to do this once." },
               { step: "3", text: "Enter your developer key, or register with your email right in the widget." },
-              { step: "4", text: "Install the Claude Code hook to start earning:" },
+              { step: "4", text: "Install the Claude Code hook to start earning (if you haven't already):" },
             ].map((s) => (
               <div key={s.step} className="flex gap-4 items-start">
                 <span className="w-7 h-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xs font-bold">{s.step}</span>
@@ -59,7 +59,7 @@ export default function DownloadPage() {
               </div>
             ))}
             <code className="block bg-white/3 border border-white/8 rounded-lg px-4 py-3 text-sm text-emerald-400 font-mono ml-11">
-              npx @brozarti/spincome setup
+              npx @brozarti/spincome
             </code>
           </div>
         </div>

@@ -79,6 +79,12 @@ async function main() {
     return;
   }
 
+  if (arg === "disable") {
+    writeConfig({ developerKey: "", enabled: false });
+    console.log("\n  \x1b[2mspincome disabled. Run npx @brozarti/spincome to re-enable.\x1b[0m\n");
+    process.exit(0);
+  }
+
   console.log("\n  spincome.io -- earn from your Claude Code sessions\n");
 
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
