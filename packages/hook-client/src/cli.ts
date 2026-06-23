@@ -113,18 +113,18 @@ async function main() {
 
   const base = API_BASE.replace("/api", "");
 
-  console.log("\n  \x1b[32m✓\x1b[0m All set! Ads will appear after Claude Code tool calls.\n");
-  console.log("  ┌─────────────────────────────────────────────────────┐");
-  console.log(`  │  \x1b[1mYour developer key:\x1b[0m                                 │`);
-  console.log(`  │  \x1b[92m${developerKey}\x1b[0m  │`);
-  console.log("  │                                                     │");
-  console.log("  │  \x1b[33mSave this key!\x1b[0m You need it for the dashboard       │");
-  console.log("  │  and the menu bar widget.                           │");
-  console.log("  └─────────────────────────────────────────────────────┘\n");
-  console.log(`  \x1b[36mReferral link:\x1b[0m ${base}/r/${myReferralCode}`);
-  console.log("  Share it -- you earn 10% of every referred developer's earnings, forever.\n");
-  console.log(`  \x1b[36mDashboard:\x1b[0m ${base}/dev`);
-  console.log(`  \x1b[36mWidget:\x1b[0m ${base}/download\n`);
+  console.log("\n  \x1b[92m✓\x1b[0m All set! Ads will appear after Claude Code tool calls.\n");
+  console.log("  \x1b[2m┌─────────────────────────────────────────────────────┐\x1b[0m");
+  console.log(`  \x1b[2m│\x1b[0m  \x1b[1m\x1b[97mYour developer key:\x1b[0m                                 \x1b[2m│\x1b[0m`);
+  console.log(`  \x1b[2m│\x1b[0m  \x1b[1m\x1b[92m${developerKey}\x1b[0m  \x1b[2m│\x1b[0m`);
+  console.log(`  \x1b[2m│\x1b[0m                                                     \x1b[2m│\x1b[0m`);
+  console.log(`  \x1b[2m│\x1b[0m  \x1b[97mSave this key!\x1b[0m \x1b[2mYou need it for the dashboard\x1b[0m       \x1b[2m│\x1b[0m`);
+  console.log(`  \x1b[2m│\x1b[0m  \x1b[2mand the menu bar widget.\x1b[0m                           \x1b[2m│\x1b[0m`);
+  console.log("  \x1b[2m└─────────────────────────────────────────────────────┘\x1b[0m\n");
+  console.log(`  \x1b[2mReferral link:\x1b[0m \x1b[92m${base}/r/${myReferralCode}\x1b[0m`);
+  console.log("  \x1b[2mShare it -- you earn 10% of every referred developer's earnings, forever.\x1b[0m\n");
+  console.log(`  \x1b[2mDashboard:\x1b[0m \x1b[92m${base}/dev\x1b[0m`);
+  console.log(`  \x1b[2mWidget:\x1b[0m \x1b[92m${base}/download\x1b[0m\n`);
 
   rl.close();
 }
