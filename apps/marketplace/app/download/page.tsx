@@ -48,8 +48,8 @@ export default function DownloadPage() {
           <h2 className="text-lg font-bold mb-6">Setup</h2>
           <div className="space-y-4">
             {[
-              { step: "1", text: "Download the DMG. If macOS says it's damaged, open Terminal and run: xattr -cr ~/Downloads/Spincome.dmg -- then open the DMG again." },
-              { step: "2", text: "Drag Spincome to Applications. Right-click (or Control-click) Spincome.app and select \"Open\". macOS will ask to confirm -- click \"Open\". You only need to do this once." },
+              { step: "1", text: "Download the DMG and open it. Drag Spincome to Applications." },
+              { step: "2", text: "If macOS blocks the app: go to System Settings > Privacy & Security, scroll down, and click \"Open Anyway\" next to the Spincome message. Or run this in Terminal: xattr -cr /Applications/Spincome.app" },
               { step: "3", text: "Enter your developer key, or register with your email right in the widget." },
               { step: "4", text: "Install the Claude Code hook to start earning (if you haven't already):" },
             ].map((s) => (
