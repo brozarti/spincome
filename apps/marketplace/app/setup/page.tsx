@@ -9,6 +9,7 @@ export default function SetupPage() {
       <Nav />
       <div className="flex-1 flex flex-col items-center justify-center px-4">
       <div className="max-w-lg w-full">
+        <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-black mb-6">$</div>
         <h1 className="text-3xl font-bold mb-2">Get set up in 30 seconds</h1>
         <p className="text-white/50 mb-10">Run this in your terminal. That&apos;s it.</p>
 
