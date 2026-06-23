@@ -32,10 +32,10 @@ export default function PrivacyPage() {
           <p>Stripe handles all payment processing. We do not store credit card numbers, bank account details, or other financial credentials. Stripe&apos;s privacy policy governs payment data.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Data retention</h2>
-          <p>Impression records are retained for billing and analytics. You can request deletion of your account and associated data by emailing support@spincome.io.</p>
+          <p>Impression records are retained for billing and analytics. You can request deletion of your account and associated data by emailing spincome.io@gmail.com.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Contact</h2>
-          <p>Questions about privacy: <a href="mailto:support@spincome.io" className="text-emerald-400 hover:text-emerald-300">support@spincome.io</a></p>
+          <p>Questions about privacy: <a href="mailto:spincome.io@gmail.com" className="text-emerald-400 hover:text-emerald-300">spincome.io@gmail.com</a></p>
         </div>
       </div>
     </main>

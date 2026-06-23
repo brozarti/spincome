@@ -108,10 +108,10 @@ export default function FAQPage() {
         <div className="border border-white/8 rounded-xl p-6 text-center mt-8">
           <p className="text-white/40 text-sm mb-4">Still have questions?</p>
           <a
-            href="mailto:support@spincome.io"
+            href="mailto:spincome.io@gmail.com"
             className="text-emerald-400 text-sm hover:text-emerald-300 transition-colors"
           >
-            support@spincome.io
+            spincome.io@gmail.com
           </a>
         </div>
       </div>

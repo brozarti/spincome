@@ -30,7 +30,7 @@ export default function TermsPage() {
           <p>Spincome is provided &quot;as is&quot; without warranty. We are not liable for lost earnings, service interruptions, or third-party actions. Maximum liability is limited to the amount paid or earned through the platform in the preceding 30 days.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Contact</h2>
-          <p>Questions: <a href="mailto:support@spincome.io" className="text-emerald-400 hover:text-emerald-300">support@spincome.io</a></p>
+          <p>Questions: <a href="mailto:spincome.io@gmail.com" className="text-emerald-400 hover:text-emerald-300">spincome.io@gmail.com</a></p>
         </div>
       </div>
     </main>
