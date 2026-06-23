@@ -8,8 +8,7 @@ export default function SetupPage() {
     <main className="min-h-screen bg-black text-white flex flex-col">
       <Nav />
       <div className="flex-1 flex flex-col items-center justify-center px-4">
-      <div className="max-w-lg w-full">
-        <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-black mb-6">$</div>
+      <div className="max-w-lg w-full text-center">
         <h1 className="text-3xl font-bold mb-2">Get set up in 30 seconds</h1>
         <p className="text-white/50 mb-10">Run this in your terminal. That&apos;s it.</p>
 
@@ -18,7 +17,7 @@ export default function SetupPage() {
           <span className="text-emerald-400">npx @brozarti/spincome</span>
         </div>
 
-        <ul className="space-y-4 text-sm text-white/60">
+        <ul className="space-y-4 text-sm text-white/60 text-left">
           <li className="flex gap-3">
             <span className="text-emerald-400 mt-0.5">✓</span>
             <span>Asks for your email and creates a free account</span>
@@ -37,9 +36,10 @@ export default function SetupPage() {
           </li>
         </ul>
 
-        <div className="mt-10 bg-white/3 border border-white/8 rounded-xl p-6 flex items-center justify-between">
-          <div>
-            <p className="text-sm font-medium mb-1">Menu bar widget for Mac</p>
+        <div className="mt-10 bg-white/3 border border-white/8 rounded-xl p-5 flex items-center gap-4">
+          <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-lg font-bold text-black shrink-0">$</div>
+          <div className="text-left flex-1 min-w-0">
+            <p className="text-sm font-medium mb-0.5">Menu bar widget for Mac</p>
             <p className="text-white/30 text-xs">Live earnings, ads, and withdrawals from your desktop.</p>
           </div>
           <Link
