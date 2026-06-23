@@ -126,10 +126,11 @@
   .ad-headline { font-size: 12px; font-weight: 600; color: #fff; margin-top: 1px; line-height: 1.3; }
   .ad-body { font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 6px; line-height: 1.4; }
   .ad-cta {
-    display: inline-block; font-size: 10px; color: #22d3ee; text-decoration: none;
-    -webkit-app-region: no-drag; cursor: pointer;
+    display: inline-block; font-size: 10px; color: #000; background: #10b981;
+    border: none; border-radius: 6px; padding: 5px 12px; font-weight: 600;
+    -webkit-app-region: no-drag; cursor: pointer; transition: background 0.15s;
   }
-  .ad-cta:hover { text-decoration: underline; }
+  .ad-cta:hover { background: #34d399; }
   .ad-earned {
     font-size: 10px; color: #34d399; margin-top: 6px; font-weight: 500;
   }
@@ -293,7 +294,7 @@
           </div>
         </div>
         <p class="ad-body" id="ad-body"></p>
-        <a class="ad-cta" id="ad-cta" href="#" target="_blank"></a>
+        <button class="ad-cta" id="ad-cta" onclick="openAdLink()"></button>
         <div class="ad-earned" id="ad-earned"></div>
       </div>
     </div>
@@ -608,15 +609,22 @@ async function fetchServer() {
   }
 })();
 
+let currentAdUrl = "";
+
+function openAdLink() {
+  if (currentAdUrl) {
+    shell.openExternal(currentAdUrl);
+  }
+}
+
 // Handle incoming ads from main process
 ipcRenderer.on("new-ad", (_, ad) => {
   const section = document.getElementById("ad-section");
   document.getElementById("ad-sponsor").textContent = "Sponsored · " + (ad.advertiser || "");
   document.getElementById("ad-headline").textContent = ad.headline || "";
   document.getElementById("ad-body").textContent = ad.body || "";
-  const ctaEl = document.getElementById("ad-cta");
-  ctaEl.textContent = ad.cta || "Learn more";
-  ctaEl.href = ad.clickUrl || "#";
+  currentAdUrl = ad.clickUrl || "";
+  document.getElementById("ad-cta").textContent = ad.cta || "Learn more";
   const iconEl = document.getElementById("ad-icon");
   if (ad.brandIconBase64) {
     iconEl.src = ad.brandIconBase64;
