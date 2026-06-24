@@ -22,7 +22,7 @@ interface FormState {
 
 const STATS = [
   { value: "100%", label: "senior devs" },
-  { value: "$25+", label: "avg CPM" },
+  { value: "$5-25", label: "CPM range" },
   { value: "10s", label: "avg view time" },
   { value: "0", label: "ad blockers" },
 ];
@@ -181,7 +181,7 @@ export default function AdvertisePage() {
 
         {/* Social proof placeholder */}
         <div className="border border-white/5 rounded-xl px-8 py-6 mb-16">
-          <p className="text-white/20 text-xs uppercase tracking-widest mb-6">Built for companies like</p>
+          <p className="text-white/20 text-xs uppercase tracking-widest mb-6">Ideal for developer tool companies</p>
           <div className="flex flex-wrap justify-center gap-x-10 gap-y-3">
             {LOGOS.map((l) => (
               <span key={l} className="text-white/25 font-semibold text-lg">{l}</span>

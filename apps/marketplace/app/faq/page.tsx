@@ -6,15 +6,15 @@ const FAQS = [
     questions: [
       {
         q: "How do I start earning?",
-        a: "Install the spincome hook via 'npx @brozarti/spincome setup' or download the menu bar widget. Ads appear after Claude Code tool calls, and you earn 50% of every impression.",
+        a: "Run 'npx @brozarti/spincome' in your terminal or download the menu bar Widget. Ads appear after Claude Code tool calls, and you earn 50% of every impression.",
       },
       {
         q: "How much can I earn?",
-        a: "Earnings depend on advertiser demand. At typical CPMs ($10-50), heavy Claude Code users can earn $5-25/day -- enough to offset or fully cover a Claude subscription.",
+        a: "Earnings depend on advertiser demand. At typical CPMs ($5-25), active Claude Code users can earn $1-5/day -- enough to offset a significant portion of your Claude subscription.",
       },
       {
         q: "When do I get paid?",
-        a: "Payouts happen automatically every Monday via Stripe. Connect your Stripe account in the developer dashboard or widget, and earnings transfer with no minimum threshold.",
+        a: "Payouts happen automatically every Monday via Stripe. Connect your Stripe account in the developer dashboard or Widget. Minimum payout is $10.",
       },
       {
         q: "What data do you collect?",

@@ -21,7 +21,7 @@ export default function TermsPage() {
           <p>Referrers earn 10% of each referred developer&apos;s impression earnings indefinitely. This is paid from the platform&apos;s share, not from the referred developer&apos;s earnings. Abuse of the referral system (self-referral fraud, bot accounts) will result in account termination.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Payouts</h2>
-          <p>Developer payouts are processed weekly via Stripe transfers. The platform is not responsible for Stripe processing delays. Minimum payout threshold may apply.</p>
+          <p>Developer payouts are processed weekly via Stripe transfers. Minimum payout is $10. The platform is not responsible for Stripe processing delays.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Content policy</h2>
           <p>Ads must not contain misleading claims, malware links, adult content, or illegal material. Spincome reserves the right to reject or remove campaigns that violate these guidelines.</p>
