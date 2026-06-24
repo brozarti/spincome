@@ -29,6 +29,7 @@ export default function DevDashboardPage() {
   const [form, setForm] = useState({ languages: "", frameworks: "" });
   const [payoutStatus, setPayoutStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [payoutMsg, setPayoutMsg] = useState("");
+  const [copied, setCopied] = useState(false);
 
   // Auto-load dashboard if signed in via GitHub
   useEffect(() => {
@@ -236,10 +237,23 @@ export default function DevDashboardPage() {
                   {referralUrl}
                 </code>
                 <button
-                  onClick={() => navigator.clipboard.writeText(referralUrl)}
+                  onClick={() => {
+                    try {
+                      navigator.clipboard.writeText(referralUrl);
+                    } catch {
+                      const ta = document.createElement("textarea");
+                      ta.value = referralUrl;
+                      document.body.appendChild(ta);
+                      ta.select();
+                      document.execCommand("copy");
+                      document.body.removeChild(ta);
+                    }
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
                   className="border border-white/20 hover:border-white/40 px-4 py-2.5 rounded-lg text-sm transition-colors"
                 >
-                  Copy
+                  {copied ? "Copied!" : "Copy"}
                 </button>
               </div>
               <p className="text-white/30 text-xs mt-2">
