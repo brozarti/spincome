@@ -37,7 +37,7 @@ export default function Home() {
             href="/download"
             className="border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-8 py-3.5 rounded-lg transition-colors text-sm"
           >
-            Download Mac widget
+            Download Mac Widget
           </Link>
         </div>
       </section>
@@ -99,7 +99,7 @@ export default function Home() {
             </div>
             <div className="bg-white/3 border border-white/8 rounded-xl p-6">
               <div className="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-sm font-bold mb-4">2</div>
-              <h3 className="font-semibold mb-2">Mac widget (no terminal needed)</h3>
+              <h3 className="font-semibold mb-2">Mac Widget (no terminal needed)</h3>
               <p className="text-white/40 text-sm leading-relaxed mb-4">Download the menu bar widget. Register, install the hook, track earnings, and withdraw -- all from the widget.</p>
               <Link
                 href="/download"
