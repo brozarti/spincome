@@ -158,6 +158,31 @@ export default function DevDashboardPage() {
           </div>
         ) : (
           <div className="space-y-6">
+            {/* Dev key */}
+            {key && (
+              <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+                <div>
+                  <p className="text-white/30 text-xs mb-1">Your developer key</p>
+                  <code className="text-emerald-400 text-sm font-mono">{key}</code>
+                </div>
+                <button
+                  onClick={() => {
+                    try { navigator.clipboard.writeText(key); } catch {
+                      const ta = document.createElement("textarea");
+                      ta.value = key;
+                      document.body.appendChild(ta);
+                      ta.select();
+                      document.execCommand("copy");
+                      document.body.removeChild(ta);
+                    }
+                  }}
+                  className="text-xs text-white/30 hover:text-white border border-white/10 hover:border-white/20 px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  Copy
+                </button>
+              </div>
+            )}
+
             {/* Earnings */}
             <div className="bg-white/5 border border-white/10 rounded-xl p-6">
               <p className="text-white/40 text-xs mb-1">Total earned</p>
