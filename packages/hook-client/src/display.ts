@@ -138,7 +138,7 @@ export function renderAd(
   const ctaLine       = `${CYAN}${ad.cta}${R}  ${DIM}${ad.clickUrl}${R}`;
   const earnLine      = `${BRIGHT_GREEN}+$${earnedDollars} earned${R}  ${DIM}session: ${GREEN}$${sessionDollars}${R}${coverage}`;
   const referralLine  = `${DIM}Refer a dev → earn 10% of their impressions forever${R}  ${CYAN}${referralUrl}${R}`;
-  const footerLine    = `${DIM}spincome · /disable to opt out${R}`;
+  const footerLine    = `${DIM}spincome · npx @brozarti/spincome disable${R}`;
 
   const stripAnsi = (s: string) => s.replace(/\x1b\[[0-9;]*m/g, "");
   const earnLen      = stripAnsi(earnLine).length;
@@ -156,7 +156,7 @@ export function renderAd(
     box(earnLine,     earnLen),
     box("", 0),
     box(referralLine, referralLen),
-    box(footerLine,   "spincome · /disable to opt out".length),
+    box(footerLine,   "spincome · npx @brozarti/spincome disable".length),
     ruler(),
     "",
   ].join("\n");

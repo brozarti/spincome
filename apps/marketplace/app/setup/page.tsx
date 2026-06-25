@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Nav } from "@/app/components/nav";
+import { Nav, Footer } from "@/app/components/nav";
 import { CopyCommand } from "@/app/components/copy-command";
 
 export default function SetupPage() {
@@ -28,7 +28,7 @@ export default function SetupPage() {
           </li>
           <li className="flex gap-3">
             <span className="text-emerald-400 mt-0.5">✓</span>
-            <span>Starts earning immediately -- no further setup</span>
+            <span>Starts earning immediately — no further setup</span>
           </li>
           <li className="flex gap-3">
             <span className="text-white/30 mt-0.5">○</span>
@@ -57,6 +57,7 @@ export default function SetupPage() {
         </div>
       </div>
     </div>
+    <Footer />
     </main>
   );
 }

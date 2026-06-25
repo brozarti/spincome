@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Nav } from "@/app/components/nav";
+import { Nav, Footer } from "@/app/components/nav";
 
 interface MarketData {
   currentHourImpressions: number;
@@ -105,6 +105,7 @@ export default function MarketPage() {
           </>
         )}
       </div>
+      <Footer />
     </main>
   );
 }

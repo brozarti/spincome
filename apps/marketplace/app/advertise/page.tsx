@@ -27,7 +27,7 @@ const STATS = [
   { value: "0", label: "ad blockers" },
 ];
 
-const LOGOS = ["Vercel", "Supabase", "Railway", "Sentry", "PlanetScale", "Render"];
+const IDEAL_FOR = ["CLI tools", "Cloud platforms", "Dev APIs", "Monitoring", "Databases", "CI/CD"];
 
 export default function AdvertisePage() {
   const [form, setForm] = useState<FormState>({
@@ -126,7 +126,7 @@ export default function AdvertisePage() {
           <span className="text-emerald-400">every Claude Code session</span>
         </h1>
         <p className="text-white/50 text-xl max-w-2xl mx-auto mb-12">
-          Developers see spincome ads between tool calls -- while they are actively coding.
+          Developers see spincome ads between tool calls — while they are actively coding.
           No banners. No pop-ups. No ad blockers. Just your message at the exact moment
           they need a better tool.
         </p>
@@ -181,9 +181,9 @@ export default function AdvertisePage() {
 
         {/* Social proof placeholder */}
         <div className="border border-white/5 rounded-xl px-8 py-6 mb-16">
-          <p className="text-white/20 text-xs uppercase tracking-widest mb-6">Ideal for developer tool companies</p>
+          <p className="text-white/20 text-xs uppercase tracking-widest mb-6">Ideal for</p>
           <div className="flex flex-wrap justify-center gap-x-10 gap-y-3">
-            {LOGOS.map((l) => (
+            {IDEAL_FOR.map((l) => (
               <span key={l} className="text-white/25 font-semibold text-lg">{l}</span>
             ))}
           </div>

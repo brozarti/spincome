@@ -13,7 +13,7 @@ export default function Home() {
       <section className="flex-1 flex flex-col items-center justify-center text-center px-4 pt-24 pb-16">
         <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium px-4 py-1.5 rounded-full mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          Live -- developers earning right now
+          Live — developers earning right now
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 max-w-3xl leading-[1.1]">
           Get paid to<br />
@@ -31,7 +31,7 @@ export default function Home() {
             href="/setup"
             className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-3.5 rounded-lg transition-colors text-sm"
           >
-            Start earning -- free
+            Start earning — free
           </Link>
           <Link
             href="/download"
@@ -100,7 +100,7 @@ export default function Home() {
             <div className="bg-white/3 border border-white/8 rounded-xl p-6">
               <div className="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-sm font-bold mb-4">2</div>
               <h3 className="font-semibold mb-2">Mac Widget (no terminal needed)</h3>
-              <p className="text-white/40 text-sm leading-relaxed mb-4">Download the menu bar widget. Register, install the hook, track earnings, and withdraw -- all from the widget.</p>
+              <p className="text-white/40 text-sm leading-relaxed mb-4">Download the menu bar widget. Register, install the hook, track earnings, and withdraw — all from the widget.</p>
               <Link
                 href="/download"
                 className="inline-block bg-white/10 hover:bg-white/15 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
@@ -156,7 +156,7 @@ export default function Home() {
           <h2 className="text-xl font-bold mb-2">Want to reach developers?</h2>
           <p className="text-white/40 text-sm mb-6">
             Second-price auction. Target by language and framework. $10 minimum budget.
-            Your ad appears when developers are actively coding -- the highest-intent moment possible.
+            Your ad appears when developers are actively coding — the highest-intent moment possible.
           </p>
           <div className="flex justify-center gap-4">
             <Link

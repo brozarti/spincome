@@ -38,6 +38,7 @@ export default function PrivacyPage() {
           <p>Questions about privacy: <a href="mailto:spincome.io@gmail.com" className="text-emerald-400 hover:text-emerald-300">spincome.io@gmail.com</a></p>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

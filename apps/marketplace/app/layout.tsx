@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "spincome -- earn money while you code",
+  title: "spincome —earn money while you code",
   description: "Terminal ads for Claude Code developers. Earn 50% of ad revenue passively while you work. Install in 30 seconds.",
   icons: {
     icon: [
@@ -25,14 +25,14 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "spincome -- get paid to use Claude Code",
+    title: "spincome —get paid to use Claude Code",
     description: "Terminal ads for Claude Code developers. Earn 50% of ad revenue passively. Install in 30 seconds.",
     siteName: "spincome.io",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "spincome -- get paid to use Claude Code",
+    title: "spincome —get paid to use Claude Code",
     description: "Terminal ads for Claude Code developers. Earn 50% of ad revenue passively.",
     images: ["/og-image.png"],
   },

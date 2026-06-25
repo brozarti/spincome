@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
-import { Nav } from "@/app/components/nav";
+import { Nav, Footer } from "@/app/components/nav";
 
 interface DevStats {
   email: string;
@@ -30,6 +30,19 @@ export default function DevDashboardPage() {
   const [payoutStatus, setPayoutStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [payoutMsg, setPayoutMsg] = useState("");
   const [copied, setCopied] = useState(false);
+  const [keyCopied, setKeyCopied] = useState(false);
+
+  function copyText(text: string) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
 
   // Auto-load dashboard if signed in via GitHub
   useEffect(() => {
@@ -126,7 +139,7 @@ export default function DevDashboardPage() {
         {!stats ? (
           <div className="space-y-4">
             <button
-              onClick={() => window.location.href = "/api/auth/signin/github?callbackUrl=/dev"}
+              onClick={() => signIn("github", { callbackUrl: "/dev" })}
               className="w-full flex items-center justify-center gap-3 bg-white text-black font-semibold py-3 rounded-lg text-sm hover:bg-white/90 transition-colors"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -167,18 +180,13 @@ export default function DevDashboardPage() {
                 </div>
                 <button
                   onClick={() => {
-                    try { navigator.clipboard.writeText(key); } catch {
-                      const ta = document.createElement("textarea");
-                      ta.value = key;
-                      document.body.appendChild(ta);
-                      ta.select();
-                      document.execCommand("copy");
-                      document.body.removeChild(ta);
-                    }
+                    copyText(key);
+                    setKeyCopied(true);
+                    setTimeout(() => setKeyCopied(false), 2000);
                   }}
                   className="text-xs text-white/30 hover:text-white border border-white/10 hover:border-white/20 px-3 py-1.5 rounded-lg transition-colors"
                 >
-                  Copy
+                  {keyCopied ? "Copied!" : "Copy"}
                 </button>
               </div>
             )}
@@ -263,16 +271,7 @@ export default function DevDashboardPage() {
                 </code>
                 <button
                   onClick={() => {
-                    try {
-                      navigator.clipboard.writeText(referralUrl);
-                    } catch {
-                      const ta = document.createElement("textarea");
-                      ta.value = referralUrl;
-                      document.body.appendChild(ta);
-                      ta.select();
-                      document.execCommand("copy");
-                      document.body.removeChild(ta);
-                    }
+                    copyText(referralUrl);
                     setCopied(true);
                     setTimeout(() => setCopied(false), 2000);
                   }}
@@ -324,6 +323,7 @@ export default function DevDashboardPage() {
 
         {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
       </div>
+      <Footer />
     </main>
   );
 }

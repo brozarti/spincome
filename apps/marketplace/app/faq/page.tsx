@@ -10,7 +10,7 @@ const FAQS = [
       },
       {
         q: "How much can I earn?",
-        a: "Earnings depend on advertiser demand. At typical CPMs ($5-25), active Claude Code users can earn $1-5/day -- enough to offset a significant portion of your Claude subscription.",
+        a: "Earnings depend on advertiser demand. At typical CPMs ($5-25), active Claude Code users can earn $1-5/day — enough to offset a significant portion of your Claude subscription.",
       },
       {
         q: "When do I get paid?",
@@ -26,7 +26,7 @@ const FAQS = [
       },
       {
         q: "How does the referral program work?",
-        a: "Share your referral link and earn 10% of every referred developer's impression earnings -- forever. There's no cap.",
+        a: "Share your referral link and earn 10% of every referred developer's impression earnings — forever. There's no cap.",
       },
     ],
   },
@@ -72,7 +72,7 @@ const FAQS = [
       },
       {
         q: "Is this safe to use with Claude Code?",
-        a: "Yes. The hook runs as a PostToolUse hook -- it fires after tool calls complete, not during. It cannot intercept, modify, or read your Claude Code session. It only writes to stderr/stdout.",
+        a: "Yes. The hook runs as a PostToolUse hook — it fires after tool calls complete, not during. It cannot intercept, modify, or read your Claude Code session. It only writes to stderr/stdout.",
       },
       {
         q: "Why can't ad blockers block these ads?",
@@ -115,6 +115,7 @@ export default function FAQPage() {
           </a>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

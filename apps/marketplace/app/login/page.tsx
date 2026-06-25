@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { Nav } from "@/app/components/nav";
+import { Nav, Footer } from "@/app/components/nav";
 
 export default function LoginPage() {
   return (
@@ -32,6 +32,7 @@ export default function LoginPage() {
           <Link href="/privacy" className="underline hover:text-white/40">Privacy Policy</Link>
         </p>
       </div>
+      <Footer />
     </main>
   );
 }

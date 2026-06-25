@@ -15,7 +15,7 @@ export default function TermsPage() {
 
           <h2 className="text-white font-semibold text-base mt-8">For advertisers</h2>
           <p>Campaign budgets are charged via Stripe Checkout before activation. Impressions are billed using a second-price (Vickrey) auction -- you pay one cent above the next highest bid, never more than your max CPM. Clicks are billed at 50x the winning impression rate.</p>
-          <p>Campaigns can be paused or exhausted. Unused budget is not automatically refunded -- contact support for refund requests on unused campaign balance.</p>
+          <p>Campaigns can be paused or exhausted. Unused budget is not automatically refunded — contact support for refund requests on unused campaign balance.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Referral program</h2>
           <p>Referrers earn 10% of each referred developer&apos;s impression earnings indefinitely. This is paid from the platform&apos;s share, not from the referred developer&apos;s earnings. Abuse of the referral system (self-referral fraud, bot accounts) will result in account termination.</p>
@@ -33,6 +33,7 @@ export default function TermsPage() {
           <p>Questions: <a href="mailto:spincome.io@gmail.com" className="text-emerald-400 hover:text-emerald-300">spincome.io@gmail.com</a></p>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }
