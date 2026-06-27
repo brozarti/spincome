@@ -14,14 +14,14 @@ export default function TermsPage() {
           <p>You may disable ads at any time by running &quot;npx @brozarti/spincome disable&quot; or setting enabled: false in your config. Disabling stops all ad display and earning immediately.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">For advertisers</h2>
-          <p>Campaign budgets are charged via Stripe Checkout before activation. Impressions are billed using a second-price (Vickrey) auction -- you pay one cent above the next highest bid, never more than your max CPM. Clicks are billed at 50x the winning impression rate.</p>
+          <p>Campaign budgets are charged via Stripe Checkout before activation. Impressions are billed using a second-price (Vickrey) auction — you pay one cent above the next highest bid, never more than your max CPM. Clicks are billed at 50x the winning impression rate.</p>
           <p>Campaigns can be paused or exhausted. Unused budget is not automatically refunded — contact support for refund requests on unused campaign balance.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Referral program</h2>
           <p>Referrers earn 10% of each referred developer&apos;s impression earnings indefinitely. This is paid from the platform&apos;s share, not from the referred developer&apos;s earnings. Abuse of the referral system (self-referral fraud, bot accounts) will result in account termination.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Payouts</h2>
-          <p>Developer payouts are processed weekly via Stripe transfers. Minimum payout is $10. The platform is not responsible for Stripe processing delays.</p>
+          <p>Developer payouts are processed automatically every Monday via Stripe transfers for any balance above $0.50. Manual withdrawals from the dashboard require a $10 minimum. The platform is not responsible for Stripe processing delays.</p>
 
           <h2 className="text-white font-semibold text-base mt-8">Content policy</h2>
           <p>Ads must not contain misleading claims, malware links, adult content, or illegal material. Spincome reserves the right to reject or remove campaigns that violate these guidelines.</p>

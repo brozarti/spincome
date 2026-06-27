@@ -118,7 +118,7 @@ export default function AdminPage() {
 
             {/* 30-day volume */}
             <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-              <h2 className="font-semibold text-sm mb-4">Impressions -- last 30 days</h2>
+              <h2 className="font-semibold text-sm mb-4">Impressions — last 30 days</h2>
               <Sparkline points={data.recentImpressions} />
             </div>
 

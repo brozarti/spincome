@@ -260,7 +260,7 @@ export default function AdvertisePage() {
                 Estimated <span className="text-white font-semibold">{impressions.toLocaleString()} impressions</span> at ${form.maxCpmBid} CPM with ${form.budget} budget.
               </p>
               <p className="text-white/30 text-xs mt-1">
-                Actual cost uses second-price auction -- you usually pay less than your max bid.
+                Actual cost uses second-price auction — you usually pay less than your max bid.
               </p>
             </div>
           </Fieldset>

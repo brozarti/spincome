@@ -89,11 +89,11 @@ async function runAuction(
     return true;
   });
 
-  // Fall back to untargeted campaigns if no targeted ones match
+  // Fall back to ANY campaign with budget remaining if no targeted ones match
   const pool = eligible.length > 0 ? eligible : campaigns.filter((c) => {
     if (c.spentCents >= c.budgetCents) return false;
     if ((hourlyCount[c.id] ?? 0) >= getHourlyLimit(c)) return false;
-    return !c.targetLanguages && !c.targetFrameworks;
+    return true;
   });
 
   if (pool.length === 0) return null;

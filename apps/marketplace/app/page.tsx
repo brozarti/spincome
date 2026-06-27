@@ -62,13 +62,13 @@ export default function Home() {
             <div className="p-5 font-mono text-sm leading-relaxed">
               <p className="text-white/30">$ claude &quot;refactor the auth module&quot;</p>
               <p className="text-white/20 mt-3">{"─".repeat(52)}</p>
-              <p className="text-white/40"> Sponsored · Vercel · TypeScript dev</p>
-              <p className="text-white font-bold"> Ship 10x faster with zero config</p>
-              <p className="text-white/50"> The frontend cloud. Build, preview, ship.</p>
+              <p className="text-white/40"> Sponsored · spincome · TS dev</p>
+              <p className="text-white font-bold"> Get paid to use Claude Code</p>
+              <p className="text-white/50"> Earn 50% of ad revenue from a single terminal ad after each tool call. 30-second install.</p>
               <p className="text-white/10"> </p>
-              <p> <span className="text-cyan-400">Start free</span>  <span className="text-white/20">vercel.com</span></p>
+              <p> <span className="text-cyan-400">Start earning free</span>  <span className="text-white/20">spincome.io/setup</span></p>
               <p className="text-white/10"> </p>
-              <p className="text-emerald-400"> +$0.0125 earned  <span className="text-white/30">session: $0.2500</span></p>
+              <p className="text-emerald-400"> +$0.0025 earned  <span className="text-white/30">session: $0.0375</span></p>
               <p className="text-white/20">{"─".repeat(52)}</p>
               <p className="text-white/20 mt-3">{">"} Refactoring auth module... <span className="text-emerald-400 animate-pulse">|</span></p>
             </div>

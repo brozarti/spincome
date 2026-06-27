@@ -14,7 +14,7 @@ const FAQS = [
       },
       {
         q: "When do I get paid?",
-        a: "Payouts happen automatically every Monday via Stripe. Connect your Stripe account in the developer dashboard or Widget. Minimum payout is $10.",
+        a: "Payouts happen automatically every Monday via Stripe. Connect your Stripe account in the developer dashboard or Widget. Auto-payouts process any balance above $0.50. You can also withdraw manually anytime from the dashboard (minimum $10).",
       },
       {
         q: "What data do you collect?",
@@ -35,7 +35,7 @@ const FAQS = [
     questions: [
       {
         q: "How does bidding work?",
-        a: "You set a max CPM (cost per 1,000 impressions) bid. The auction uses second-price (Vickrey) rules -- you pay one cent above the next highest bid. This incentivizes honest bidding.",
+        a: "You set a max CPM (cost per 1,000 impressions) bid. The auction uses second-price (Vickrey) rules — you pay one cent above the next highest bid. This incentivizes honest bidding.",
       },
       {
         q: "What's the minimum bid and budget?",
@@ -51,7 +51,7 @@ const FAQS = [
       },
       {
         q: "Can I upload a brand icon?",
-        a: "Yes. Upload a PNG, JPG, or WebP file (max 64KB) when creating your campaign. It appears next to your ad in developer terminals.",
+        a: "Yes. Upload a PNG, JPG, or WebP file (max 64KB) when creating your campaign. It's stored with your campaign data for use in the menu bar widget and web displays.",
       },
       {
         q: "When does my campaign go live?",

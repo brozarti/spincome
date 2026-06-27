@@ -34,7 +34,7 @@ export default function MarketPage() {
         <div className="flex items-start justify-between mb-3">
           <div>
             <h1 className="text-3xl font-bold mb-2">Market data</h1>
-            <p className="text-white/40 text-sm">Real-time pricing and volume -- refreshes every 30 seconds.</p>
+            <p className="text-white/40 text-sm">Real-time pricing and volume — refreshes every 30 seconds.</p>
           </div>
           <div className="flex items-center gap-2 mt-1">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

@@ -32,16 +32,20 @@ export default function DevDashboardPage() {
   const [copied, setCopied] = useState(false);
   const [keyCopied, setKeyCopied] = useState(false);
 
-  function copyText(text: string) {
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    ta.style.position = "fixed";
-    ta.style.left = "-9999px";
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
+  async function copyText(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
   }
 
   // Auto-load dashboard if signed in via GitHub
@@ -263,7 +267,7 @@ export default function DevDashboardPage() {
             <div className="bg-white/5 border border-white/10 rounded-xl p-6">
               <h2 className="font-semibold mb-1">Your referral link</h2>
               <p className="text-white/40 text-xs mb-4">
-                Earn 10% of every referred developer&apos;s impressions -- forever.
+                Earn 10% of every referred developer&apos;s impressions — forever.
               </p>
               <div className="flex gap-2">
                 <code className="flex-1 bg-black border border-white/10 rounded-lg px-4 py-2.5 text-sm text-emerald-400 truncate">
