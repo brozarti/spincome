@@ -471,6 +471,14 @@ async function handleWithdraw() {
   const btn = document.getElementById("withdraw-btn");
   const msg = document.getElementById("withdraw-msg");
 
+  // Check minimum before anything
+  const balance = serverData?.earningsCents ?? 0;
+  if (serverData?.stripeConnected && balance < 1000000) {
+    const needed = ((1000000 - balance) / 100000).toFixed(2);
+    flashMsg("$" + needed + " more to reach the $10 minimum", "info");
+    return;
+  }
+
   if (!serverData?.stripeConnected) {
     // Open Stripe connect in browser
     try {
@@ -604,7 +612,7 @@ function updateUI() {
       const dollars = (lifetimeCents / 100000).toFixed(2);
       wBtn.textContent = "Withdraw $" + dollars;
       wBtn.className = "withdraw-btn";
-      wBtn.disabled = lifetimeCents < 50000;
+      wBtn.disabled = false;
     } else {
       stripeEl.innerHTML = '<span class="stripe-badge stripe-no">Stripe not connected</span>';
       wBtn.textContent = "Connect Stripe to withdraw";
