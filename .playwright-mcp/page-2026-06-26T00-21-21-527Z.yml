@@ -1,0 +1,461 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+    - generic [ref=e4]: Skip to main content
+  - generic [ref=e6]:
+    - generic:
+      - banner [ref=e9]:
+        - navigation [ref=e10]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+            - img [ref=e16]
+          - search [ref=e33]:
+            - generic [ref=e35]:
+              - img [ref=e37]
+              - textbox "Ask" [ref=e58]:
+                - /placeholder: Find anything
+              - separator [ref=e59]
+              - link "Ask" [ref=e63] [cursor=pointer]:
+                - /url: /answers/
+                - generic [ref=e64]:
+                  - img [ref=e66]
+                  - generic [ref=e68]: Ask
+              - generic: Find anything
+          - generic [ref=e69]:
+            - link "Sign Up" [ref=e75] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+              - generic [ref=e77]: Sign Up
+            - link "Log In" [ref=e81] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+              - generic [ref=e83]: Log In
+            - button "Expand user menu" [ref=e88] [cursor=pointer]:
+              - img [ref=e91]
+              - generic [ref=e93]:
+                - generic: Expand user menu
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=e97] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=e98] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=e99]:
+            - main [ref=e100]:
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - generic "Sort by" [ref=e107]:
+                    - 'button "Sort by: Best" [ref=e109] [cursor=pointer]':
+                      - generic [ref=e111]: Best
+                  - generic "Sort by" [ref=e116]:
+                    - 'button "Sort by: Everywhere" [ref=e118] [cursor=pointer]':
+                      - generic [ref=e120]: Everywhere
+                - generic "View" [ref=e126]:
+                  - 'button "View: Card" [ref=e128] [cursor=pointer]'
+              - separator [ref=e134]
+              - generic [ref=e135]:
+                - heading "Feed" [level=1] [ref=e137]
+                - generic:
+                  - article [ref=e138]:
+                    - generic [ref=e139] [cursor=pointer]:
+                      - link "My exit interview took a wild turn when HR pulled out a counter-offer... for exactly what I'd been asking for all year 😭" [ref=e140]:
+                        - /url: https://www.reddit.com/r/careeradvice/comments/1uf7mud/my_exit_interview_took_a_wild_turn_when_hr_pulled/
+                        - generic [ref=e141]:
+                          - generic: My exit interview took a wild turn when HR pulled out a counter-offer... for exactly what I'd been asking for all year 😭
+                      - generic [ref=e142]:
+                        - generic [ref=e143]:
+                          - link "r/careeradvice" [ref=e146]:
+                            - /url: https://www.reddit.com/r/careeradvice/
+                            - img [ref=e150]
+                            - generic [ref=e152]: r/careeradvice
+                          - generic [ref=e153]: •
+                          - time [ref=e155]: 13 hr. ago
+                        - generic [ref=e156]:
+                          - button "Join" [ref=e158]
+                          - button "Open user actions" [ref=e162]:
+                            - img [ref=e165]
+                      - generic [ref=e168]:
+                        - heading "My exit interview took a wild turn when HR pulled out a counter-offer... for exactly what I'd been asking for all year 😭" [level=2] [ref=e169]:
+                          - link "My exit interview took a wild turn when HR pulled out a counter-offer... for exactly what I'd been asking for all year 😭" [ref=e170]:
+                            - /url: https://www.reddit.com/r/careeradvice/comments/1uf7mud/my_exit_interview_took_a_wild_turn_when_hr_pulled/
+                            - text: My exit interview took a wild turn when HR pulled out a counter-offer... for exactly what I'd been asking for all year 😭
+                        - generic [ref=e171]:
+                          - generic:
+                            - link:
+                              - /url: /r/careeradvice/comments/1uf7mud/my_exit_interview_took_a_wild_turn_when_hr_pulled/
+                              - generic:
+                                - generic:
+                                  - paragraph: This is one of my life story that happened 5 years back!! So I gave my notice after 2 years of being ignored in that same company. I was the only marketing person there back then.
+                                  - paragraph: Every quarter I'd send a report about Impressions rankings slipping, competitors blah blah. I'd flag it FIRST!! My manager would say great insights and then we'd talk about something else. For two years.
+                                  - paragraph: At my exit interview...hr asks the usual why are you leaving? I was polite and honest. Said I felt my work wasn't being taken seriously ( My audacity!!!!!) and gave a few examples. Like how I'd been asking for a content budget for 8 months and got nothing.
+                                  - paragraph: HR takes a pause and came up with a counteroffer. With same role... but with a content budget, with a junior hire under me, and a 30% raise!!!
+                                  - paragraph: "I literally said this in my mind: Where was this 8 months ago?"
+                                  - paragraph: You know what I did? I turned it down on the spot. Walked out.
+                                  - paragraph: The funniest part that my manager emailed me the next day saying congrats on the new role, let us know if you change your mind. bro he never even acknowledged the report I sent him 6 weeks ago.
+                                  - paragraph: They don't value you until you're leaving. That's literally the only deadline that works at some companies.
+                      - generic "Actions available for this post" [ref=e173]:
+                        - generic [ref=e176]:
+                          - button "Upvote" [ref=e177]:
+                            - img [ref=e179]
+                            - generic [ref=e181]:
+                              - generic: Upvote
+                          - generic [ref=e183]: 5.6K
+                          - button "Downvote" [ref=e184]:
+                            - img [ref=e186]
+                            - generic [ref=e188]:
+                              - generic: Downvote
+                        - link "250 Go to comments" [ref=e189]:
+                          - /url: /r/careeradvice/comments/1uf7mud/my_exit_interview_took_a_wild_turn_when_hr_pulled/
+                          - generic [ref=e190]:
+                            - img [ref=e192]
+                            - generic [ref=e195]: "250"
+                          - generic [ref=e196]:
+                            - generic: Go to comments
+                        - button "Give award" [ref=e198]:
+                          - img [ref=e203]
+                        - button "Share" [ref=e208]:
+                          - generic [ref=e209]:
+                            - img [ref=e211]
+                            - generic [ref=e213]: Share
+                  - separator [ref=e214]
+                  - generic [ref=e215]:
+                    - 'link "Advertisement: Try Reddit Ads and get $500 in ad credit when you spend $500." [ref=e217] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                      - generic [ref=e218]:
+                        - generic: "Advertisement: Try Reddit Ads and get $500 in ad credit when you spend $500."
+                    - generic [ref=e219]:
+                      - generic [ref=e220]:
+                        - link "u/RedditforBusiness" [ref=e223] [cursor=pointer]:
+                          - /url: /user/RedditforBusiness/
+                          - img "u/RedditforBusiness avatar" [ref=e226]
+                          - generic [ref=e227]: u/RedditforBusiness
+                        - generic [ref=e228]: •
+                        - link "Promoted" [ref=e230] [cursor=pointer]:
+                          - /url: /user/RedditforBusiness/
+                          - generic [ref=e231]: Promoted
+                        - link [ref=e233] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                      - button "Open user actions" [ref=e238] [cursor=pointer]:
+                        - img [ref=e241]
+                    - heading "Try Reddit Ads and get $500 in ad credit when you spend $500." [level=2] [ref=e245]:
+                      - link "Try Reddit Ads and get $500 in ad credit when you spend $500." [ref=e248] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                        - generic: Try Reddit Ads and get $500 in ad credit when you spend $500.
+                    - generic [ref=e249]:
+                      - generic [ref=e254]:
+                        - generic "video player" [ref=e255]
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - img
+                          - generic [ref=e256]:
+                            - generic [ref=e257]:
+                              - button "Toggle playback" [ref=e258] [cursor=pointer]:
+                                - img [ref=e259]
+                              - generic "Media time" [ref=e261]
+                              - generic [ref=e266]:
+                                - generic [ref=e267]: 0:00
+                                - generic [ref=e268]: / 0:00
+                              - button "Toggle captions" [ref=e269] [cursor=pointer]:
+                                - img [ref=e270]
+                              - generic [ref=e273]:
+                                - button "Settings" [ref=e274] [cursor=pointer]:
+                                  - img [ref=e275]
+                                - generic:
+                                  - button:
+                                    - generic: 1080p
+                                  - button:
+                                    - generic: 720p
+                                  - button:
+                                    - generic: 480p
+                                  - button:
+                                    - generic: 360p
+                                  - button:
+                                    - generic:
+                                      - img
+                                    - generic: Auto
+                              - button "Toggle fullscreen" [ref=e277] [cursor=pointer]:
+                                - img [ref=e278]
+                            - button "Toggle volume" [ref=e283] [cursor=pointer]:
+                              - img [ref=e284]
+                      - separator [ref=e287]
+                      - generic [ref=e288]:
+                        - link [ref=e290] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                        - generic [ref=e291]:
+                          - link "redditforbusiness.com" [ref=e294] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                            - generic: redditforbusiness.com
+                          - link "Sign Up" [ref=e296] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                            - generic [ref=e298]:
+                              - generic: Sign Up
+                    - generic "Actions available for this post" [ref=e300]:
+                      - generic [ref=e303]:
+                        - button "Upvote" [ref=e304] [cursor=pointer]:
+                          - img [ref=e306]
+                          - generic [ref=e308]:
+                            - generic: Upvote
+                        - text: Vote
+                        - button "Downvote" [ref=e309] [cursor=pointer]:
+                          - img [ref=e311]
+                          - generic [ref=e313]:
+                            - generic: Downvote
+                      - link "0 Go to comments" [ref=e314] [cursor=pointer]:
+                        - /url: /user/RedditforBusiness/comments/1km1sbx/try_reddit_ads_and_get_500_in_ad_credit_when_you/?p=1&impressionid=5465540313252686507
+                        - generic [ref=e315]:
+                          - img [ref=e317]
+                          - generic [ref=e320]: "0"
+                        - generic [ref=e321]:
+                          - generic: Go to comments
+                      - button "Share" [ref=e325] [cursor=pointer]:
+                        - generic [ref=e326]:
+                          - img [ref=e328]
+                          - generic [ref=e330]: Share
+                      - link [ref=e332] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=xWPEQ_rGeh6k3ytpn25I8KqkjeQ94cyw5nkO87MDnGqbipndP7o6O8ZLvy-wjgcmULaYooo7Td4ipnj2u6EzOvQy4yb-gzju2rCAwxuxGv_ZRO6pSW1TsZcwuFhXoZ2ETcWu8fk96VJZXT6ODTU_sBBGoUjNIgCYE83YmNxx35_KwDzIIZPWd5oGnh9zPvNu1bsYX2F6IyoY_StAClMVcfm_0l4-mL7r8wVCt8XiZM3hr_sLkWWO-KGOIpjva9YfjI0X-La1zqHsZYgAY6fi2x8MSPrhb-3sfhEKk3AfgG4KMkdTx1IPFm2kvsMYUrJdoGrMg5ZGRrZMkiPSXWEUluY2LW6dZJCjA4mlGDLU6ghNPRZXzWQmXdlc0APbCNoXNiYMZGMnvs0l-GueF9UsIt65_kl5mXIPqe1rZH2a7cS3B6lSI3qX6gzxQz1KoIMtkH5r-doNJm59M46e52LSj64OtRMK7jSr_hH5WiNz2I_A-d5OiGFNUrUM5HoDjj6VRxvEVDK6teGVSvSpMSJ7LcZ-0Jjs_HyxCDIMlb3einm3qJX0uMQZbznd4kVbPEKr4R6Qm3PKMIH2vh6ye2PX_v_4egTTOAUCrrmjViorlTddinvkY9s6J-yayGM62oYXil2XT_ivKtc_V4Bb3P2HlSjzuigpinYa7AWYi68ePATrXONvhs2jJh9aC2KZ5Vyvcdt1Ru2CmCi-KoD6PDq-pOrsPKw&zp=PcQ23ZSqG02HQzB9cf7xSX6EZ132J__v-CCb64PX7JvZmxlYje0Z28s5IT1qLU3-e1ZuuMMIysD1sYjOGr8VoYlm4uwwBYGZbU7S8jWNIq3eqB7tMmthw-2xRyk1hnGog_7cKdRwRE1iWSgzyrlav7abtFZ1rPObRVLrcV2KilIvfSla5LE7Fe88FnEd6ZuWOoCm513z-5sanWG2eFORfBC4x6m2htJzw-lmqsNFPQAqIG0t0XYVbl5lO0A2DwrMyYRVgsYIIVi_OftWHIB_3vixvtFDJG63umW4aIg6Eg0byvNxVWKBazJ2mdJjgyYDESI7R9vC-Ol0LZWxyYxWbLA00U1ADGEaTHBGOM_38ucWxh40X2rm2rYaphVRGS0VJqUifs1YKkJ4JFdS2IaeNVU7TpIGUWyQneyNsBr2NRRE73KB5BVDlb1AyJWVKaFyO54kquvNv9t7Ij8XHP9NRmENgu603XY9vDtABmDmKPhrL-CF9wRLynXbdfmEAOdTzLqsQhBA82pv1cNdi4g747jB92IRNNidjsvZi00_SF7g
+                  - separator [ref=e333]
+                  - article [ref=e334]:
+                    - generic [ref=e335] [cursor=pointer]:
+                      - 'link "WATCH: Stephen Miller says ''America''s doors are closed fully to asylum seekers'' after SCOTUS ruling" [ref=e336]':
+                        - /url: https://www.reddit.com/r/law/comments/1ufobmu/watch_stephen_miller_says_americas_doors_are/
+                        - generic [ref=e337]:
+                          - generic: "WATCH: Stephen Miller says 'America's doors are closed fully to asylum seekers' after SCOTUS ruling"
+                      - generic [ref=e338]:
+                        - generic [ref=e339]:
+                          - link "r/law" [ref=e342]:
+                            - /url: https://www.reddit.com/r/law/
+                            - generic [ref=e346]: r/law
+                          - generic [ref=e347]: •
+                          - time [ref=e349]: 2 hr. ago
+                        - generic [ref=e350]:
+                          - button "Join" [ref=e352]
+                          - button "Open user actions" [ref=e356]:
+                            - img [ref=e359]
+                      - 'heading "WATCH: Stephen Miller says ''America''s doors are closed fully to asylum seekers'' after SCOTUS ruling" [level=2] [ref=e363]':
+                        - 'link "WATCH: Stephen Miller says ''America''s doors are closed fully to asylum seekers'' after SCOTUS ruling" [ref=e364]':
+                          - /url: https://www.reddit.com/r/law/comments/1ufobmu/watch_stephen_miller_says_americas_doors_are/
+                      - generic [ref=e370]:
+                        - generic "video player" [ref=e371]
+                        - generic [ref=e372]:
+                          - generic [ref=e373]:
+                            - button "Toggle playback" [ref=e374]:
+                              - img [ref=e375]
+                            - generic "Media time" [ref=e377]
+                            - generic [ref=e382]:
+                              - generic [ref=e383]: 0:00
+                              - generic [ref=e384]: / 0:00
+                            - button "Toggle captions" [ref=e385]:
+                              - img [ref=e386]
+                            - generic [ref=e389]:
+                              - button "Settings" [ref=e390]:
+                                - img [ref=e391]
+                              - generic:
+                                - button:
+                                  - generic: 1080p
+                                - button:
+                                  - generic: 720p
+                                - button:
+                                  - generic: 480p
+                                - button:
+                                  - generic: 360p
+                                - button:
+                                  - generic: 240p
+                                - button:
+                                  - generic: 144p
+                                - button:
+                                  - generic:
+                                    - img
+                                  - generic: Auto
+                            - button "Toggle fullscreen" [ref=e393]:
+                              - img [ref=e394]
+                          - button "Toggle volume" [ref=e399]:
+                            - img [ref=e400]
+                      - generic "Actions available for this post" [ref=e404]:
+                        - generic [ref=e407]:
+                          - button "Upvote" [ref=e408]:
+                            - img [ref=e410]
+                            - generic [ref=e412]:
+                              - generic: Upvote
+                          - generic [ref=e414]: 5.5K
+                          - button "Downvote" [ref=e415]:
+                            - img [ref=e417]
+                            - generic [ref=e419]:
+                              - generic: Downvote
+                        - link "1.5K Go to comments" [ref=e420]:
+                          - /url: /r/law/comments/1ufobmu/watch_stephen_miller_says_americas_doors_are/
+                          - generic [ref=e421]:
+                            - img [ref=e423]
+                            - generic [ref=e426]: 1.5K
+                          - generic [ref=e427]:
+                            - generic: Go to comments
+                        - button "Give award, 8 awards given" [ref=e429]:
+                          - generic [ref=e434]: "8"
+                        - button "Share" [ref=e438]:
+                          - generic [ref=e439]:
+                            - img [ref=e441]
+                            - generic [ref=e443]: Share
+                  - separator [ref=e444]
+                  - article [ref=e445]:
+                    - generic [ref=e446] [cursor=pointer]:
+                      - link "Peter explain the joke please" [ref=e447]:
+                        - /url: https://www.reddit.com/r/PeterExplainsTheJoke/comments/1ufh38i/peter_explain_the_joke_please/
+                        - generic [ref=e448]:
+                          - generic: Peter explain the joke please
+                      - generic [ref=e449]:
+                        - generic [ref=e450]:
+                          - link "r/PeterExplainsTheJoke" [ref=e453]:
+                            - /url: https://www.reddit.com/r/PeterExplainsTheJoke/
+                            - generic [ref=e457]: r/PeterExplainsTheJoke
+                          - generic [ref=e458]: •
+                          - time [ref=e460]: 7 hr. ago
+                        - generic [ref=e461]:
+                          - button "Join" [ref=e463]
+                          - button "Open user actions" [ref=e467]:
+                            - img [ref=e470]
+                      - heading "Peter explain the joke please" [level=2] [ref=e474]:
+                        - link "Peter explain the joke please" [ref=e475]:
+                          - /url: https://www.reddit.com/r/PeterExplainsTheJoke/comments/1ufh38i/peter_explain_the_joke_please/
+                      - img "r/PeterExplainsTheJoke - Peter explain the joke please" [ref=e481]
+                      - generic "Actions available for this post" [ref=e483]:
+                        - generic [ref=e486]:
+                          - button "Upvote" [ref=e487]:
+                            - img [ref=e489]
+                            - generic [ref=e491]:
+                              - generic: Upvote
+                          - generic [ref=e493]: 7.4K
+                          - button "Downvote" [ref=e494]:
+                            - img [ref=e496]
+                            - generic [ref=e498]:
+                              - generic: Downvote
+                        - link "2.2K Go to comments" [ref=e499]:
+                          - /url: /r/PeterExplainsTheJoke/comments/1ufh38i/peter_explain_the_joke_please/
+                          - generic [ref=e500]:
+                            - img [ref=e502]
+                            - generic [ref=e505]: 2.2K
+                          - generic [ref=e506]:
+                            - generic: Go to comments
+                        - button "Give award, 6 awards given" [ref=e508]:
+                          - generic [ref=e513]: "6"
+                        - button "Share" [ref=e517]:
+                          - generic [ref=e518]:
+                            - img [ref=e520]
+                            - generic [ref=e522]: Share
+                  - separator [ref=e523]
+                - img [ref=e529]
+            - generic [ref=e542]:
+              - complementary [ref=e544]:
+                - complementary "Popular Communities" [ref=e545]:
+                  - generic [ref=e546]:
+                    - heading "Popular Communities" [level=2] [ref=e548]:
+                      - generic [ref=e549]: Popular Communities
+                    - listitem [ref=e550]:
+                      - list [ref=e551]:
+                        - link "r/DestinyTheGame 3,368,086 members" [ref=e552] [cursor=pointer]:
+                          - /url: /r/DestinyTheGame
+                          - generic [ref=e558]:
+                            - generic [ref=e560]: r/DestinyTheGame
+                            - generic [ref=e561]: 3,368,086 members
+                        - link "r/anime 14,317,768 members" [ref=e562] [cursor=pointer]:
+                          - /url: /r/anime
+                          - generic [ref=e568]:
+                            - generic [ref=e570]: r/anime
+                            - generic [ref=e571]: 14,317,768 members
+                        - link "r/destiny2 945,480 members" [ref=e572] [cursor=pointer]:
+                          - /url: /r/destiny2
+                          - generic [ref=e578]:
+                            - generic [ref=e580]: r/destiny2
+                            - generic [ref=e581]: 945,480 members
+                        - link "r/FortNiteBR 5,676,797 members" [ref=e582] [cursor=pointer]:
+                          - /url: /r/FortNiteBR
+                          - generic [ref=e588]:
+                            - generic [ref=e590]: r/FortNiteBR
+                            - generic [ref=e591]: 5,676,797 members
+                        - link "r/dndnext 822,251 members" [ref=e592] [cursor=pointer]:
+                          - /url: /r/dndnext
+                          - generic [ref=e598]:
+                            - generic [ref=e600]: r/dndnext
+                            - generic [ref=e601]: 822,251 members
+                        - button "See more" [ref=e602] [cursor=pointer]:
+                          - generic [ref=e604]: See more
+              - list [ref=e606]:
+                - listitem [ref=e607]:
+                  - link "Home" [ref=e609] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=e610]:
+                  - link "Popular" [ref=e612] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=e613]:
+                  - link "News" [ref=e615] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=e616]:
+                  - link "Explore" [ref=e618] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=e619]:
+                  - link "Best of Reddit" [ref=e621] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=e622]:
+                  - link "Best of Reddit in Portuguese" [ref=e624] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=e625]:
+                  - link "Best of Reddit in German" [ref=e627] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=e628]:
+                  - link "Reddit Rules" [ref=e630] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=e631]:
+                  - link "Privacy Policy" [ref=e633] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=e634]:
+                  - link "User Agreement" [ref=e636] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=e637]:
+                  - link "Your Privacy Choices" [ref=e639] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/articles/43980704794004
+                - listitem [ref=e640]:
+                  - link "Accessibility" [ref=e642] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=e643]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=e644] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=e647]:
+          - img
+          - paragraph [ref=e648]: Join the most real place on the internet
+          - generic [ref=e650]:
+            - generic [ref=e653]:
+              - iframe [ref=e658]:
+                - button "Continue with Google. Opens in new tab" [ref=f4e3] [cursor=pointer]:
+                  - generic [ref=f4e5]:
+                    - img [ref=f4e7]
+                    - generic [ref=f4e14]: Continue with Google
+              - generic [ref=e660] [cursor=pointer]:
+                - generic [ref=e661]:
+                  - img [ref=e662]
+                  - generic [ref=e664]: Continue with Apple
+                - button "Sign in with Apple" [ref=e667]:
+                  - generic [ref=e668]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+                  - img [ref=e670]
+            - link "Continue with Phone Number" [ref=e673] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+              - generic [ref=e676]:
+                - img [ref=e677]
+                - generic [ref=e680]: Continue with Phone Number
+            - link "Continue with Email" [ref=e682] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+              - generic [ref=e685]:
+                - img [ref=e686]
+                - generic [ref=e688]: Continue with Email
+          - paragraph [ref=e689]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=e690] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=e691] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

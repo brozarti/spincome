@@ -58,6 +58,10 @@ const FAQS = [
         a: "Immediately after payment clears via Stripe Checkout. Your ad enters the real-time auction and starts competing for impressions within minutes.",
       },
       {
+        q: "How often are ads shown?",
+        a: "One ad per 15 seconds maximum. This means every impression is a real view -- not rapid-fire spam that gets ignored. Your budget lasts longer and each impression carries more weight than traditional ad networks.",
+      },
+      {
         q: "Can I see what other advertisers are bidding?",
         a: "Yes. The Live Bids page shows all active campaigns, their CPM bids, budget pacing, and targeting. Full transparency.",
       },

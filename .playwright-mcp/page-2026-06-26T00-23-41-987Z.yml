@@ -1,0 +1,19 @@
+- generic [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+    - generic [ref=e4]: Skip to main content
+  - generic [ref=e6]:
+    - generic:
+      - banner [ref=e7]:
+        - generic [ref=e8]:
+          - img [ref=e10]
+          - img [ref=e24]
+      - dialog "Welcome back!" [ref=e35]:
+        - generic [ref=e38]:
+          - heading "Welcome back!" [level=1] [ref=e39]
+          - paragraph [ref=e40]: You are already logged in and will be redirected back to Reddit shortly.
+          - paragraph [ref=e41]:
+            - text: If you are not redirected automatically, follow
+            - link "this link" [active] [ref=e42] [cursor=pointer]:
+              - /url: https://www.reddit.com/
+            - text: .
