@@ -101,6 +101,15 @@ export default function DevDashboardPage() {
     }
   }
 
+  async function disconnectStripe() {
+    if (!confirm("Disconnect this Stripe account? You'll need to reconnect before withdrawing again.")) return;
+    await fetch("/api/developers/disconnect", {
+      method: "POST",
+      headers: { "X-Developer-Key": key.trim() },
+    });
+    setStats((s) => s ? { ...s, stripeConnected: false } : s);
+  }
+
   async function requestPayout() {
     setPayoutStatus("loading");
     const res = await fetch("/api/developers/payout", {
@@ -250,6 +259,20 @@ export default function DevDashboardPage() {
                       {payoutMsg}
                     </p>
                   )}
+                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/5">
+                    <button
+                      onClick={connectStripe}
+                      className="text-xs text-white/30 hover:text-white/50 transition-colors"
+                    >
+                      Switch Stripe account
+                    </button>
+                    <button
+                      onClick={disconnectStripe}
+                      className="text-xs text-white/30 hover:text-red-400 transition-colors"
+                    >
+                      Disconnect
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
