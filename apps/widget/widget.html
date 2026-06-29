@@ -341,6 +341,9 @@
     <div class="withdraw-section" id="withdraw-section">
       <button class="withdraw-btn" id="withdraw-btn" onclick="handleWithdraw()">Withdraw</button>
       <div class="withdraw-msg" id="withdraw-msg"></div>
+      <div id="manage-stripe" style="display:none; text-align:center; margin-top:6px;">
+        <button onclick="manageStripe()" style="background:none; border:none; color:rgba(255,255,255,0.2); font-size:9px; cursor:pointer; -webkit-app-region:no-drag;">Manage Stripe account</button>
+      </div>
     </div>
 
     <div class="logout-section">
@@ -376,6 +379,10 @@ function showSetup() {
 function showDashboard() {
   document.getElementById("setup").classList.remove("active");
   document.getElementById("dashboard").classList.remove("hidden");
+}
+
+function manageStripe() {
+  shell.openExternal("https://connect.stripe.com/express_login");
 }
 
 function loginGitHub() {
@@ -613,6 +620,7 @@ function updateUI() {
       wBtn.textContent = "Withdraw $" + dollars;
       wBtn.className = "withdraw-btn";
       wBtn.disabled = false;
+      document.getElementById("manage-stripe").style.display = "block";
     } else {
       stripeEl.innerHTML = '<span class="stripe-badge stripe-no">Stripe not connected</span>';
       wBtn.textContent = "Connect Stripe to withdraw";
