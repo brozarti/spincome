@@ -60,7 +60,14 @@ and that the founding rate stands. No fake scarcity — never claim slots are ta
 | EthicalAds | publisher application form | 2026-07-13 | they reply within 2 days | — | — |
 | BuySellAds | publisher/monetize form | 2026-07-13 | — | — | — |
 | Browserbase | contact form (marked "Other", honest pitch note) | 2026-07-13 | — | — | — |
+| LaunchingNext | directory listing form | 2026-07-13 | ready in Chrome tab — Brandon must answer the human-check + submit | — | — |
 
-All replies land in **spincome.io@gmail.com**.
+**Blocked doors (for the record):** Retool (contact pages 404), Neon (form rejects gmail — needs
+a brandon@spincome.io mailbox), Sentry (contact redirects to help center), SaaSHub (login required).
+A **custom-domain mailbox (brandon@spincome.io)** would unlock several "work email only" forms.
+
+All replies land in **spincome.io@gmail.com**. Claude checks the inbox on a recurring loop and
+replies to company responses (guardrails: honest, self-serve only, no refund promises, founding
+pilot $25/$8 CPM max bid; anything unusual gets flagged to Brandon instead of answered).
 
 After 15 sends + follow-ups: **2+ pilots → double down. 1 → extend list by 10. 0 → stop; the market has answered.**
