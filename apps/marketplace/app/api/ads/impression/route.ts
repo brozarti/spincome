@@ -22,10 +22,30 @@ export async function POST(req: NextRequest) {
   const parsed = schema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "Invalid" }, { status: 400 });
 
-  const { adId, actualCpmCents, toolName, fileExt } = parsed.data;
+  const { adId, toolName, fileExt } = parsed.data;
 
   const campaign = await prisma.campaign.findUnique({ where: { id: adId } });
   if (!campaign || !campaign.active) return NextResponse.json({ ok: true });
+
+  // Never trust the client-reported CPM beyond the campaign's own ceiling —
+  // otherwise a modified hook client can drain a campaign and credit itself.
+  const actualCpmCents = Math.min(parsed.data.actualCpmCents, campaign.maxCpmCents);
+
+  // Server-side enforcement of the 15s per-developer cooldown (the hook client
+  // also enforces it, but only this check protects advertiser budgets from
+  // scripted impression farming).
+  const cooldownStart = new Date(Date.now() - 15_000);
+  const recentCount = await prisma.impression.count({
+    where: { developerId: developer.id, createdAt: { gte: cooldownStart } },
+  });
+  if (recentCount > 0) {
+    return NextResponse.json({
+      ok: true,
+      earnedCents: 0,
+      lifetimeCents: developer.earningsCents,
+      referralCode: developer.referralCode,
+    });
+  }
 
   // actualCpmCents = cents per 1000 impressions (e.g. 500 = $5 CPM)
   // Per impression cost = actualCpmCents / 1000 cents = 0.5 cents for $5 CPM

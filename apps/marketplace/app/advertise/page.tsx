@@ -191,11 +191,36 @@ export default function AdvertisePage() {
       </section>
 
       {/* Campaign form */}
-      <section className="max-w-2xl mx-auto px-6 pb-24">
+      <section id="launch" className="max-w-2xl mx-auto px-6 pb-24">
+        {/* Founding advertiser pilot */}
+        <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-xl p-6 mb-12">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xs font-medium bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
+              Founding advertiser pilot
+            </span>
+          </div>
+          <h3 className="text-lg font-semibold mb-2">$200 pilot — locked $8 CPM, ~25,000 impressions</h3>
+          <ul className="text-white/50 text-sm space-y-1 mb-4">
+            <li>· Full impression logs: tool context, timestamps, unique developers, clicks</li>
+            <li>· We&apos;re an early network — you get founding pricing and a direct line to the founder</li>
+            <li>· Unspent budget refunded, no questions asked</li>
+          </ul>
+          <button
+            type="button"
+            onClick={() => {
+              setForm((f) => ({ ...f, maxCpmBid: "8", budget: "200" }));
+              document.getElementById("launch-form")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="text-sm font-semibold text-emerald-400 hover:text-emerald-300"
+          >
+            Start the pilot ↓
+          </button>
+        </div>
+
         <h2 className="text-2xl font-bold mb-2">Launch your campaign</h2>
         <p className="text-white/40 text-sm mb-10">Minimum $10 budget. Live in minutes after payment.</p>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form id="launch-form" onSubmit={handleSubmit} className="space-y-8">
           <Fieldset legend="Your account">
             <Field label="Company or product name" value={form.advertiserName} onChange={set("advertiserName")} required />
             <Field label="Email" type="email" value={form.advertiserEmail} onChange={set("advertiserEmail")} required />
