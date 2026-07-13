@@ -54,8 +54,13 @@ and that the founding rate stands. No fake scarcity — never claim slots are ta
 
 | Company | Contact | Date sent | Follow-up | Reply | Outcome |
 |---|---|---|---|---|---|
-| Warp | press@warp.dev | 2026-07-13 | due 2026-07-18 | — | — |
-| PostHog | sales@posthog.com | 2026-07-13 | due 2026-07-18 | — | — |
-| Paved | hey@paved.com | 2026-07-13 | due 2026-07-18 | — | — |
+| Warp | press@warp.dev (email) | 2026-07-13 | due 2026-07-18 | — | — |
+| PostHog | sales@posthog.com (email) | 2026-07-13 | due 2026-07-18 | — | — |
+| Paved | hey@paved.com (email) | 2026-07-13 | due 2026-07-18 | — | — |
+| EthicalAds | publisher application form | 2026-07-13 | they reply within 2 days | — | — |
+| BuySellAds | publisher/monetize form | 2026-07-13 | — | — | — |
+| Browserbase | contact form (marked "Other", honest pitch note) | 2026-07-13 | — | — | — |
+
+All replies land in **spincome.io@gmail.com**.
 
 After 15 sends + follow-ups: **2+ pilots → double down. 1 → extend list by 10. 0 → stop; the market has answered.**
