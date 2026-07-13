@@ -199,16 +199,17 @@ export default function AdvertisePage() {
               Founding advertiser pilot
             </span>
           </div>
-          <h3 className="text-lg font-semibold mb-2">$200 pilot — locked $8 CPM, ~25,000 impressions</h3>
+          <h3 className="text-lg font-semibold mb-2">$25 founding pilot — $8 CPM max bid</h3>
           <ul className="text-white/50 text-sm space-y-1 mb-4">
-            <li>· Full impression logs: tool context, timestamps, unique developers, clicks</li>
-            <li>· We&apos;re an early network — you get founding pricing and a direct line to the founder</li>
-            <li>· Unspent budget refunded, no questions asked</li>
+            <li>· Budget only spends when your ad actually renders in a live session</li>
+            <li>· Track impressions, spend, and remaining budget on your dashboard</li>
+            <li>· We&apos;re an early, honestly small network — founding pricing reflects that</li>
+            <li>· Unspent budget refunded anytime, just email spincome.io@gmail.com</li>
           </ul>
           <button
             type="button"
             onClick={() => {
-              setForm((f) => ({ ...f, maxCpmBid: "8", budget: "200" }));
+              setForm((f) => ({ ...f, maxCpmBid: "8", budget: "25" }));
               document.getElementById("launch-form")?.scrollIntoView({ behavior: "smooth" });
             }}
             className="text-sm font-semibold text-emerald-400 hover:text-emerald-300"
