@@ -54,6 +54,8 @@ and that the founding rate stands. No fake scarcity — never claim slots are ta
 
 | Company | Contact | Date sent | Follow-up | Reply | Outcome |
 |---|---|---|---|---|---|
-| _fill in on each send_ | | | | | |
+| Warp | press@warp.dev | 2026-07-13 | due 2026-07-18 | — | — |
+| PostHog | sales@posthog.com | 2026-07-13 | due 2026-07-18 | — | — |
+| Paved | hey@paved.com | 2026-07-13 | due 2026-07-18 | — | — |
 
 After 15 sends + follow-ups: **2+ pilots → double down. 1 → extend list by 10. 0 → stop; the market has answered.**
