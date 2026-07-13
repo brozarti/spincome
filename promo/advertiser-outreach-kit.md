@@ -13,7 +13,7 @@ Never offer to set up an account or campaign for them.
 - $25 budget, $8 CPM max bid (form prefills both via the "Start the pilot" button)
 - Budget only spends when the ad actually renders in a live Claude Code session
 - Advertiser dashboard (spincome.io/dashboard, lookup by email): impressions, spend, remaining budget
-- Unspent budget refunded on request to spincome.io@gmail.com (manual Stripe refund)
+- **No refund promises in any outreach or site copy** (user decision, 2026-07-13)
 
 **Why $25 and not more:** deliverability, not market rate. The network currently has ~1 active
 developer generating ~50–100 impressions/day, so ~$25 at $8 CPM (~3,100 impressions) is what can
@@ -28,8 +28,8 @@ dev podcasts $25–65 ([daily.dev](https://business.daily.dev/resources/develope
 ## Honesty rules (do not break these — the product survives on trust)
 
 - Say the network is small, in plain words, in the first email. It converts better than getting caught.
-- Promise only what exists: self-serve setup, live dashboard (impressions/spend/budget), pay-per-serve, manual refund.
-  There is NO log export feature — do not promise "raw logs."
+- Promise only what exists: self-serve setup, live dashboard (impressions/spend/budget), pay-per-serve.
+  There is NO log export feature — do not promise "raw logs." Do not promise refunds.
 - Second-price auction detail: with few bidders an advertiser pays at or near their max bid. Say "$8 CPM max bid," not "locked $8 CPM."
 - Developers share ad revenue → sell *brand awareness to Claude Code power users*, never conversion intent.
 

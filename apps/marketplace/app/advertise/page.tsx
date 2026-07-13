@@ -204,7 +204,6 @@ export default function AdvertisePage() {
             <li>· Budget only spends when your ad actually renders in a live session</li>
             <li>· Track impressions, spend, and remaining budget on your dashboard</li>
             <li>· We&apos;re an early, honestly small network — founding pricing reflects that</li>
-            <li>· Unspent budget refunded anytime, just email spincome.io@gmail.com</li>
           </ul>
           <button
             type="button"
